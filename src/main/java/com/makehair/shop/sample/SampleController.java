@@ -17,8 +17,8 @@ public class SampleController {
 	public String hell() {
 		
 		CommonUserVo userVo = new CommonUserVo();
-		userVo.setUserId("yjk");
-		userVo.setName("yjkim");
+		userVo.setUserId("yj123k");
+		userVo.setName("yj123kim");
 		
 		sampleService.insertUser(userVo);
 		
