@@ -6,4 +6,4 @@ src/test/test.iml
 target/
 .classpath
 .project
-
+.settings
