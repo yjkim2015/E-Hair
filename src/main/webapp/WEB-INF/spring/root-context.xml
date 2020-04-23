@@ -14,13 +14,15 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 	
-	<context:component-scan base-package="com.makehair.shop.*">
+	<context:component-scan base-package="com.makehair.shop">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!-- <context:property-placeholder location="classpath:${spring.profiles.active}/db.properties"/> -->
-
+<!-- 	<context:property-placeholder location="classpath:${spring.profiles.active}/db.properties"/> 
+ -->
+ 	<context:property-placeholder location="classpath:/dev/db.properties"/> 
+ 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${db.driver}"/>
 		<property name="url" value="${db.url}"/> 
@@ -42,10 +44,10 @@
 	</bean>
 	
 	
-	<!-- <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.ericssonlg.ems.tacs_agent.**"/>	
+	<bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.makehair.shop.**"/>	
 		<property name="annotationClass" value="org.springframework.stereotype.Repository"/>	
-	</bean> -->
+	</bean> 
 
 
 
