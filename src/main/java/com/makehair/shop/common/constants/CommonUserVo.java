@@ -1,7 +1,9 @@
 package com.makehair.shop.common.constants;
 
 import java.util.Date;
-
+/*
+  Designer와 일반 user 공통 vo
+ * */
 public class CommonUserVo {
 	
 	private String userId;

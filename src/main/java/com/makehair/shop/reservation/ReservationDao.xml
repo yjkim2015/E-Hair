@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.makehair.shop.reservation.ReservationDao">
+
+<select id="checkReservation" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makerhair.shop.common.constants.ReservationVo">
+	SELECT 
+		* 
+	FROM
+		RESERVATION
+	WHERE
+		ADMIN_ID = #{userId}
+</select>
+
+<insert id="insertReservation" parameterType="com.makerhair.shop.common.constants.ReservationVo">
+
+</insert>
+
+<delete id="deleteReservation" parameterType="com.makerhair.shop.common.constants.ReservationVo">
+
+</delete>
+</mapper> 

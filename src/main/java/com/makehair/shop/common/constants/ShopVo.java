@@ -4,7 +4,7 @@ public class ShopVo {
 	
 	private int shopNo;
 	private String shopName;
-	private String name;
+	private String owner;
 	
 	public int getShopNo() {
 		return shopNo;
@@ -21,18 +21,9 @@ public class ShopVo {
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	@Override
 	public String toString() {
-		return "ShopVo [shopNo=" + shopNo + ", shopName=" + shopName + ", name=" + name + "]";
+		return "ShopVo [shopNo=" + shopNo + ", shopName=" + shopName + ", owner=" + owner + "]";
 	}
-	
 }

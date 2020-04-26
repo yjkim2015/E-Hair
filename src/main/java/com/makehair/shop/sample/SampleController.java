@@ -13,7 +13,7 @@ public class SampleController {
 	private SampleService sampleService;
 	
 	
-	@RequestMapping(value="/")
+	@RequestMapping(value="/sample")
 	public String hell() {
 		
 		CommonUserVo userVo = new CommonUserVo();

@@ -1,5 +1,4 @@
-<script type="text/javascript">
-	function goAjaxForm(form, callback) {
+function goAjaxForm(form, callback) {
 	form.ajaxForm({
         dataType: "json",
         async: true,
@@ -88,6 +87,4 @@ function authorizationErrorHandler(a,b,c,d,e) {
 	console.log(d);
 	console.log(e);
 }
-	
 
-</script>
