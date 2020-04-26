@@ -21,7 +21,7 @@ function goAjaxPost(url, param, callback, layout) {
 }
 
 function goAjaxMethod(method, url, param, async, callback, layout) {
-	var response 		= null;
+	var response 		= null;ㅇ\
 	var ajaxOption 		= {};
 	ajaxOption.url 		= getContextPath + url;
 	ajaxOption.type 	= method;
