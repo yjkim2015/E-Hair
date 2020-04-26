@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.makehair.shop.reservation.ReservationDao">
 
-<select id="checkReservation" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makerhair.shop.common.constants.ReservationVo">
+<select id="checkReservation" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.ReservationVo">
 	SELECT 
 		* 
 	FROM
@@ -11,11 +11,30 @@
 		ADMIN_ID = #{userId}
 </select>
 
-<insert id="insertReservation" parameterType="com.makerhair.shop.common.constants.ReservationVo">
-
+<insert id="insertReservation" parameterType="com.makehair.shop.common.constants.ReservationVo">
+	INSERT 
+		INTO 
+			RESERVATION 
+				(RESERVATION_DATE, MEMO, SERVICE_NO, ADMIN_ID, USER_ID) 
+			VALUES
+				( #{reservationDate}, #{memo}, #{serviceNo}, #{adminId}, #{userId})
 </insert>
 
-<delete id="deleteReservation" parameterType="com.makerhair.shop.common.constants.ReservationVo">
-
+<delete id="deleteReservation" parameterType="com.makehair.shop.common.constants.ReservationVo">
+	DELETE 
+		FROM
+	RESERVATION 
+		WHERE 
+			1 = 1
+			<if test="reservationNo != -1">
+				AND RESERVATION_NO = #{reservationNo}
+			</if>
+			<if test="adminId != null and adminId != ''">
+				AND ADMIN_ID = #{adminId}
+			</if>
+			<if test="userId != null and userId != ''">
+				AND USER_ID = #{userId}
+			</if>
+				AND RESERVATION_DATE = #{reservationDate}
 </delete>
 </mapper> 
