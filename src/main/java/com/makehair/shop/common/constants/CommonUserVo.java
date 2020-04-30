@@ -14,6 +14,9 @@ public class CommonUserVo {
 	private int age;
 	private Date insertDate;
 	private Date deleteDate;
+	private String profile;
+	private String imgUrl;
+	
 	private int shopNo;
 	
 	public String getUserId() {
@@ -86,6 +89,29 @@ public class CommonUserVo {
 
 	public void setShopNo(int shopNo) {
 		this.shopNo = shopNo;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	@Override
+	public String toString() {
+		return "CommonUserVo [userId=" + userId + ", password=" + password + ", name=" + name + ", sex=" + sex
+				+ ", phone=" + phone + ", age=" + age + ", insertDate=" + insertDate + ", deleteDate=" + deleteDate
+				+ ", profile=" + profile + ", imgUrl=" + imgUrl + ", shopNo=" + shopNo + "]";
 	}
 	
 }

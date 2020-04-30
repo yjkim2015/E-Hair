@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.makehair.shop.user.UserDao">
 
-	<insert id="insertUser" parameterType="com.makehair.shop.common.constants.UserVo">
+	<insert id="insertUser" parameterType="com.makehair.shop.common.constants.CommonUserVo">
 		INSERT INTO user (USER_ID, PASSWORD, NAME, SEX, PHONE, AGE, INSERT_DATE, DELETE_DATE)
 		VALUES (#{userId}, #{password}, #{name}, #{sex}, #{phone}, #{age}, now(), now());
 	</insert>
