@@ -4,6 +4,30 @@
 
 	<insert id="insertUser" parameterType="com.makehair.shop.common.constants.CommonUserVo">
 		INSERT INTO user (USER_ID, PASSWORD, NAME, SEX, PHONE, AGE, INSERT_DATE, DELETE_DATE)
-		VALUES (#{userId}, #{password}, #{name}, #{sex}, #{phone}, #{age}, now(), now());
+		VALUES (#{userId}, HEX(AES_ENCRYPT(#{password}, SHA2("enc_key",512))), #{name}, #{sex},  AES_ENCRYPT(#{phone}, SHA2("enc_key",512)), #{age}, now(), now());
 	</insert>
-</mapper> 
+
+	<insert id="insertAdmin" parameterType="com.makehair.shop.common.constants.CommonUserVo">
+		INSERT INTO admin (ADMIN_ID, SHOP_NO, PASSWORD, NAME, SEX, PHONE, AGE, INSERT_DATE, DELETE_DATE)
+		VALUES (#{userId}, #{shopNo},HEX(AES_ENCRYPT(#{password}, SHA2("enc_key",512))), #{name}, #{sex},  AES_ENCRYPT(#{phone}, SHA2("enc_key",512)), #{age}, now(), now());
+	</insert>
+
+	<select id="checkId" parameterType="String" resultType="int">
+		SELECT count(USER_ID)
+		FROM user, admin
+		WHERE USER_ID = #{value} OR ADMIN_ID = #{value};
+	</select>
+
+	<select id="loginUser" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
+		SELECT USER_ID, PASSWORD
+		FROM user
+		WHERE USER_ID = #{userId}  AND PASSWORD = HEX(AES_ENCRYPT(#{password}, SHA2("enc_key",512)))
+	</select>
+
+	<select id="loginAdmin" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
+		SELECT ADMIN_ID, PASSWORD
+		FROM admin
+		WHERE ADMIN_ID = #{userId} AND PASSWORD = HEX(AES_ENCRYPT(#{password}, SHA2("enc_key",512)))
+	</select>
+</mapper>
+	<!--AES_DECRYPT(passwd, SHA2("enc_key",512)),-->

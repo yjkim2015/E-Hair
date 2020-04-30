@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.makehair.shop.shop.ShopDao">
+
+	<insert id="insertShop" parameterType="com.makehair.shop.common.constants.CommonUserVo"
+		useGeneratedKeys="true" keyProperty="shopNo">
+		INSERT INTO shop (SHOP_NAME)
+		VALUES (#{shopName});
+	</insert>
+
+	<select id="getLastId" resultType="Integer">
+		SELECT SHOP_NO FROM shop ORDER BY SHOP_NO DESC LIMIT 1
+	</select>
+
+</mapper>
+	<!--AES_DECRYPT(passwd, SHA2("enc_key",512)),-->
