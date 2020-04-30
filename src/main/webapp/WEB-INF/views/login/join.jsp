@@ -27,12 +27,12 @@
         <section class="page-section" id="contact">
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Login</h2>
-                    <h3 class="section-subheading text-muted">서비스 이용을 위해서는 로그인을 해주시기 바랍니다.</h3>
+                    <h2 class="section-heading text-uppercase">Join</h2>
+                    <h3 class="section-subheading text-muted">회원 가입을 환영합니다.</h3>
                 </div>
-                <form id="joinForm" novalidate="novalidate" action="${pageContext.request.contextPath}/login" method="post">
+                <form id="joinForm" novalidate="novalidate" action="${pageContext.request.contextPath}/join" method="post">
                     <div class="row align-items-stretch mb-5 ">
-                        <div class="col-md-3"></div>
+                        <div clahss="col-md-3"></div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <input class="form-control" id="user_id" name="userId" type="text" placeholder="Your ID *" required="required" data-validation-required-message="Please enter your id." />
