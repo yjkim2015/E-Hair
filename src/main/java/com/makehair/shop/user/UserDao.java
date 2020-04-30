@@ -1,12 +1,13 @@
 package com.makehair.shop.user;
 
-import com.makehair.shop.common.constants.UserVo;
 import org.springframework.stereotype.Repository;
+
+import com.makehair.shop.common.constants.CommonUserVo;
 
 
 @Repository
 public interface UserDao {
 
-	int insertUser(final UserVo userVo);
+	int insertUser(final CommonUserVo userVo);
 
 }

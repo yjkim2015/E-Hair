@@ -16,7 +16,7 @@ public class ProfileController {
 	private ProfileService profileService;
 	
 	@RequestMapping(value="/profile", method = RequestMethod.GET)
-	public String profileView(Model model, @RequestParam CommonUserVo adminVo) {
+	public String profileView(Model model, CommonUserVo adminVo) {
 		
 		model.addAttribute("oneProfile", profileService.selectProfile(adminVo));
 		return "profile/profileView";

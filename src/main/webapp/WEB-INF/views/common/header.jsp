@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>미용실 통합 예약시스템 HIRS(Hairshop Integration Reservation System)</title>
  <link rel="icon" type="image/x-icon" href="../../../resources/assets/img/favicon.ico" />
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.12.1/js/all.js" crossorigin="anonymous"></script>
@@ -24,6 +24,7 @@
    <script src="../../../resources/assets/mail/contact_me.js"></script>
    <!-- Core theme JS-->
    <script src="../../../resources/js/scripts.js"></script>
+   <script src="../../../resources/js/common_utils.js"></script>
 </head>
 <body>
 

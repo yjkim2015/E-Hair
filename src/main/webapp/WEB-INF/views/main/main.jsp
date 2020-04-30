@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>미용실 통합 예약시스템 HIRS(Hairshop Integration Reservation System)</title>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 </head>
@@ -13,7 +13,8 @@
         <!-- Masthead-->
         <header class="masthead">
             <div class="container">
-                <div class="masthead-subheading">Welcome To Our Studio!</div>
+                <div class="masthead-subheading">미용실 통합 예약시스템 <br>
+                HIRS(Hairshop Integration Reservation System)</div>
                 <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
                 <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Tell Me More</a>
             </div>

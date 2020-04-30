@@ -1,8 +1,8 @@
 package com.makehair.shop.user;
 
-import com.makehair.shop.common.constants.UserVo;
+import com.makehair.shop.common.constants.CommonUserVo;
 
 public interface LoginService {
 
-	int inserUser(UserVo userVo);
+	int inserUser(CommonUserVo userVo);
 }
