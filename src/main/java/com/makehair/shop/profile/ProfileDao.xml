@@ -2,13 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.makehair.shop.profile.ProfileDao">
 
+<select id="selectAllProfile" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
+	SELECT 
+		ADMIN_ID AS userId,
+		NAME,
+		SEX,
+		AGE,
+		PROFILE,
+		IMG_URL AS imgUrl,
+		SHOP_NO as shopNo
+	FROM
+		ADMIN
+</select>
 <select id="selectProfile" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
 	SELECT 
-		*
+		ADMIN_ID AS userId,
+		NAME,
+		SEX,
+		AGE,
+		PROFILE,
+		IMG_URL AS imgUrl,
+		SHOP_NO as shopNo
 	FROM
 		ADMIN
 	WHERE 
-		ADMIN_ID = #{userId}
+		1 = 1
+		<if test="userId != null">
+			AND ADMIN_ID = #{userId}
+		</if>
 </select>
 
+
+<update id="updateProfile" parameterType="com.makehair.shop.common.constants.CommonUserVo">
+	UPDATE
+		ADMIN
+	SET
+		PROFILE = #{profile},
+		IMG_URL = #{imgUrl}
+	WHERE
+		ADMIN_ID = #{userId}
+</update>
 </mapper> 

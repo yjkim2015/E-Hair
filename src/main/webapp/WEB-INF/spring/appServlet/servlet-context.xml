@@ -27,6 +27,13 @@
 		<beans:property name="contentType" value="text/html; charset=UTF-8"/>		
 	</beans:bean>
 	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10485760"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg value="C:\\zzz\\upload"></beans:constructor-arg>
+	</beans:bean>
 	<context:component-scan base-package="com.makehair.shop" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>

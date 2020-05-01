@@ -1,5 +1,6 @@
 package com.makehair.shop.common.constants;
 
+import java.util.Arrays;
 import java.util.Date;
 /*
   Designer와 일반 user 공통 vo
@@ -16,6 +17,9 @@ public class CommonUserVo {
 	private Date deleteDate;
 	private String profile;
 	private String imgUrl;
+	
+	private String[] files;
+	
 	
 	private int shopNo;
 	
@@ -107,11 +111,20 @@ public class CommonUserVo {
 		this.imgUrl = imgUrl;
 	}
 
+	public String[] getFiles() {
+		return files;
+	}
+
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
+
 	@Override
 	public String toString() {
-		return "CommonUserVo [userId=" + userId + ", password=" + password + ", name=" + name + ", sex=" + sex
+		return "[userId=" + userId + ", password=" + password + ", name=" + name + ", sex=" + sex
 				+ ", phone=" + phone + ", age=" + age + ", insertDate=" + insertDate + ", deleteDate=" + deleteDate
-				+ ", profile=" + profile + ", imgUrl=" + imgUrl + ", shopNo=" + shopNo + "]";
+				+ ", profile=" + profile + ", imgUrl=" + imgUrl + ", files=" + Arrays.toString(files) + ", shopNo="
+				+ shopNo + "]";
 	}
 	
 }
