@@ -10,7 +10,7 @@ public class ReservationVo {
 	private String memo;
 	private Date insertDate;
 	private int serviceNo;
-	private int adminNo;
+	private int adminId;
 	private String userId;
 	
 	public int getReservationNo() {
@@ -49,11 +49,11 @@ public class ReservationVo {
 	public void setServiceNo(int serviceNo) {
 		this.serviceNo = serviceNo;
 	}
-	public int getAdminNo() {
-		return adminNo;
+	public int getAdminId() {
+		return adminId;
 	}
-	public void setAdminNo(int adminNo) {
-		this.adminNo = adminNo;
+	public void setAdminId(int adminId) {
+		this.adminId = adminId;
 	}
 	public String getUserId() {
 		return userId;
@@ -65,7 +65,7 @@ public class ReservationVo {
 	public String toString() {
 		return "ReservationVo [reservationNo=" + reservationNo + ", reservationDate=" + reservationDate + ", isConfirm="
 				+ isConfirm + ", memo=" + memo + ", insertDate=" + insertDate + ", serviceNo=" + serviceNo
-				+ ", adminNo=" + adminNo + ", userId=" + userId + "]";
+				+ ", adminId=" + adminId + ", userId=" + userId + "]";
 	}
 	
 }

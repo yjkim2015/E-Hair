@@ -48,7 +48,8 @@ public class ProfileController {
 	@RequestMapping(value="/profile/detail", method = RequestMethod.GET)
 	public String profileDetail(Model model, CommonUserVo adminVo) {
 		
-		model.addAttribute("userId", adminVo.getUserId());
+		//model.addAttribute("userId", adminVo.getUserId());
+		model.addAttribute("adminNo", adminVo.getAdminNo());
 		return "profile/profileDetail";
 	}
 	

@@ -7,8 +7,9 @@ import java.util.Date;
  * */
 public class CommonUserVo {
 	
+	private int userNo;
+	private int adminNo;
 	private String userId;
-
 	private String password;
 	private String name;
 	private String sex;
@@ -20,10 +21,24 @@ public class CommonUserVo {
 	private String imgUrl;
 	
 	private String[] files;
-	
-	
 	private int shopNo;
 	private String shopName;
+	
+	public int getUserNo() {
+		return userNo;
+	}
+	
+	public int getAdminNo() {
+		return adminNo;
+	}
+
+	public void setAdminNo(int adminNo) {
+		this.adminNo = adminNo;
+	}
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -131,10 +146,10 @@ public class CommonUserVo {
 
 	@Override
 	public String toString() {
-		return "CommonUserVo [userId=" + userId + ", password=" + password + ", name=" + name + ", sex=" + sex
-				+ ", phone=" + phone + ", age=" + age + ", insertDate=" + insertDate + ", deleteDate=" + deleteDate
-				+ ", profile=" + profile + ", imgUrl=" + imgUrl + ", files=" + Arrays.toString(files) + ", shopNo="
-				+ shopNo + ", shopName=" + shopName + "]";
+		return "CommonUserVo [userNo=" + userNo + ", adminNo=" + adminNo + ", userId=" + userId + ", password="
+				+ password + ", name=" + name + ", sex=" + sex + ", phone=" + phone + ", age=" + age + ", insertDate="
+				+ insertDate + ", deleteDate=" + deleteDate + ", profile=" + profile + ", imgUrl=" + imgUrl + ", files="
+				+ Arrays.toString(files) + ", shopNo=" + shopNo + ", shopName=" + shopName + "]";
 	}
 
 }

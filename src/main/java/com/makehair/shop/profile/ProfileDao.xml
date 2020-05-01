@@ -3,7 +3,8 @@
 <mapper namespace="com.makehair.shop.profile.ProfileDao">
 
 <select id="selectAllProfile" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
-	SELECT 
+	SELECT
+		ADMIN_NO as adminNo,
 		ADMIN_ID AS userId,
 		NAME,
 		SEX,
@@ -16,6 +17,7 @@
 </select>
 <select id="selectProfile" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
 	SELECT 
+		ADMIN_NO AS adminNo,
 		ADMIN_ID AS userId,
 		NAME,
 		SEX,
@@ -29,6 +31,9 @@
 		1 = 1
 		<if test="userId != null">
 			AND ADMIN_ID = #{userId}
+		</if>
+		<if test="adminNo != null">
+			AND ADMIN_NO = #{adminNo}
 		</if>
 </select>
 
