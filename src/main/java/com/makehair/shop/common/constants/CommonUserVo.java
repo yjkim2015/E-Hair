@@ -8,6 +8,7 @@ import java.util.Date;
 public class CommonUserVo {
 	
 	private String userId;
+
 	private String password;
 	private String name;
 	private String sex;
@@ -22,7 +23,8 @@ public class CommonUserVo {
 	
 	
 	private int shopNo;
-	
+	private String shopName;
+
 	public String getUserId() {
 		return userId;
 	}
@@ -118,14 +120,22 @@ public class CommonUserVo {
 	public void setFiles(String[] files) {
 		this.files = files;
 	}
+	
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
 
 	@Override
 	public String toString() {
-		return "[userId=" + userId + ", password=" + password + ", name=" + name + ", sex=" + sex
+		return "CommonUserVo [userId=" + userId + ", password=" + password + ", name=" + name + ", sex=" + sex
 				+ ", phone=" + phone + ", age=" + age + ", insertDate=" + insertDate + ", deleteDate=" + deleteDate
 				+ ", profile=" + profile + ", imgUrl=" + imgUrl + ", files=" + Arrays.toString(files) + ", shopNo="
-				+ shopNo + "]";
+				+ shopNo + ", shopName=" + shopName + "]";
 	}
-	
+
 }
 
