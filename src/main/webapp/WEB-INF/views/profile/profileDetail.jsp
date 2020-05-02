@@ -6,13 +6,36 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" 
+        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" 
+        crossorigin="anonymous"> 
+</script>-->
 
+<style>
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  font-size: 40px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+li.active, li.hover { color: orange; }
+
+ul.hover li.active:not(.hover) { color: #ccc }
+</style>
 </head>
 <body>
-<script>
+<script type="text/javascript">
 var adminNo = '${adminNo}';
 $(function(){
     $( "#datepicker" ).datetimepicker();
+	$('#starRating').starRating();
 
 	$.ajax({
 		url:'/profileView',
@@ -25,6 +48,7 @@ $(function(){
 			$('#profile').text(data.data.name +"\n" + data.data.sex + "\n" + data.data.profile);
 		}
 	});
+	
 });
 </script>
 
@@ -38,6 +62,8 @@ $(function(){
 						<div class="widget tags masthead-subheading">
                             <h3 class="widget-title section-subheading text-muted">
                              	고객 만족도
+                             	<ul id="starRating"></ul>
+                             	
                             </h3>
                         </div>
 						 <p>Date: <input type="text" id="datepicker"></p>
@@ -63,7 +89,6 @@ $(function(){
 							</a>
 							<div class="widget categories">
                             <h3 class="widget-title masthead-subheading">
-                               	디자이너 
 							</h3>
                             <div class="row">
                                 

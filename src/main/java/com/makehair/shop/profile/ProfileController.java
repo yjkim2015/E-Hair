@@ -31,6 +31,12 @@ public class ProfileController {
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
+	@RequestMapping(value="/test", method = RequestMethod.GET)
+	public String test() {
+		
+		return "profile/test";
+	}
+	
 	@RequestMapping(value="/allProfile", method = RequestMethod.GET)
 	public String allProfile(Model model) {
 	
