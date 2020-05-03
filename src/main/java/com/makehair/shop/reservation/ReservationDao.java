@@ -19,6 +19,8 @@ public interface ReservationDao {
 	
 	public int checkReservation(ReservationVo reservationVo);
 
+	public int checkDuplicateReservation(ReservationVo reservationVo);
+	
 	public int insertReservation(ReservationVo reservationVo);
 	
 	public int deleteReservation(ReservationVo reservationVo);

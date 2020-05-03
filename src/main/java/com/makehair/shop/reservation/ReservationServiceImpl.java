@@ -40,4 +40,9 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<DayOffVo> checkDayOff(ReservationVo reservationVo) {
 		return reservationDao.checkDayOff(reservationVo);
 	}
+
+	@Override
+	public int checkDuplicateReservation(ReservationVo reservationVo) {
+		return reservationDao.checkDuplicateReservation(reservationVo);
+	}
 }

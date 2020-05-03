@@ -48,6 +48,7 @@ $(function(){
 });
 </script>
 <script>
+var service = {};
 function initComponent() {
 	$('#datepicker').datetimepicker();
 
@@ -63,6 +64,7 @@ function initComponent() {
 	
 	goAjaxGet('/allService',null, function(result){
 		$(result).each(function(key, value) { 
+			service[value.serviceName] = value.serviceNo;
 			$('.dropdown-menu').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#">'+value.serviceName+'</a></li>');
 		});
 		$('.dropdown-menu li > a').bind('click',function (e) {
@@ -79,6 +81,7 @@ function initComponent() {
 		},
 		type:'get',
 		success:function(data) {
+		
 			$('#mainImg').attr('src','/displayFile?fileName='+data.data.imgUrl);
 			$('#profile').text(data.data.name +"\n" + data.data.sex + "\n" + data.data.profile);
 		}
@@ -105,11 +108,15 @@ function initEvent() {
 		});
 		goAjaxPost('/checkReservation', searchparams, function(result) {
 			
-			if ( result.data == 1 ) {
+			if ( result.data >= 1 ) {
 				alert(result.reason);
+				$('#datepicker').val('');
 			}
+			
 		});
 	});
+	
+	$('#replyAddBtn').on('click', replyAdd);
 	
 }
 
@@ -118,21 +125,36 @@ function reservation() {
 	
 	searchparams.userId ='test';
 	var memo = $('#memo').val();
-	var serviceName = $('#menu1').text();
 	searchparams.memo = memo;
 	
-	if ( serviceName == '서비스 종류' ) { alert('서비스 종류를 선택해주세요'); return false;}
-	searchparams.serviceName = serviceName;
 	var reservationDate = $('#datepicker').val();
+
+	
 	if ( reservationDate == '' ) {alert('날짜를 선택해주세요'); return false;}
+	var serviceName = $('#menu1').text();
+	if ( serviceName.includes('서비스 종류') ) { alert('서비스 종류를 선택해주세요'); return false;}
+	
 	reservationDate = reservationDate+ ":00";
-	searchparams.reservationDate = $('#datepicker').val();
+	searchparams.reservationDate = reservationDate;
+	searchparams.serviceNo = service[serviceName];
+
 	
 	goAjaxPost('/insertReservation', searchparams, function(result) {
-		console.log(result);
+		if ( result.data == 1) {
+			alert('예약되었습니다.');
+			$('#datepicker').val('');
+		}
+		else if ( result.data == 3 ){
+			alert('당일 중복 예약은 불가합니다');
+		}
+		else {
+			alert(result.reason);
+		}
 	});
-	
 
+}
+function replyAdd() {
+	
 }
 </script>
 <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
@@ -246,7 +268,7 @@ function reservation() {
 			</div>
 			
 		<div class="box-footer">
-			<button type="submit" class="btn btn-primary btn-outlined" id="replyAddBtn">
+			<button type="button" class="btn btn-primary btn-outlined" id="replyAddBtn">
 				등록
 	    	 </button>
 		</div>
@@ -264,7 +286,6 @@ function reservation() {
     </div>
     </div>
         <div>
-    	<!-- <h3>근처 유적지</h3> -->
 
       <ul class="portfolio-items col-3 isotope fade-up" id="li_near">
    <%--  <c:forEach items="${near_historic}" var="Historic_siteVO">

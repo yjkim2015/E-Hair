@@ -17,4 +17,46 @@ INSERT INTO STAR VALUES(#{userId},#{adminNo}, #{starPoint})
 
 </insert>
 
+<select id="list" resultType="com.makehair.shop.common.constants.ReviewVo">
+	SELECT
+		*
+	FROM
+		REVIEW
+	WHERE ADMIN_NO = #{adminNo}
+	ORDER BY REVIEW_NO DESC
+	limit #{cri.pageStart}, #{cri.perPageNum}
+</select>
+
+<select id="count" resultType="int">
+	SELECT
+		COUNT(REVIEW_NO)
+	FROM
+		REVIEW
+	WHERE
+		ADMIN_NO = #{adminNo}
+</select>
+
+<insert id="create">
+INSERT 
+	INTO 
+		REVIEW (REVIEW_TITLE, REVIEW_CONTENT, USER_ID, ADMIN_NO) 
+	VALUES(#{reviewTitle}, #{reviewContent}, #{userId}, #{adminNo})
+</insert>
+
+<update id="update">
+UPDATE 
+	REVIEW 
+		SET REVIEW_CONTENT = #{reviewContent} 
+	WHERE
+		REVIEW_NO = #{reviewNo}
+</update>
+
+<delete id="delete">
+DELETE
+	FROM
+REVIEW
+	WHERE
+		REVIEW_NO = #{reviewNo}
+</delete>
+
 </mapper>

@@ -1,7 +1,7 @@
 package com.makehair.shop.common.constants;
 
 
-public class Review {
+public class ReviewVo {
 
   private long reviewNo;
   private String reviewTitle;
@@ -10,7 +10,7 @@ public class Review {
   private java.sql.Timestamp insertDate;
   private long serviceNo;
   private String userId;
-  private String adminId;
+  private int adminNo;
 
 
   public long getReviewNo() {
@@ -75,13 +75,20 @@ public class Review {
     this.userId = userId;
   }
 
-
-  public String getAdminId() {
-    return adminId;
+  public int getAdminNo() {
+	return adminNo;
   }
 
-  public void setAdminId(String adminId) {
-    this.adminId = adminId;
+  public void setAdminNo(int adminNo) {
+	this.adminNo = adminNo;
   }
 
+	@Override
+	public String toString() {
+		return "ReviewVo [reviewNo=" + reviewNo + ", reviewTitle=" + reviewTitle + ", reviewContent=" + reviewContent
+				+ ", stars=" + stars + ", insertDate=" + insertDate + ", serviceNo=" + serviceNo + ", userId=" + userId
+				+ ", adminNo=" + adminNo + "]";
+	}
+	  
+  
 }

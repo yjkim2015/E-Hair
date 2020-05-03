@@ -23,6 +23,17 @@ FROM
 	SERVICE
 </select>
 
+<select id="checkDuplicateReservation" parameterType="com.makehair.shop.common.constants.ReservationVo" resultType="int">
+SELECT 
+	COUNT(*)
+FROM
+	RESERVATION
+WHERE
+	1 = 1
+	AND USER_ID = #{userId}
+	AND RESERVATION_DATE LIKE CONCAT('%',#{reservationDate},'%');
+</select>
+
 <select id="checkReservation" parameterType="com.makehair.shop.common.constants.ReservationVo" resultType="int">
 	SELECT 
 		count(*) 
@@ -37,9 +48,9 @@ FROM
 	INSERT 
 		INTO 
 			RESERVATION 
-				(RESERVATION_DATE, MEMO, SERVICE_NO, ADMIN_ID, USER_ID) 
+				(RESERVATION_DATE, MEMO, SERVICE_NO, ADMIN_NO, USER_ID) 
 			VALUES
-				( #{reservationDate}, #{memo}, #{serviceNo}, #{adminId}, #{userId})
+				( #{reservationDate}, #{memo}, #{serviceNo}, #{adminNo}, #{userId})
 </insert>
 
 <delete id="deleteReservation" parameterType="com.makehair.shop.common.constants.ReservationVo">

@@ -39,8 +39,10 @@ public class ReservationController {
 	public ResponseEntity<ResultVo> checkReservation(@RequestBody ReservationVo reservationVo) {
 		ResultVo resultVo = null;
 		try {
+			System.out.println("reservationVo : " +reservationVo.toString());
 			reservationVo.setReservationDate(reservationVo.getReservationDate().replaceAll("/", "-"));
 			final int result = reservationService.checkReservation(reservationVo); 
+			System.out.println("result : " + result);
 			resultVo = new ResultVo(result, HttpStatus.OK);
 			if ( result >= 1 ) {
 				throw new Exception();
@@ -48,7 +50,6 @@ public class ReservationController {
 
 		}
 		catch(Exception ex) {
-			resultVo = new ResultVo(HttpStatus.OK);
 			resultVo.setReason("먼저 예약된 손님이 있습니다.");
 
 		}
@@ -61,8 +62,19 @@ public class ReservationController {
 		
 		ResultVo resultVo = null;
 		try {
-			final int result = reservationService.insertReservation(reservationVo);
-			resultVo = new ResultVo(result, HttpStatus.OK);
+			System.out.println(reservationVo.toString());
+			String forCheckReservationData = reservationVo.getReservationDate().replaceAll("/", "-").substring(0,10);
+			System.out.println(" forCheckReservationData : " + forCheckReservationData);
+			reservationVo.setReservationDate(forCheckReservationData);
+			if ( reservationService.checkDuplicateReservation(reservationVo) > 0) {
+				resultVo = new ResultVo(3, HttpStatus.OK);
+			}
+			else {
+				reservationVo.setReservationDate(reservationVo.getReservationDate().replaceAll("/", "-"));
+
+				final int result = reservationService.insertReservation(reservationVo);
+				resultVo = new ResultVo(result, HttpStatus.OK);
+			}
 		}
 		catch (Exception e) {
 			resultVo = new ResultVo(HttpStatus.INTERNAL_SERVER_ERROR);
