@@ -32,7 +32,7 @@
 		<if test="userId != null">
 			AND ADMIN_ID = #{userId}
 		</if>
-		<if test="adminNo != null">
+		<if test="adminNo != null and adminNo != 0">
 			AND ADMIN_NO = #{adminNo}
 		</if>
 </select>

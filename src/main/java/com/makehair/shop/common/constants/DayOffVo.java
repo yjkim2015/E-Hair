@@ -1,12 +1,12 @@
 package com.makehair.shop.common.constants;
 
 
-public class DayOff {
+public class DayOffVo {
 
   private String dayOff;
   private java.sql.Timestamp dayOffDate;
   private java.sql.Timestamp insertDate;
-  private String adminId;
+  private String adminNo;
 
 
   public String getDayOff() {
@@ -35,13 +35,14 @@ public class DayOff {
     this.insertDate = insertDate;
   }
 
-
-  public String getAdminId() {
-    return adminId;
+  public String getAdminNo() {
+	return adminNo;
+  }
+	
+  public void setAdminNo(String adminNo) {
+	this.adminNo = adminNo;
   }
 
-  public void setAdminId(String adminId) {
-    this.adminId = adminId;
-  }
+
 
 }

@@ -23,8 +23,8 @@
    <!-- Third party plugin JS-->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
    <!-- Contact form JS-->
-   <script src="../../../resources/assets/mail/jqBootstrapValidation.js"></script>
-   <script src="../../../resources/assets/mail/contact_me.js"></script>
+   <!-- <script src="../../../resources/assets/mail/jqBootstrapValidation.js"></script>
+   <script src="../../../resources/assets/mail/contact_me.js"></script> -->
    <!-- Core theme JS-->
    <script src="../../../resources/js/scripts.js"></script>
    <script src="../../../resources/js/common_utils.js"></script>

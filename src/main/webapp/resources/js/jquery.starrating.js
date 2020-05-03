@@ -5,10 +5,23 @@
             current: 0,
             callback: function (value) {
             	starRate = value;
-            	var params = {};
-            	var userId = '';
-            	adminNo;
             	
+            	var params = {};
+            	//var userId = '${userId}';
+            	var userId = 'TEST';
+            	params.userId = userId;
+            	params.adminNo = adminNo;
+            	params.starPoint = starRate;
+            	console.log(params);
+            	
+            	goAjaxPost('/evaluate/star', params, function(result) {
+            		if ( result.data == 0) {
+            			alert('등록되었습니다');
+            		}
+            		else {
+            			alert(result.reason);
+            		}
+            	});
             	
             },
             static: false

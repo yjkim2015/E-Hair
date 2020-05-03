@@ -1,18 +1,20 @@
 package com.makehair.shop.reservation;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.makehair.shop.common.constants.CommonUserVo;
+import com.makehair.shop.common.constants.DayOffVo;
 import com.makehair.shop.common.constants.ReservationVo;
 import com.makehair.shop.common.constants.ResultVo;
+import com.makehair.shop.common.constants.ServiceVo;
 
 @Controller
 public class ReservationController {
@@ -20,10 +22,37 @@ public class ReservationController {
 	@Autowired
 	private ReservationService reservationService;
 	
-	@RequestMapping(value="/checkReservation", method = RequestMethod.GET)
-	public String checkReservation(Model model, CommonUserVo commonUserVo) {
-		model.addAttribute("list", reservationService.checkReservation(commonUserVo));
-		return "reservation/checkReservation";
+	@ResponseBody
+	@RequestMapping(value="/allService", method = RequestMethod.GET)
+	public List<ServiceVo> allService() {
+		return reservationService.allService();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/checkDayOff", method = RequestMethod.GET)
+	public List<DayOffVo> checkDayOff(ReservationVo reservationVo) {
+		return reservationService.checkDayOff(reservationVo);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/checkReservation", method = RequestMethod.POST)
+	public ResponseEntity<ResultVo> checkReservation(@RequestBody ReservationVo reservationVo) {
+		ResultVo resultVo = null;
+		try {
+			reservationVo.setReservationDate(reservationVo.getReservationDate().replaceAll("/", "-"));
+			final int result = reservationService.checkReservation(reservationVo); 
+			resultVo = new ResultVo(result, HttpStatus.OK);
+			if ( result >= 1 ) {
+				throw new Exception();
+			}
+
+		}
+		catch(Exception ex) {
+			resultVo = new ResultVo(HttpStatus.OK);
+			resultVo.setReason("먼저 예약된 손님이 있습니다.");
+
+		}
+		return resultVo.build();
 	}
 	
 	@RequestMapping(value="/insertReservation", method = RequestMethod.POST)

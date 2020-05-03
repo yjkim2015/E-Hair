@@ -5,12 +5,12 @@ import java.util.Date;
 public class ReservationVo {
 	
 	private int reservationNo;
-	private Date reservationDate;
+	private String reservationDate;
 	private Boolean isConfirm;
 	private String memo;
 	private Date insertDate;
 	private int serviceNo;
-	private int adminId;
+	private int adminNo;
 	private String userId;
 	
 	public int getReservationNo() {
@@ -19,10 +19,11 @@ public class ReservationVo {
 	public void setReservationNo(int reservationNo) {
 		this.reservationNo = reservationNo;
 	}
-	public Date getReservationDate() {
+	
+	public String getReservationDate() {
 		return reservationDate;
 	}
-	public void setReservationDate(Date reservationDate) {
+	public void setReservationDate(String reservationDate) {
 		this.reservationDate = reservationDate;
 	}
 	public Boolean getIsConfirm() {
@@ -49,11 +50,12 @@ public class ReservationVo {
 	public void setServiceNo(int serviceNo) {
 		this.serviceNo = serviceNo;
 	}
-	public int getAdminId() {
-		return adminId;
+	
+	public int getAdminNo() {
+		return adminNo;
 	}
-	public void setAdminId(int adminId) {
-		this.adminId = adminId;
+	public void setAdminNo(int adminNo) {
+		this.adminNo = adminNo;
 	}
 	public String getUserId() {
 		return userId;
@@ -65,7 +67,8 @@ public class ReservationVo {
 	public String toString() {
 		return "ReservationVo [reservationNo=" + reservationNo + ", reservationDate=" + reservationDate + ", isConfirm="
 				+ isConfirm + ", memo=" + memo + ", insertDate=" + insertDate + ", serviceNo=" + serviceNo
-				+ ", adminId=" + adminId + ", userId=" + userId + "]";
+				+ ", adminNo=" + adminNo + ", userId=" + userId + "]";
 	}
+	
 	
 }

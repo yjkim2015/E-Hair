@@ -2,13 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.makehair.shop.reservation.ReservationDao">
 
-<select id="checkReservation" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.ReservationVo">
+<select id="checkDayOff" parameterType="com.makehair.shop.common.constants.ReservationVo" resultType="com.makehair.shop.common.constants.DayOffVo">
+SELECT 
+	DAY_OFF AS dayOff,
+	ADMIN_NO AS adminNo
+FROM
+	DAY_OFF
+WHERE 
+	ADMIN_NO = #{adminNo}
+
+</select>
+
+<select id="allService" resultType="com.makehair.shop.common.constants.ServiceVo">
+SELECT
+	SERVICE_NO 	  AS serviceNo,
+	SERVICE_NAME  AS serviceName,
+	SERVICE_PRICE AS servicePrice,
+	MEMO		  AS MEMO
+FROM
+	SERVICE
+</select>
+
+<select id="checkReservation" parameterType="com.makehair.shop.common.constants.ReservationVo" resultType="int">
 	SELECT 
-		* 
+		count(*) 
 	FROM
 		RESERVATION
 	WHERE
-		ADMIN_ID = #{userId}
+		ADMIN_NO = #{adminNo}
+		AND RESERVATION_DATE = #{reservationDate}
 </select>
 
 <insert id="insertReservation" parameterType="com.makehair.shop.common.constants.ReservationVo">

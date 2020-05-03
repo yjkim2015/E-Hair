@@ -24,7 +24,13 @@ li {
   color: #ccc;
   cursor: pointer;
 }
-
+.dropdown-menu > li {
+	font-size:20px;
+	display:block;
+}
+.dropdown-menu > li > a{
+	color:blue;
+}
 li.active, li.hover { color: orange; }
 
 ul.hover li.active:not(.hover) { color: #ccc }
@@ -33,10 +39,39 @@ ul.hover li.active:not(.hover) { color: #ccc }
 <body>
 <script type="text/javascript">
 var adminNo = '${adminNo}';
+var getContextPath = '${getContextPath}';
+var searchparams = {};
+var dayOffList = [];
 $(function(){
-    $( "#datepicker" ).datetimepicker();
-	$('#starRating').starRating();
+	initComponent();
+	initEvent();
+});
+</script>
+<script>
+function initComponent() {
+	$('#datepicker').datetimepicker();
 
+	$('#starRating').starRating();
+	var param = {};
+	param.adminNo = adminNo;
+	goAjaxGet('/checkDayOff', param, function(result){
+		$(result).each(function(key, value){
+			var dayOffSplit = value.dayOff.split('-');
+			dayOffList.push(dayOffSplit[0]+"/"+dayOffSplit[1]+"/"+dayOffSplit[2]);
+		});
+	});
+	
+	goAjaxGet('/allService',null, function(result){
+		$(result).each(function(key, value) { 
+			$('.dropdown-menu').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#">'+value.serviceName+'</a></li>');
+		});
+		$('.dropdown-menu li > a').bind('click',function (e) {
+		    var html = $(this).html();
+		    
+		    $('#menu1').text(html);
+		});
+	});
+	
 	$.ajax({
 		url:'/profileView',
 		data: {
@@ -48,10 +83,58 @@ $(function(){
 			$('#profile').text(data.data.name +"\n" + data.data.sex + "\n" + data.data.profile);
 		}
 	});
-	
-});
-</script>
+}
 
+function initEvent() {
+	$('#reservation').on('click', reservation);
+	
+	$('#datepicker').unbind('change').change(function (event) {
+		
+		
+		var reservationDate = event.target.value;
+		reservationDate = reservationDate+ ":00";
+		searchparams.reservationDate = reservationDate;
+		searchparams.adminNo = adminNo;
+		
+		$(dayOffList).each(function(key,value){
+			if ( reservationDate.includes(value) ) {
+				alert('해당 요일은 디자이너의 휴무일입니다.');
+				$('#datepicker').val('');
+				return false;
+			}
+		});
+		goAjaxPost('/checkReservation', searchparams, function(result) {
+			
+			if ( result.data == 1 ) {
+				alert(result.reason);
+			}
+		});
+	});
+	
+}
+
+function reservation() {
+	
+	
+	searchparams.userId ='test';
+	var memo = $('#memo').val();
+	var serviceName = $('#menu1').text();
+	searchparams.memo = memo;
+	
+	if ( serviceName == '서비스 종류' ) { alert('서비스 종류를 선택해주세요'); return false;}
+	searchparams.serviceName = serviceName;
+	var reservationDate = $('#datepicker').val();
+	if ( reservationDate == '' ) {alert('날짜를 선택해주세요'); return false;}
+	reservationDate = reservationDate+ ":00";
+	searchparams.reservationDate = $('#datepicker').val();
+	
+	goAjaxPost('/insertReservation', searchparams, function(result) {
+		console.log(result);
+	});
+	
+
+}
+</script>
 <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
 <div id="content-wrapper" style="margin-top:70px;">
         <section id="blog" class="white">
@@ -67,6 +150,15 @@ $(function(){
                             </h3>
                         </div>
 						 <p>Date: <input type="text" id="datepicker"></p>
+						 <div class="dropdown">
+						    <button class="btn btn-info dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">서비스 종류
+						    <span class="caret"></span></button>
+						    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+						   	  
+						    </ul>
+					  	</div>
+					  	<br>
+					  	<textArea id="memo" style="width:250px; margin-bottom:15px; display:block;"></textArea>
 						 <button id='reservation' type='button' class="btn btn-primary btn-outlined">예약하기</button>			     
 						
                     </aside>       

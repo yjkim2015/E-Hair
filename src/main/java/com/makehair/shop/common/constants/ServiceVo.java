@@ -1,7 +1,7 @@
 package com.makehair.shop.common.constants;
 
 
-public class Service {
+public class ServiceVo {
 
   private long serviceNo;
   private String serviceName;
@@ -44,4 +44,10 @@ public class Service {
     this.memo = memo;
   }
 
+  @Override
+  public String toString() {
+	return "ServiceVo [serviceNo=" + serviceNo + ", serviceName=" + serviceName + ", servicePrice=" + servicePrice
+				+ ", memo=" + memo + "]";
+ }
+ 	  
 }

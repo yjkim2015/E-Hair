@@ -18,13 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.makehair.shop.commom.util.CommonController;
 import com.makehair.shop.commom.util.MediaUtils;
 import com.makehair.shop.commom.util.UploadFileUtils;
 import com.makehair.shop.common.constants.CommonUserVo;
 import com.makehair.shop.common.constants.ResultVo;
 
 @Controller
-public class ProfileController {
+public class ProfileController extends CommonController {
 	@Autowired
 	private ProfileService profileService;
 	
