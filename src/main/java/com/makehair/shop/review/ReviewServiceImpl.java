@@ -55,7 +55,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public int count(Integer adminNo) {
-		return 0;
+		return reviewDao.count(adminNo);
 	}
 
 }

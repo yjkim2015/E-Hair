@@ -7,7 +7,7 @@ public class ReviewVo {
   private String reviewTitle;
   private String reviewContent;
   private long stars;
-  private java.sql.Timestamp insertDate;
+  private String insertDate;
   private long serviceNo;
   private String userId;
   private int adminNo;
@@ -49,11 +49,11 @@ public class ReviewVo {
   }
 
 
-  public java.sql.Timestamp getInsertDate() {
+  public String getInsertDate() {
     return insertDate;
   }
 
-  public void setInsertDate(java.sql.Timestamp insertDate) {
+  public void setInsertDate(String insertDate) {
     this.insertDate = insertDate;
   }
 

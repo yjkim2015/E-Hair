@@ -18,7 +18,7 @@ ul {
   padding: 0;
 }
 
-li {
+#starRating>li {
   display: inline-block;
   font-size: 40px;
   color: #ccc;
@@ -31,9 +31,12 @@ li {
 .dropdown-menu > li > a{
 	color:blue;
 }
-li.active, li.hover { color: orange; }
+li.active, li.hover { color: blue; }
+#starRating>li.active, #starRating>li.hover { color: orange; }
 
 ul.hover li.active:not(.hover) { color: #ccc }
+
+
 </style>
 </head>
 <body>
@@ -156,6 +159,26 @@ function reservation() {
 function replyAdd() {
 	
 }
+
+</script>
+
+<script id="template" type="text/x-handlebars-template">
+{{#each .}}
+<li class="replyLi" data-rno={{reviewNo}} style="list-style-type:none;">
+	<div class="well">
+	<div class="media-heading">{{userId}}
+	&nbsp;<small><i class="fa fa-clock-o"></i> {{prettifyDate insertDate}}</small>
+	</div>
+		<a class="pull-right btn btn-primary btn-outlined" name="modify_modal" id="modify_modal"
+		data-toggle="modal" data-target="#modifyModal">Modify</a>
+	<div class="timeline-body">{{reviewContent}} </div>
+	
+		
+</div>
+<hr>
+</li>
+{{/each}}
+
 </script>
 <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
 <div id="content-wrapper" style="margin-top:70px;">
@@ -261,7 +284,7 @@ function replyAdd() {
 		    	 </h3>
 			</div>
 			<div class="box-body">
-					<input class='form-control' type='text' placeholder='글쓴이' id='newReplyWriter' value="" readonly>
+					<input class='form-control' type='text' placeholder='글쓴이' id='newReplyWriter' value="" >
 					<div style="margin-top:15px; margin-bottom:15px;">
 						<textarea rows="8"  id="newReplyText" class="form-control" placeholder="내용"></textarea>
 					</div>
@@ -301,5 +324,193 @@ function replyAdd() {
 </section><!--/#blog-->
 </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+
+<div id="modifyModal" class="modal modal-primary fade" role="dialog">
+	<div class="modal-dialog">
+		
+		<div class="modal-content" style="margin-top:300px;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title"></h4>
+			</div>
+			<div class="modal-body" data-rno>
+				<p><input type="text" id="replytext" class="form-control"></p>
+			</div>
+			<div class="modal-footer">
+			
+				<button type="button" class="btn btn-info" id="replyModBtn">
+					수정
+		    	</button>
+				<button type="button" class="btn btn-danger" id="replyDelBtn">
+					삭제
+		    	</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">
+					닫기
+		    	</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+getPageList(adminNo);
+var replyPage = 1;
+function getPageList(page) {
+	$.getJSON('/replies/'+adminNo+'/'+page, function(data) {
+		console.log(data.list.length);
+		
+		var str = "";
+		
+		$("#reply_count").text(data.totalCount);
+		printData(data.list,$("#repliesDiv"),$("#template"));
+		
+		printPaging(data.pageMaker,$(".pagination"));
+		//$("#modifyModal").hide();
+		$("#replycntSmall").html("[ " +data.pageMaker.totalCount +" ]")
+	});
+}
+
+
+var printPaging= function(pageMaker,target){
+	
+	var str="";
+	if(pageMaker.prev){
+		str+= "<li style='border:solid 1px; margin-right:3px;'><a href='"+(pageMaker.startPage-1)+"'> << </a></li>";
+	}
+	for(var i=pageMaker.startPage,len=pageMaker.endPage;i<=len;i++)
+		{
+		var strClass= pageMaker.cri.page==i?'class=active':'';
+		str+="<li style='border:solid 1px; margin-right:3px;'"+strClass+"><a href='"+i+"'>"+i+"</a></li>";
+		}
+	if(pageMaker.next){
+		str+="<li style='border:solid 1px; margin-right:3px;' ><a href='"+(pageMaker.endPage +1)+"'> >> </a></li>";
+	}
+	target.html(str);
+};
+
+Handlebars.registerHelper("prettifyDate",function(timeValue){
+	var dateObj= new Date(timeValue);
+	var year= dateObj.getFullYear();
+	var month = dateObj.getMonth()+1;
+	var date= dateObj.getDate();
+	return year+"/"+month+"/"+date;
+
+});
+
+var printData= function(replyArr,target,templateObject){
+	var template= Handlebars.compile(templateObject.html());
+	var html=template(replyArr);
+	$(".replyLi").remove();
+	target.after(html);
+
+	/* for(var i=0;i<replyArr.length;i++){
+
+		if(replyArr[i].replyer !="${login_id}" && replyArr[i].replyer != "${login_id2}"){
+			$("a[name=modify_modal]").eq(i).hide();
+		}
+		
+	} */
+}
+
+$(".pagination").on("click","li a",function(event){
+	event.preventDefault();
+	replyPage =$(this).attr("href");
+	getPageList(replyPage);
+});
+
+$(".timeline").on("click",".replyLi",function(event){
+	
+	var reply=$(this);
+	
+	$("#replytext").val(reply.find('.timeline-body').text());
+	$(".modal-title").html(reply.attr("data-rno"));
+});
+
+$("#replyAddBtn").on("click",function(){
+	
+	var replyerObj = $("#newReplyWriter");
+	var replytextObj = $("#newReplyText");
+	var replyer = replyerObj.val();
+	var replytext= replytextObj.val();
+	if(replyer==""){
+		alert("로그인 후 이용이 가능합니다.");
+		return;
+	}
+	if(replytext==""){
+		alert("댓글을 입력해주세요.");
+		return;
+	}
+	$.ajax({
+		type:'post',
+		url:'/replies/',
+		headers:{
+			"Content-Type":"application/json",
+			"X-HTTP-Method-Override":"POST"},
+		dataType:'text',
+		processData:false,
+		data: JSON.stringify({adminNo:adminNo,userId:replyer,reviewContent:replytext}),
+		success:function(result){
+			if(result.includes('OK')){
+				alert("등록 되었습니다.");
+				replyPage=1;
+				getPageList(replyPage);
+			
+				replytextObj.val("");
+			}
+		
+		}});
+});
+
+$("#replyModBtn").on("click",function(){
+	
+	var rno = $(".modal-title").html();
+	var replytext=$("#replytext").val();
+	
+	$.ajax({
+		type:'put',
+		url:'/replies/'+rno,
+		headers:{
+			"Content-Type":"application/json",
+			"X-HTTP-Method-Override":"PUT"},
+		dataType:'text',
+		processData:false,
+		data: JSON.stringify({reviewContent:replytext}),
+		success:function(result){
+			console.log("result: "+result);
+			if(result == 'SUCCESS'){
+				alert("수정 되었습니다.");
+				getPageList(replyPage);
+				
+			}
+		
+		}});
+});
+
+
+$("#replyDelBtn").on("click",function(){
+	
+	var rno = $(".modal-title").html();
+	var replytext=$("#replytext").val();
+	
+	$.ajax({
+		type:'delete',
+		url:'/replies/'+rno,
+		headers:{
+			"Content-Type":"application/json",
+			"X-HTTP-Method-Override":"DELETE"},
+		dataType:'text',
+		processData:false,
+		success:function(result){
+			console.log("result: "+result);
+			if(result == 'SUCCESS'){
+				alert("삭제 되었습니다.");
+				getPageList(replyPage);
+				
+			}
+		
+		}});
+});
+
+</script>
 </body>
 </html>

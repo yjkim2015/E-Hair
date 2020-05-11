@@ -55,7 +55,7 @@ public class ReviewController extends CommonController {
 	@RequestMapping(value="/replies", method = RequestMethod.POST)
 	public ResponseEntity<ResultVo> register(@RequestBody ReviewVo reviewVo) {
 		ResultVo resultVo = null;
-		
+		System.out.println("reviewVo : " + reviewVo);
 		try {
 			int result = reviewService.create(reviewVo);
 			resultVo = new ResultVo(result, HttpStatus.OK);
@@ -82,13 +82,17 @@ public class ReviewController extends CommonController {
 			pageMaker.setCri(cri);
 			
 			Map<String, Object> map = new HashMap<String,Object>();
+			System.out.println("adminNo : " +adminNo);
+			System.out.println("page :" +page);
 			List<ReviewVo> list = reviewService.list(adminNo, cri);
 			
+			System.out.println("list : :" +list);
 			map.put("list",list);
 			
 			int replyCount = reviewService.count(adminNo);
+			System.out.println("replyCount : " + replyCount);
 			pageMaker.setTotalCount(replyCount);
-			
+			map.put("pageMaker", pageMaker);
 			entity = new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
 		}
 		catch(Exception ex) {

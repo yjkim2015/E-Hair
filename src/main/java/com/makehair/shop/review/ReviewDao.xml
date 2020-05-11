@@ -19,7 +19,11 @@ INSERT INTO STAR VALUES(#{userId},#{adminNo}, #{starPoint})
 
 <select id="list" resultType="com.makehair.shop.common.constants.ReviewVo">
 	SELECT
-		*
+		REVIEW_NO AS reviewNo,
+		REVIEW_CONTENT AS reviewContent,
+		INSERT_DATE AS insertDate,
+		USER_ID AS userId,
+		ADMIN_NO AS adminNo
 	FROM
 		REVIEW
 	WHERE ADMIN_NO = #{adminNo}
@@ -27,7 +31,7 @@ INSERT INTO STAR VALUES(#{userId},#{adminNo}, #{starPoint})
 	limit #{cri.pageStart}, #{cri.perPageNum}
 </select>
 
-<select id="count" resultType="int">
+<select id="count"  parameterType="int" resultType="int">
 	SELECT
 		COUNT(REVIEW_NO)
 	FROM
@@ -39,8 +43,8 @@ INSERT INTO STAR VALUES(#{userId},#{adminNo}, #{starPoint})
 <insert id="create">
 INSERT 
 	INTO 
-		REVIEW (REVIEW_TITLE, REVIEW_CONTENT, USER_ID, ADMIN_NO) 
-	VALUES(#{reviewTitle}, #{reviewContent}, #{userId}, #{adminNo})
+		REVIEW (REVIEW_CONTENT, USER_ID, ADMIN_NO) 
+	VALUES(#{reviewContent}, #{userId}, #{adminNo})
 </insert>
 
 <update id="update">
