@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.makehair.shop.common.constants.CommonUserVo;
+import com.makehair.shop.common.constants.SearchCriteria;
 
 
 @Service
@@ -25,7 +26,7 @@ public class ProfileServiceImpl implements ProfileService {
 	}
 
 	@Override
-	public List<CommonUserVo> selectAllProfile() {
-		return profileDao.selectAllProfile();
+	public List<CommonUserVo> selectAllProfile(SearchCriteria cri) {
+		return profileDao.selectAllProfile(cri);
 	}
 }

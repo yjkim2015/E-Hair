@@ -4,16 +4,35 @@
 
 <select id="selectAllProfile" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
 	SELECT
-		ADMIN_NO as adminNo,
-		ADMIN_ID AS userId,
-		NAME,
-		SEX,
-		AGE,
-		PROFILE,
-		IMG_URL AS imgUrl,
-		SHOP_NO as shopNo
+		A.ADMIN_NO as adminNo,
+		A.ADMIN_ID AS userId,
+		A.NAME,
+		A.SEX,
+		A.AGE,
+		A.PROFILE,
+		A.IMG_URL AS imgUrl,
+		A.SHOP_NO as shopNo,
+		B.SHOP_NAME as shopName,
+		C.STAR_POINT as starPoint
 	FROM
-		ADMIN
+		ADMIN A
+	LEFT JOIN SHOP B
+	ON A.SHOP_NO = B.SHOP_NO
+	LEFT JOIN STAR C
+	ON A.ADMIN_NO = C.ADMIN_NO
+	WHERE
+	 	1 = 1
+		<if test="searchType != null">
+			<if test="searchType == 't'.toStrnig()">
+				AND A.NAME LIKE CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				AND B.SHOP_NAME CONCAT('%',#{keyword},'%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				AND (A.NAME LIKE CONCAT('%',#{keyword},'%') OR B.SHOP_NAME CONCAT('%',#{keyword},'%'))
+			</if>
+		</if>
 </select>
 <select id="selectProfile" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
 	SELECT 

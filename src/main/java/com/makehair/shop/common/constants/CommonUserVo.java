@@ -23,7 +23,7 @@ public class CommonUserVo {
 	private String[] files;
 	private int shopNo;
 	private String shopName;
-	
+	private int starPoint;
 	public int getUserNo() {
 		return userNo;
 	}
@@ -143,14 +143,25 @@ public class CommonUserVo {
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}
+	
+	public int getStarPoint() {
+		return starPoint;
+	}
+
+	public void setStarPoint(int starPoint) {
+		this.starPoint = starPoint;
+	}
 
 	@Override
 	public String toString() {
 		return "CommonUserVo [userNo=" + userNo + ", adminNo=" + adminNo + ", userId=" + userId + ", password="
 				+ password + ", name=" + name + ", sex=" + sex + ", phone=" + phone + ", age=" + age + ", insertDate="
 				+ insertDate + ", deleteDate=" + deleteDate + ", profile=" + profile + ", imgUrl=" + imgUrl + ", files="
-				+ Arrays.toString(files) + ", shopNo=" + shopNo + ", shopName=" + shopName + "]";
+				+ Arrays.toString(files) + ", shopNo=" + shopNo + ", shopName=" + shopName + ", starPoint=" + starPoint
+				+ "]";
 	}
+	
+	
 
 }
 

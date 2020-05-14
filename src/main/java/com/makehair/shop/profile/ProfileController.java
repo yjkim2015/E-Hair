@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,7 @@ import com.makehair.shop.commom.util.MediaUtils;
 import com.makehair.shop.commom.util.UploadFileUtils;
 import com.makehair.shop.common.constants.CommonUserVo;
 import com.makehair.shop.common.constants.ResultVo;
+import com.makehair.shop.common.constants.SearchCriteria;
 
 @Controller
 public class ProfileController extends CommonController {
@@ -39,9 +41,9 @@ public class ProfileController extends CommonController {
 	}
 	
 	@RequestMapping(value="/allProfile", method = RequestMethod.GET)
-	public String allProfile(Model model) {
+	public String allProfile(@ModelAttribute("cri") SearchCriteria cri, Model model) {
 	
-		model.addAttribute("list",profileService.selectAllProfile());
+		model.addAttribute("list",profileService.selectAllProfile(cri));
 		return "profile/list";
 	}
 	
