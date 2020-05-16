@@ -6,65 +6,65 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
-
 </head>
-<script>
-  $(document).ready(function () {
-    // 밸리데이션
-    $("#joinForm input").jqBootstrapValidation({
-      preventSubmit: true,
-      submitError: function ($form, event, errors) {
-      },
-      submitSuccess: function ($form, event) {
-      }
+<script type="application/javascript">
+    $(document).ready(function () {
+        // 밸리데이션
+        $("#joinForm input").jqBootstrapValidation({
+            preventSubmit: true,
+            submitError: function ($form, event, errors) {
+            },
+            submitSuccess: function ($form, event) {
+            }
+        });
+
+        // 패스워드 중복체크
+        $('.pw').focusout(function () {
+            var pwd1 = $("#password_1").val();
+            var pwd2 = $("#password_2").val();
+
+            if (pwd1 != '' && pwd2 == '') {
+                null;
+            } else if (pwd1 != "" || pwd2 != "") {
+                if (pwd1 == pwd2) {
+                    $("#alert-success").css('display', 'inline-block');
+                    $("#alert-danger").css('display', 'none');
+                } else {
+                    alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
+                    $("#password_1").val("");
+                    $("#password_2").val("");
+                    $("#alert-success").css('display', 'none');
+                    $("#alert-danger").css('display', 'inline-block');
+                }
+            }
+        });
+
+        // ajax
+        $("#checkId").on("click", function () {
+            let id = $("#user_id").val();
+
+            $.ajax({
+                url: "${pageContext.request.contextPath}/check-id?id=" + id,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if (data.checkId === false) {
+                        $("#checkId").css('background-color', 'green');
+                        alert("확인 되었습니다.")
+                    } else {
+                        $("#checkId").css('background-color', 'red');
+                        alert("이미 존재하는 아이디입니다.")
+                    }
+                }
+            })
+        })
+
     });
-
-    // 패스워드 중복체크
-    $('.pw').focusout(function () {
-      var pwd1 = $("#password_1").val();
-      var pwd2 = $("#password_2").val();
-
-      if ( pwd1 != '' && pwd2 == '' ) {
-        null;
-      } else if (pwd1 != "" || pwd2 != "") {
-        if (pwd1 == pwd2) {
-          $("#alert-success").css('display', 'inline-block');
-          $("#alert-danger").css('display', 'none');
-        } else {
-          alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
-          $("#alert-success").css('display', 'none');
-          $("#alert-danger").css('display', 'inline-block');
-        }
-      }
-    });
-
-    // ajax
-    $("#checkId").on("click", function(){
-      let id = $("#user_id").val();
-
-      $.get({
-        url : "${pageContext.request.contextPath}/check-id?id="+id,
-        type :"GET",
-        dataType: "json",
-        success: function (data) {
-          console.log(data);
-          if(data.checkId === false){
-            $("#checkId").css('background-color', 'green');
-            alert("확인 되었습니다.")
-          } else {
-            $("#checkId").css('background-color', 'red');
-            alert("이미 존재하는 아이디입니다.")
-          }
-        }
-      })
-    })
-
-  });
 
 </script>
 <body id="page-top">
 <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
-
 <!-- Contact-->
 <section class="page-section" id="contact">
     <div class="container">
@@ -97,12 +97,12 @@
                     </div>
                     <!-- 어드민인 경우에만 해당 인풋창 생성 -->
                     <c:if test="${param.userType eq 'admin'}">
-                    <div class="form-group">
-                        <input class="form-control" id="shop_name" name="shopName" type="text"
-                               placeholder="Your Shop Name *" required="required"
-                               data-validation-required-message="Please enter shop name."/>
-                        <p class="help-block text-danger"></p>
-                    </div>
+                        <div class="form-group">
+                            <input class="form-control" id="shop_name" name="shopName" type="text"
+                                   placeholder="Your Shop Name *" required="required"
+                                   data-validation-required-message="Please enter shop name."/>
+                            <p class="help-block text-danger"></p>
+                        </div>
                     </c:if>
                     <div class="form-group">
                         <input class="form-control pw" id="password_1" name="password" type="password"
@@ -117,7 +117,8 @@
                         <p class="help-block text-danger"></p>
                         <div class="text-center">
                             <span id="alert-success" style="display: none; color: black; background-color:greenyellow">비밀번호가 일치합니다.</span>
-                            <span id="alert-danger" style="display: none; color: white; font-weight: bold; background-color: #a71d2a ">비밀번호가 일치하지 않습니다.</span>
+                            <span id="alert-danger"
+                                  style="display: none; color: white; font-weight: bold; background-color: #a71d2a ">비밀번호가 일치하지 않습니다.</span>
                         </div>
                     </div>
                     <div class="form-group">

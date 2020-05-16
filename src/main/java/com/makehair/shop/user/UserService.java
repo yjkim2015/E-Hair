@@ -8,41 +8,45 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-  @Autowired
-  private UserDao userDao;
+    @Autowired
+    private UserDao userDao;
 
-  @Autowired
-  private ShopDao shopDao;
+    @Autowired
+    private ShopDao shopDao;
 
-  public int inserUser(CommonUserVo userVo) {
-    return userDao.insertUser(userVo);
-  }
-
-
-  public Boolean checkId(String id) {
-    return userDao.checkId(id) == 1;
-  }
-
-
-  public CommonUserVo login(String userType, CommonUserVo commonUserVo) {
-    CommonUserVo userVo;
-
-    if (userType.equals("admin")) {
-			userVo = userDao.loginUser(commonUserVo);
-    } else {
-      userVo = userDao.loginAdmin(commonUserVo);
+    public int inserUser(CommonUserVo userVo) {
+        return userDao.insertUser(userVo);
     }
 
-    return userVo;
-  }
+
+    public Boolean checkId(String id) {
+        return userDao.checkId(id) == 1;
+    }
 
 
-  public int inserAdmin(CommonUserVo userVo) {
-    int result = shopDao.insertShop(userVo.getShopName());
-    int shopNo = shopDao.getLastId();
-    System.out.println(userVo);
-    userVo.setShopNo(shopNo);
+    public CommonUserVo login(String userType, CommonUserVo commonUserVo) {
+        CommonUserVo userVo;
 
-    return userDao.insertAdmin(userVo);
-  }
+        if (userType.equals("admin")) {
+          userVo = userDao.loginAdmin(commonUserVo);
+        } else {
+          userVo = userDao.loginUser(commonUserVo);
+        }
+
+        return userVo;
+    }
+
+
+    public int inserAdmin(CommonUserVo userVo) {
+        int result = shopDao.insertShop(userVo.getShopName());
+        int shopNo = shopDao.getLastId();
+        System.out.println(userVo);
+        userVo.setShopNo(shopNo);
+
+        return userDao.insertAdmin(userVo);
+    }
+
+    public CommonUserVo getUserInfo(int userNo) {
+        return userDao.getUserInfo(userNo);
+    }
 }

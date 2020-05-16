@@ -19,13 +19,28 @@
 	</select>
 
 	<select id="loginUser" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
-		SELECT USER_ID, PASSWORD
+		SELECT
+			USER_ID AS userId,
+			USER_NO,
+			NAME,
+			SEX,
+			AES_DECRYPT(PHONE, SHA2("enc_key",512)) as PHONE,
+			AGE
 		FROM user
 		WHERE USER_ID = #{userId}  AND PASSWORD = HEX(AES_ENCRYPT(#{password}, SHA2("enc_key",512)))
 	</select>
 
 	<select id="loginAdmin" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
-		SELECT ADMIN_ID, PASSWORD
+		SELECT
+			ADMIN_ID as adminId,
+			ADMIN_NO as adminNo,
+			SHOP_NO as shopNo,
+			NAME,
+			SEX,
+			AES_DECRYPT(PHONE, SHA2("enc_key",512)) as PHONE,
+			AGE,
+			PROFILE,
+			IMG_URL as imgUrl
 		FROM admin
 		WHERE ADMIN_ID = #{userId} AND PASSWORD = HEX(AES_ENCRYPT(#{password}, SHA2("enc_key",512)))
 	</select>

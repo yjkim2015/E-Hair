@@ -17,7 +17,7 @@
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/#team">Team</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/#contact">Contact</a></li>
                 <c:if test="${not empty sessionScope.loginUser}">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/login">회원정보수정</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/user_detail">회원정보수정</a></li>
                 </c:if>
                 <c:if test="${empty sessionScope.loginUser}">
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/login">로그인</a></li>
