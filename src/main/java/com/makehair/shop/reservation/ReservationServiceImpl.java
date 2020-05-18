@@ -45,4 +45,9 @@ public class ReservationServiceImpl implements ReservationService {
 	public int checkDuplicateReservation(ReservationVo reservationVo) {
 		return reservationDao.checkDuplicateReservation(reservationVo);
 	}
+
+	@Override
+	public List<ReservationVo> reservationList(ReservationVo reservationVo) {
+		return reservationDao.reservationList(reservationVo);
+	}
 }

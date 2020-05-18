@@ -6,21 +6,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.makehair.shop.commom.util.CommonController;
+import com.makehair.shop.common.constants.CommonUserVo;
 import com.makehair.shop.common.constants.DayOffVo;
 import com.makehair.shop.common.constants.ReservationVo;
 import com.makehair.shop.common.constants.ResultVo;
 import com.makehair.shop.common.constants.ServiceVo;
 
 @Controller
-public class ReservationController {
+public class ReservationController extends CommonController {
 	
 	@Autowired
 	private ReservationService reservationService;
+	
+	@RequestMapping(value="/reservationView", method = RequestMethod.GET)
+	public String reservationList(Model model, CommonUserVo adminVo) {
+		
+		model.addAttribute("adminNo", adminVo.getAdminNo());
+		return "/reservation/reservationList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/reservationList", method = RequestMethod.POST) 
+	public ResponseEntity<ResultVo> reservationList(@RequestBody ReservationVo reservationVo) {
+		ResultVo resultVo = null;
+		resultVo = new ResultVo(HttpStatus.OK);
+		resultVo.setData(reservationService.reservationList(reservationVo));
+		return resultVo.build();
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="/allService", method = RequestMethod.GET)

@@ -70,4 +70,30 @@ WHERE
 			</if>
 				AND RESERVATION_DATE = #{reservationDate}
 </delete>
+
+<select id="reservationList" parameterType="com.makehair.shop.common.constants.ReservationVo" resultType="com.makehair.shop.common.constants.ReservationVo">
+SELECT
+	A.RESERVATION_NO AS reservationNo,
+	A.RESERVATION_DATE AS reservationDate,
+	A.IS_CONFIRM AS isConfirm,
+	A.MEMO AS memo,
+	A.USER_ID  AS userId,
+	B.SERVICE_NAME AS serviceName,
+	B.SERVICE_PRICE AS servicePrice,
+	C.NAME AS userName,
+	C.USER_NO AS userNo
+FROM
+	RESERVATION A
+LEFT JOIN SERVICE B
+	ON A.SERVICE_NO = B.SERVICE_NO
+LEFT JOIN USER C
+	ON A.USER_ID = C.USER_ID 
+WHERE
+	1 = 1
+	AND A.ADMIN_NO = #{adminNo}
+	<if test="reservationDate != null and reservationDate != ''">
+		AND A.RESERVATION_DATE LIKE CONCAT('%',#{reservationDate},'%')
+	</if>
+ORDER BY A.RESERVATION_DATE ASC
+</select>
 </mapper> 

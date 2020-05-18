@@ -46,32 +46,32 @@
 	
     <!-- sql -->
 	<logger name="jdbc.sqlonly" additivity="false">
-        <level value="INFO"/>
+        <level value="DEBUG"/>
         <appender-ref ref="console"/>
 		<appender-ref ref="rollingFile" />
     </logger>
  
     <logger name="jdbc.sqltiming" additivity="false">
-        <level value="OFF"/>
+        <level value="DEBUG"/>
         <appender-ref ref="console"/>
 		<appender-ref ref="rollingFile" />
     </logger>
  
     <logger name="jdbc.resultset" additivity="false">
-        <level value="WARN"/>
+        <level value="DEBUG"/>
         <appender-ref ref="console"/>
 		<appender-ref ref="rollingFile" />
     </logger>
     
     <logger name="jdbc.resultsettable" additivity="false">
-        <level value="INFO"/>
+        <level value="DEBUG"/>
         <appender-ref ref="console"/>
 		<appender-ref ref="rollingFile" />
     </logger>
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="WARN" />
+		<priority value="DEBUG" />
 		<appender-ref ref="console" />
 		<appender-ref ref="rollingFile" />
 	</root>

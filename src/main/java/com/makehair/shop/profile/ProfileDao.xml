@@ -2,9 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.makehair.shop.profile.ProfileDao">
 
-<select id="selectAllProfile" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
+<select id="selectAllProfile" parameterType="com.makehair.shop.common.constants.SearchCriteria" resultType="com.makehair.shop.common.constants.CommonUserVo">
 	SELECT
 		A.ADMIN_NO as adminNo,
+		A.ADMIN_ID AS userId,
+		A.NAME AS name,
+		A.SEX,
+		A.AGE,
+		A.PROFILE,
+		A.IMG_URL AS imgUrl,
+		A.SHOP_NO as shopNo,
+		B.SHOP_NAME AS shopName,
+		C.STAR_POINT AS starPoint
+	FROM
+		ADMIN A
+ 	LEFT JOIN SHOP B
+		ON A.SHOP_NO = B.SHOP_NO
+	LEFT JOIN STAR C
+		ON A.ADMIN_NO = C.ADMIN_NO
+ 	WHERE
+ 		1 = 1 
+		 <if test="searchType != null and keyword != ''">
+			<if test="searchType == 't'.toString()">
+				AND A.NAME LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'c'.toString()">
+				AND B.SHOP_NAME LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				AND (A.NAME LIKE CONCAT('%', #{keyword}, '%') OR B.SHOP_NAME LIKE CONCAT('%', #{keyword}, '%'))
+			</if>
+		</if>
+	ORDER BY C.STAR_POINT DESC
+</select>
+<select id="selectProfile" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
+	SELECT 
+		A.ADMIN_NO AS adminNo,
 		A.ADMIN_ID AS userId,
 		A.NAME,
 		A.SEX,
@@ -12,47 +45,21 @@
 		A.PROFILE,
 		A.IMG_URL AS imgUrl,
 		A.SHOP_NO as shopNo,
-		B.SHOP_NAME as shopName,
-		C.STAR_POINT as starPoint
+		B.SHOP_NAME AS shopName,
+		C.STAR_POINT AS starPoint
 	FROM
 		ADMIN A
 	LEFT JOIN SHOP B
-	ON A.SHOP_NO = B.SHOP_NO
-	LEFT JOIN STAR C
-	ON A.ADMIN_NO = C.ADMIN_NO
-	WHERE
-	 	1 = 1
-		<if test="searchType != null">
-			<if test="searchType == 't'.toStrnig()">
-				AND A.NAME LIKE CONCAT('%',#{keyword},'%')
-			</if>
-			<if test="searchType == 'c'.toString()">
-				AND B.SHOP_NAME CONCAT('%',#{keyword},'%')
-			</if>
-			<if test="searchType == 'tc'.toString()">
-				AND (A.NAME LIKE CONCAT('%',#{keyword},'%') OR B.SHOP_NAME CONCAT('%',#{keyword},'%'))
-			</if>
-		</if>
-</select>
-<select id="selectProfile" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
-	SELECT 
-		ADMIN_NO AS adminNo,
-		ADMIN_ID AS userId,
-		NAME,
-		SEX,
-		AGE,
-		PROFILE,
-		IMG_URL AS imgUrl,
-		SHOP_NO as shopNo
-	FROM
-		ADMIN
+		ON A.SHOP_NO = B.SHOP_NO
+	LEFT JOIN STAR C 
+		ON A.ADMIN_NO = C.ADMIN_NO
 	WHERE 
 		1 = 1
 		<if test="userId != null">
-			AND ADMIN_ID = #{userId}
+			AND A.ADMIN_ID = #{userId}
 		</if>
 		<if test="adminNo != null and adminNo != 0">
-			AND ADMIN_NO = #{adminNo}
+			AND A.ADMIN_NO = #{adminNo}
 		</if>
 </select>
 
