@@ -1,19 +1,15 @@
 package com.makehair.shop.user;
 
 import com.makehair.shop.common.constants.CommonUserVo;
-
-import java.util.HashMap;
-import java.util.Map;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -54,13 +50,15 @@ public class UserController {
         return "login/login";
     }
 
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginProcess(
             @RequestParam(value = "userType", defaultValue = "user") String userType,
             @ModelAttribute CommonUserVo commonUserVo,
-            HttpSession httpSession,
+            HttpServletRequest request,
             Model model) {
 
+        HttpSession session = request.getSession();
         // user or admin 으로 파라미터를 받아서 로그인 다르게 요청
         CommonUserVo result = userService.login(userType, commonUserVo);
         if (result == null) {
@@ -69,7 +67,7 @@ public class UserController {
             return "login/login";
         } else {
             // 로그인 성공
-            httpSession.setAttribute("loginUser", result);
+            session.setAttribute("loginUser", result);
             return "redirect:/";
         }
     }
@@ -94,8 +92,13 @@ public class UserController {
                              HttpSession httpSession,
                              Model model) {
 
-      System.out.println(httpSession.getAttribute("loginUser"));;
+        return "login/user_detail";
+    }
 
-      return "login/user_detail";
+    @RequestMapping(value = "/user_update", method = RequestMethod.POST)
+    public String userUpdate(@ModelAttribute CommonUserVo commonUserVo, Model model) {
+        userService.updateUser(commonUserVo);
+
+        return "login/user_detail";
     }
 }

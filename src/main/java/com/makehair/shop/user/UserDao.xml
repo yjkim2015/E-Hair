@@ -32,7 +32,7 @@
 
 	<select id="loginAdmin" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
 		SELECT
-			ADMIN_ID as adminId,
+			ADMIN_ID as userId,
 			ADMIN_NO as adminNo,
 			SHOP_NO as shopNo,
 			NAME,
@@ -43,6 +43,14 @@
 			IMG_URL as imgUrl
 		FROM admin
 		WHERE ADMIN_ID = #{userId} AND PASSWORD = HEX(AES_ENCRYPT(#{password}, SHA2("enc_key",512)))
+	</select>
+
+	<select id="checkAdmin" parameterType="map" resultType="com.makehair.shop.common.constants.CommonUserVo">
+		SELECT
+			ADMIN_ID as userId,
+			ADMIN_NO as adminNo
+		FROM admin
+		WHERE ADMIN_ID = #{map.adminId} AND ADMIN_NO = #{map.adminNo}
 	</select>
 </mapper>
 	<!--AES_DECRYPT(passwd, SHA2("enc_key",512)),-->

@@ -5,6 +5,9 @@ import com.makehair.shop.shop.ShopDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class UserService {
 
@@ -28,9 +31,9 @@ public class UserService {
         CommonUserVo userVo;
 
         if (userType.equals("admin")) {
-          userVo = userDao.loginAdmin(commonUserVo);
+            userVo = userDao.loginAdmin(commonUserVo);
         } else {
-          userVo = userDao.loginUser(commonUserVo);
+            userVo = userDao.loginUser(commonUserVo);
         }
 
         return userVo;
@@ -46,7 +49,14 @@ public class UserService {
         return userDao.insertAdmin(userVo);
     }
 
-    public CommonUserVo getUserInfo(int userNo) {
-        return userDao.getUserInfo(userNo);
+    public Boolean checkAdmin(int adminNo, String userId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("adminId", userId);
+        map.put("adminNo", adminNo);
+        return userDao.checkAdmin(map).getUserId() != null;
+    }
+
+    public CommonUserVo updateUser(CommonUserVo commonUserVo) {
+        return userDao.updateUser(commonUserVo);
     }
 }
