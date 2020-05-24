@@ -1,13 +1,14 @@
 package com.makehair.shop.common.constants;
 
+import java.util.Date;
 
-public class Sales {
+public class SalesVo {
 
   private long salesNo;
-  private String adminId;
+  private int adminNo;
   private long income;
   private String memo;
-  private java.sql.Timestamp insertDate;
+  private Date insertDate;
 
 
   public long getSalesNo() {
@@ -19,12 +20,12 @@ public class Sales {
   }
 
 
-  public String getAdminId() {
-    return adminId;
+  public int getAdminNo() {
+    return adminNo;
   }
 
-  public void setAdminId(String adminId) {
-    this.adminId = adminId;
+  public void setAdminNo(int adminNo) {
+    this.adminNo = adminNo;
   }
 
 
@@ -46,11 +47,11 @@ public class Sales {
   }
 
 
-  public java.sql.Timestamp getInsertDate() {
+  public Date getInsertDate() {
     return insertDate;
   }
 
-  public void setInsertDate(java.sql.Timestamp insertDate) {
+  public void setInsertDate(Date insertDate) {
     this.insertDate = insertDate;
   }
 

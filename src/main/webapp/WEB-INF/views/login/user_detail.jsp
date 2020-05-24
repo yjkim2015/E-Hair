@@ -24,7 +24,7 @@
             <h2 class="section-heading text-uppercase"><c:out value="${param.userType}" default="user"/> 정보 수정</h2>
             <h3 class="section-subheading text-muted">회원님의 정보를 수정하세요.</h3>
         </div>
-        <form action="/user-update" method="post">
+        <form action="${pageContext.request.contextPath}/user_update?userType=<c:out value="${param.userType}" default="user"/>" method="post">
             <div class="row align-items-stretch mb-5 ">
                 <div class="col-md-6">
                     <input type="file">
