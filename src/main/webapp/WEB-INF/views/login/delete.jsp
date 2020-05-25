@@ -7,22 +7,24 @@
     <title>Insert title here</title>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-</head>
-<script>
-    $(document).ready(function () {
-        if($("#delete_result").val() === "fail") {
-            alert("비밀번호 인증 실패입니다. 재입력 해주십시오.");
-        }
-
-        $("#btnSubmit").on('click', function () {
-            let deleteConfirm = confirm('회원 탈퇴 하시겠습니까?');
-            if(deleteConfirm) {
-                return true;
+    <script>
+        $(document).ready(function () {
+            if($("#delete_result").val() === "fail") {
+                alert("비밀번호 인증 실패입니다. 재입력 해주십시오.");
             }
-            return false;
+
+            $("#btnSubmit").on('click', function () {
+                let deleteConfirm = confirm('회원 탈퇴 하시겠습니까?');
+                if(deleteConfirm) {
+                    return true;
+                }
+                return false;
+            });
         });
-    });
-</script>
+    </script>
+
+</head>
+
 <body id="page-top">
 <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
 
