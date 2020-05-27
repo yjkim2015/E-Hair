@@ -1,6 +1,6 @@
 package com.makehair.shop.admin;
 
-import com.makehair.shop.admin.read.AdminReadService;
+import com.makehair.shop.admin_read.AdminReadService;
 import com.makehair.shop.common.constants.Auth;
 import com.makehair.shop.common.constants.SalesVo;
 import com.makehair.shop.common.constants.UserDetail;
@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 // admin basic

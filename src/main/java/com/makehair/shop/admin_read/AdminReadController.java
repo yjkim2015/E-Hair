@@ -1,21 +1,14 @@
-package com.makehair.shop.admin.read;
+package com.makehair.shop.admin_read;
 
 import com.makehair.shop.common.constants.Auth;
-import com.makehair.shop.common.constants.CommonUserVo;
 import com.makehair.shop.common.constants.ReadVo;
-import com.makehair.shop.common.constants.SalesVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 // admin read

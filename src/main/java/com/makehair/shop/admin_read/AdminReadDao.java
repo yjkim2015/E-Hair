@@ -1,4 +1,4 @@
-package com.makehair.shop.admin.read;
+package com.makehair.shop.admin_read;
 
 import com.makehair.shop.common.constants.CommonUserVo;
 import com.makehair.shop.common.constants.ReviewVo;

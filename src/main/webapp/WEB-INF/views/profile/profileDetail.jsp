@@ -84,9 +84,11 @@ function initComponent() {
 		},
 		type:'get',
 		success:function(data) {
-		
+			if ( data.data.starPoint == null ) {
+				data.data.starPoint = 0;
+			}
 			$('#mainImg').attr('src','/displayFile?fileName='+data.data.imgUrl);
-			$('#profile').text(data.data.name +"\n" + data.data.sex + "\n" + data.data.profile);
+			$('#profile').html("<h4>"+"소속 매장 : " + data.data.shopName +"<br>"+"이름 : " + data.data.name + "<br>별점 ★ " + data.data.starPoint+".0<br>성별 : " + data.data.sex + "<br>자기소개 : " + data.data.profile +"</h4>");
 		}
 	});
 }
@@ -221,8 +223,9 @@ function replyAdd() {
 				    <!-- Wrapper for slides -->
 				    <div class="carousel-inner">
 				      <div class="item active">
-							<a href="#" onclick="dirImg('1636095');" title="사진을 클릭하시면 크게 확인하실 수 있습니다." style="line-height: 301px; float:left; margin-right:150px;">
- 							<img id='mainImg' src="" class="img-responsive img-blog"  style="width:250px;">                
+							<a href="#" onclick="dirImg('1636095');" title="사진을 클릭하시면 크게 확인하실 수 있습니다." style="line-height: 301px; float:left; margin-right:
+							50px;">
+ 							<img id='mainImg' src="" class="img-responsive img-blog"  style="width:350px;">                
 							</a>
 							<div class="widget categories">
                             <h3 class="widget-title masthead-subheading">
@@ -231,7 +234,7 @@ function replyAdd() {
                                 
                                 <div class="col-sm-6 masthead-subheading">
                                     <ul class="arrow">
-                                       <li id='profile'></li>
+                                       <li id='profile' style="width:300px"></li>
                                     </ul>
                                 </div>
                             </div>                     

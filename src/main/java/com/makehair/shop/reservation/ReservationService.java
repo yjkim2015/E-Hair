@@ -21,4 +21,6 @@ public interface ReservationService {
 	
 	public int deleteReservation(ReservationVo reservationVo);
 	
+	public List<ReservationVo> reservationList(ReservationVo reservationVo);
+	
 }
