@@ -12,16 +12,24 @@
 		VALUES (#{userId}, #{shopNo},HEX(AES_ENCRYPT(#{password}, SHA2("enc_key",512))), #{name}, #{sex},  AES_ENCRYPT(#{phone}, SHA2("enc_key",512)), #{age}, now(), now());
 	</insert>
 
-	<select id="checkId" parameterType="String" resultType="int">
-		SELECT count(USER_ID)
-		FROM user, admin
-		WHERE USER_ID = #{value} OR ADMIN_ID = #{value};
+	<select id="checkId" parameterType="map" resultType="int">
+		SELECT count(*)
+		<choose>
+			<when test='map.userType == "admin"'>
+				FROM admin
+				WHERE ADMIN_ID = #{map.id};
+			</when>
+			<otherwise>
+				FROM user
+				WHERE user_ID = #{map.id};
+			</otherwise>
+		</choose>
 	</select>
 
 	<select id="loginUser" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
 		SELECT
 			USER_ID AS userId,
-			USER_NO,
+			USER_NO AS userNo,
 			NAME,
 			SEX,
 			AES_DECRYPT(PHONE, SHA2("enc_key",512)) as PHONE,
@@ -52,5 +60,28 @@
 		FROM admin
 		WHERE ADMIN_ID = #{map.adminId} AND ADMIN_NO = #{map.adminNo}
 	</select>
+	
+	<delete id="deleteUser" parameterType="com.makehair.shop.common.constants.CommonUserVo">
+		DELETE
+		FROM user
+		WHERE USER_ID = #{userId} AND PASSWORD = HEX(AES_ENCRYPT(#{password}, SHA2("enc_key",512)))
+	</delete>
+
+	<update id="updateUser" parameterType="com.makehair.shop.common.constants.CommonUserVo">
+		UPDATE user
+		SET NAME = #{name}, SEX = #{sex}, PHONE = AES_ENCRYPT(#{phone}, SHA2("enc_key",512)), AGE = #{age}
+		WHERE USER_NO = #{userNo}
+	</update>
+
+	<select id="getUserInfo" parameterType="int" resultType="com.makehair.shop.common.constants.CommonUserVo">
+		SELECT
+			USER_ID AS userId,
+			USER_NO AS userNo,
+			NAME,
+			SEX,
+			AES_DECRYPT(PHONE, SHA2("enc_key",512)) as PHONE,
+			AGE
+		FROM user
+		WHERE USER_NO = #{value}
+	</select>
 </mapper>
-	<!--AES_DECRYPT(passwd, SHA2("enc_key",512)),-->

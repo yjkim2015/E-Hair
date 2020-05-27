@@ -39,12 +39,15 @@
             }
         });
 
-        // ajax
+        let checkIdFlag = false;
+
+        // 아이디 중복체크 -> user, admin
         $("#checkId").on("click", function () {
             let id = $("#user_id").val();
+            let userType = '${param.userType}';
 
             $.ajax({
-                url: "${pageContext.request.contextPath}/check-id?id=" + id,
+                url: "${pageContext.request.contextPath}/check-id?id=" + id + "&userType=" + userType,
                 type: "GET",
                 dataType: "json",
                 success: function (data) {
@@ -52,14 +55,23 @@
                     if (data.checkId === false) {
                         $("#checkId").css('background-color', 'green');
                         alert("확인 되었습니다.")
+                        $("#user_id").focus()
+                        checkIdFlag = true;
                     } else {
-                        $("#checkId").css('background-color', 'red');
-                        alert("이미 존재하는 아이디입니다.")
+                        alert("이미 존재하는 아이디입니다. 재입력 해주십시오.")
+                        $("#user_id").val('')
+                        $("#user_id").focus()
                     }
                 }
             })
         })
 
+        // 회원가입 버튼 클릭 -> 아이디 중복체크 여부
+        $("#btnSubmit").on('click', function() {
+            if(checkIdFlag != true) {
+                alert("아이디 중복체크는 필수입니다.")
+            }
+        });
     });
 
 </script>
@@ -163,7 +175,7 @@
             <div class="col-md-3"></div>
             <div class="text-center">
                 <div id="success"></div>
-                <button class="btn btn-primary btn-xl text-uppercase" type="submit">회원 가입하기</button>
+                <button class="btn btn-primary btn-xl text-uppercase" type="submit" id="btnSubmit">회원 가입하기</button>
             </div>
         </form>
     </div>
