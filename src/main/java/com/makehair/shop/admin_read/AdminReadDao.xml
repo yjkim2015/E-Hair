@@ -38,12 +38,12 @@
         LIMIT #{map.startRow}, #{map.pageSize}
 	</select>
 
-    <select id="getUserCount" parameterType="map" resultType="int">
-        SELECT
-            COUNT(*)
-        FROM USER
-        WHERE NAME LIKE CONCAT('%', #{map.searchValue}, '%')
-    </select>
+<!--    <select id="getUserCount" parameterType="map" resultType="int">-->
+<!--        SELECT-->
+<!--            COUNT(*)-->
+<!--        FROM USER-->
+<!--        WHERE NAME LIKE CONCAT('%', #{map.searchValue}, '%')-->
+<!--    </select>-->
 
     <select id="getReviewList" parameterType="map" resultType="com.makehair.shop.common.constants.ReviewVo">
         SELECT

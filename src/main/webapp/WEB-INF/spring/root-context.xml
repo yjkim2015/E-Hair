@@ -40,7 +40,7 @@
   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="dataSource" ref="dataSource"/>
     <!-- MariaDB용 mapper -->
-    <property name="mapperLocations" value="classpath*:com/makehair/shop/**/*.xml" />
+<!--    <property name="mapperLocations" value="classpath*:com/makehair/shop/**/*Dao.xml" />-->
     <property name="configLocation" value="/WEB-INF/spring/sql-mapper-config.xml"/>
   </bean>
 

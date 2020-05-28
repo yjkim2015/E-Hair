@@ -3,9 +3,9 @@
 <mapper namespace="com.makehair.shop.admin.AdminDao">
 
     <!-- 매출 등록 -->
-    <select id="insertSales" parameterType="com.makehair.shop.common.constants.SalesVo">
+    <insert id="insertSales" parameterType="com.makehair.shop.common.constants.SalesVo">
         INSERT INTO SALES (INCOME, MEMO, ADMIN_NO) VALUES (#{income}, #{memo}, #{adminNo})
-    </select>
+    </insert>
 
     <!-- 메모 등록 -->
     <insert id="insertMemo" parameterType="com.makehair.shop.common.constants.UserDetail">
