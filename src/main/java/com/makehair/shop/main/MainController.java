@@ -12,4 +12,10 @@ public class MainController {
 
 		return "/main/main";
 	}
+
+	@RequestMapping(value="/admin_test", method = RequestMethod.GET)
+	public String adminView() {
+
+		return "/admin/dashboard";
+	}
 }
