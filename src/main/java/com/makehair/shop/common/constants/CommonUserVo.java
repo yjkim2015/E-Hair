@@ -161,8 +161,5 @@ public class CommonUserVo {
 				+ Arrays.toString(files) + ", shopNo=" + shopNo + ", shopName=" + shopName + ", starPoint=" + starPoint
 				+ "]";
 	}
-	
-	
-
 }
 

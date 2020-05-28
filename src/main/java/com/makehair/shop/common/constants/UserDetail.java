@@ -1,13 +1,15 @@
 package com.makehair.shop.common.constants;
 
 
+import java.util.Date;
+
 public class UserDetail {
 
   private long userDetailNo;
   private String memo;
   private long count;
-  private java.sql.Timestamp insertDate;
-  private String userId;
+  private Date insertDate;
+  private int userNo;
 
 
   public long getUserDetailNo() {
@@ -36,22 +38,19 @@ public class UserDetail {
     this.count = count;
   }
 
-
-  public java.sql.Timestamp getInsertDate() {
+  public Date getInsertDate() {
     return insertDate;
   }
 
-  public void setInsertDate(java.sql.Timestamp insertDate) {
+  public void setInsertDate(Date insertDate) {
     this.insertDate = insertDate;
   }
 
-
-  public String getUserId() {
-    return userId;
+  public int getUserNo() {
+    return userNo;
   }
 
-  public void setUserId(String userId) {
-    this.userId = userId;
+  public void setUserNo(int userNo) {
+    this.userNo = userNo;
   }
-
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.makehair.shop.admin.AdminDao">
+
+    <!-- 매출 등록 -->
+    <insert id="insertSales" parameterType="com.makehair.shop.common.constants.SalesVo">
+        INSERT INTO SALES (SALES_NO, INCOME, MEMO, ADMIN_NO) VALUES (13, #{income}, #{memo}, #{adminNo})
+    </insert>
+
+    <!-- 메모 등록 -->
+    <insert id="insertMemo" parameterType="com.makehair.shop.common.constants.UserDetail">
+        INSERT INTO USER_DETAIL (MEMO, USER_NO) VALUES (#{memo}, #{userNo})
+    </insert>
+
+    <select id="getMemoList" parameterType="map" resultType="com.makehair.shop.common.constants.UserDetail">
+        SELECT
+            USER_DETAIL_NO AS userDetailNo,
+            MEMO AS memo,
+            COUNT AS count,
+            INSERT_DATE AS insertDate,
+            USER_NO AS userNo
+        FROM USER_DETAIL
+        WHERE USER_NO = #{map.searchValue}
+        ORDER BY INSERT_DATE DESC
+    </select>
+
+    <select id="getMemoCount" parameterType="map" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM USER_DETAIL
+        WHERE USER_NO = #{map.searchValue}
+        ORDER BY INSERT_DATE DESC
+    </select>
+
+</mapper>

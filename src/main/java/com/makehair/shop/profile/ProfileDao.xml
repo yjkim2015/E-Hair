@@ -1,76 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.makehair.shop.profile.ProfileDao">
 
-<select id="selectAllProfile" parameterType="com.makehair.shop.common.constants.SearchCriteria" resultType="com.makehair.shop.common.constants.CommonUserVo">
-	SELECT
-		A.ADMIN_NO as adminNo,
-		A.ADMIN_ID AS userId,
-		A.NAME AS name,
-		A.SEX,
-		A.AGE,
-		A.PROFILE,
-		A.IMG_URL AS imgUrl,
-		A.SHOP_NO as shopNo,
-		B.SHOP_NAME AS shopName,
-		C.STAR_POINT AS starPoint
-	FROM
-		ADMIN A
- 	LEFT JOIN SHOP B
-		ON A.SHOP_NO = B.SHOP_NO
-	LEFT JOIN STAR C
-		ON A.ADMIN_NO = C.ADMIN_NO
- 	WHERE
- 		1 = 1 
-		 <if test="searchType != null and keyword != ''">
-			<if test="searchType == 't'.toString()">
-				AND A.NAME LIKE CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType == 'c'.toString()">
-				AND B.SHOP_NAME LIKE CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType == 'tc'.toString()">
-				AND (A.NAME LIKE CONCAT('%', #{keyword}, '%') OR B.SHOP_NAME LIKE CONCAT('%', #{keyword}, '%'))
-			</if>
-		</if>
-	ORDER BY C.STAR_POINT DESC
-</select>
-<select id="selectProfile" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.CommonUserVo">
-	SELECT 
-		A.ADMIN_NO AS adminNo,
-		A.ADMIN_ID AS userId,
-		A.NAME,
-		A.SEX,
-		A.AGE,
-		A.PROFILE,
-		A.IMG_URL AS imgUrl,
-		A.SHOP_NO as shopNo,
-		B.SHOP_NAME AS shopName,
-		C.STAR_POINT AS starPoint
-	FROM
-		ADMIN A
-	LEFT JOIN SHOP B
-		ON A.SHOP_NO = B.SHOP_NO
-	LEFT JOIN STAR C 
-		ON A.ADMIN_NO = C.ADMIN_NO
-	WHERE 
-		1 = 1
-		<if test="userId != null">
-			AND A.ADMIN_ID = #{userId}
-		</if>
-		<if test="adminNo != null and adminNo != 0">
-			AND A.ADMIN_NO = #{adminNo}
-		</if>
-</select>
+  <select id="selectAllProfile" parameterType="com.makehair.shop.common.constants.SearchCriteria"
+    resultType="com.makehair.shop.common.constants.CommonUserVo">
+    SELECT
+    A.ADMIN_NO as adminNo,
+    A.ADMIN_ID AS userId,
+    A.NAME AS name,
+    A.SEX,
+    A.AGE,
+    A.PROFILE,
+    A.IMG_URL AS imgUrl,
+    A.SHOP_NO as shopNo,
+    B.SHOP_NAME AS shopName,
+    C.STAR_POINT AS starPoint
+    FROM
+    ADMIN A
+    LEFT JOIN SHOP B
+    ON A.SHOP_NO = B.SHOP_NO
+    LEFT JOIN STAR C
+    ON A.ADMIN_NO = C.ADMIN_NO
+    WHERE
+    1 = 1
+    <if test="searchType != null and keyword != ''">
+      <if test="searchType == 't'.toString()">
+        AND A.NAME LIKE CONCAT('%', #{keyword}, '%')
+      </if>
+      <if test="searchType == 'c'.toString()">
+        AND B.SHOP_NAME LIKE CONCAT('%', #{keyword}, '%')
+      </if>
+      <if test="searchType == 'tc'.toString()">
+        AND (A.NAME LIKE CONCAT('%', #{keyword}, '%') OR B.SHOP_NAME LIKE CONCAT('%', #{keyword},
+        '%'))
+      </if>
+    </if>
+    ORDER BY C.STAR_POINT DESC
+  </select>
+
+  <select id="selectProfile" parameterType="com.makehair.shop.common.constants.CommonUserVo"
+    resultType="com.makehair.shop.common.constants.CommonUserVo">
+    SELECT
+    A.ADMIN_NO AS adminNo,
+    A.ADMIN_ID AS userId,
+    A.NAME,
+    A.SEX,
+    A.AGE,
+    A.PROFILE,
+    A.IMG_URL AS imgUrl,
+    A.SHOP_NO as shopNo,
+    B.SHOP_NAME AS shopName,
+    C.STAR_POINT AS starPoint
+    FROM
+    ADMIN A
+    LEFT JOIN SHOP B
+    ON A.SHOP_NO = B.SHOP_NO
+    LEFT JOIN STAR C
+    ON A.ADMIN_NO = C.ADMIN_NO
+    WHERE
+    1 = 1
+    <if test="userId != null">
+      AND A.ADMIN_ID = #{userId}
+    </if>
+    <if test="adminNo != null and adminNo != 0">
+      AND A.ADMIN_NO = #{adminNo}
+    </if>
+  </select>
 
 
-<update id="updateProfile" parameterType="com.makehair.shop.common.constants.CommonUserVo">
-	UPDATE
-		ADMIN
-	SET
-		PROFILE = #{profile},
-		IMG_URL = #{imgUrl}
-	WHERE
-		ADMIN_ID = #{userId}
-</update>
+  <update id="updateProfile" parameterType="com.makehair.shop.common.constants.CommonUserVo">
+    UPDATE
+      ADMIN
+    SET
+      PROFILE = #{profile},
+      IMG_URL = #{imgUrl}
+    WHERE
+      ADMIN_ID = #{userId}
+	</update>
 </mapper> 
