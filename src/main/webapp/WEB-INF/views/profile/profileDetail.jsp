@@ -58,6 +58,7 @@ function initComponent() {
         sideBySide: true
     }); 
 	$('#starRating').starRating();
+	
 
 	var param = {};
 	param.adminNo = adminNo;
