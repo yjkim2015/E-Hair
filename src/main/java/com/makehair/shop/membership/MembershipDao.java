@@ -1,19 +1,17 @@
 package com.makehair.shop.membership;
 
 import com.makehair.shop.common.constants.CommonUserVo;
+import com.makehair.shop.common.constants.MembershipUsage;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface MembershipDao {
 
-	int insertUser(final CommonUserVo userVo);
+    public List<MembershipUsage> getPointListByUserNo(int userNo);
 
-  int checkId(String id);
-
-  CommonUserVo loginUser(CommonUserVo commonUserVo);
-
-  CommonUserVo loginAdmin(CommonUserVo commonUserVo);
-
-  int insertAdmin(CommonUserVo userVo);
+    int getRefundByUserNo(@Param("map") Map<String, Object> map);
 }

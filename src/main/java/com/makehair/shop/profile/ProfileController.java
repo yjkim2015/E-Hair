@@ -2,6 +2,9 @@ package com.makehair.shop.profile;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -43,7 +46,15 @@ public class ProfileController extends CommonController {
 	@RequestMapping(value="/allProfile", method = RequestMethod.GET)
 	public String allProfile(@ModelAttribute("cri") SearchCriteria cri, Model model) {
 	
-		model.addAttribute("list",profileService.selectAllProfile(cri));
+	
+		List<CommonUserVo> list = profileService.selectAllProfile(cri);
+		
+		for ( CommonUserVo oneUser : list ) {
+			if ( oneUser.getStarPoint() == null ) {
+				oneUser.setStarPoint("0");
+			}
+		}
+		model.addAttribute("list",list);
 		return "profile/list";
 	}
 	
@@ -70,7 +81,7 @@ public class ProfileController extends CommonController {
 		
 		try {
 			CommonUserVo result = profileService.selectProfile(adminVo);
-			System.out.println(result.toString());
+			
 			resultVo = new ResultVo(HttpStatus.OK);
 			resultVo.setData(result);
 		}

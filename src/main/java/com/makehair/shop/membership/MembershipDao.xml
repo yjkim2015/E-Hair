@@ -2,4 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.makehair.shop.membership.MembershipDao">
 
+    <select id="getPointListByUserNo" parameterType="int" resultType="com.makehair.shop.common.constants.MembershipUsage">
+		SELECT
+			USER_NO as userNo,
+			PRICE,
+			DESCRIPTION,
+			INSERT_DATE as insertDate
+		FROM MEMBERSHIP_USAGE
+		WHERE USER_NO = #{value}
+		ORDER BY INSERT_DATE DESC
+	</select>
+
+	<insert id="getRefundByUserNo" parameterType="map">
+		INSERT INTO MEMBERSHIP_USAGE (PRICE, DESCRIPTION, USER_NO)
+		VALUES (#{map.leftPoint}, #{map.description}, #{map.userNo})
+	</insert>
+
 </mapper>

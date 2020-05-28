@@ -7,6 +7,14 @@
 <title>미용실 통합 예약시스템 HIRS(Hairshop Integration Reservation System)</title>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<script type="text/javascript">
+    let deleteResult = '${param.deleteResult}';
+    if(deleteResult == 'true') {
+        alert('탈퇴 완료되었습니다.');
+    }
+    console.log(deleteResult);
+</script>
+
 </head>
 <body id="page-top">
 <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
@@ -291,6 +299,6 @@
             </div>
         </section>
         <%@ include file="/WEB-INF/views/common/footer.jsp" %>
-       
+
     </body>
 </html>

@@ -1,13 +1,14 @@
 package com.makehair.shop.common.constants;
 
-
+import java.util.Date;
 
 public class MembershipUsage {
 
   private long usageNo;
   private long price;
   private String description;
-  private long membershipNo;
+  private Date insertDate;
+  private int userNo;
 
 
   public long getUsageNo() {
@@ -37,12 +38,19 @@ public class MembershipUsage {
   }
 
 
-  public long getMembershipNo() {
-    return membershipNo;
+  public int getUserNo() {
+    return userNo;
   }
 
-  public void setMembershipNo(long membershipNo) {
-    this.membershipNo = membershipNo;
+  public void setUserNo(int userNo) {
+    this.userNo = userNo;
   }
 
+  public Date getInsertDate() {
+    return insertDate;
+  }
+
+  public void setInsertDate(Date insertDate) {
+    this.insertDate = insertDate;
+  }
 }

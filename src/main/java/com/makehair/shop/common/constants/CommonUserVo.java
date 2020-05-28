@@ -23,7 +23,8 @@ public class CommonUserVo {
 	private String[] files;
 	private int shopNo;
 	private String shopName;
-	private int starPoint;
+	private String starPoint;
+	private String reservationDate;
 	public int getUserNo() {
 		return userNo;
 	}
@@ -144,11 +145,11 @@ public class CommonUserVo {
 		this.shopName = shopName;
 	}
 	
-	public int getStarPoint() {
+	public String getStarPoint() {
 		return starPoint;
 	}
 
-	public void setStarPoint(int starPoint) {
+	public void setStarPoint(String starPoint) {
 		this.starPoint = starPoint;
 	}
 
@@ -160,8 +161,5 @@ public class CommonUserVo {
 				+ Arrays.toString(files) + ", shopNo=" + shopNo + ", shopName=" + shopName + ", starPoint=" + starPoint
 				+ "]";
 	}
-	
-	
-
 }
 

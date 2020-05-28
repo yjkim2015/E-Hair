@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.makehair.shop.admin_read.AdminReadDao">
+
+    <select id="getSalesDayList" parameterType="map" resultType="com.makehair.shop.common.constants.SalesVo">
+        SELECT
+            SALES_NO AS salesNo,
+            ADMIN_NO AS adminNo,
+            INCOME,
+            MEMO,
+            INSERT_DATE AS insertDate
+        FROM SALES
+        WHERE ADMIN_NO = #{map.adminNo}
+        AND INSERT_DATE BETWEEN #{map.startTime} AND #{map.endTime}
+        ORDER BY INSERT_DATE DESC
+        LIMIT #{map.startRow}, #{map.pageSize}
+	</select>
+
+    <select id="getSalesDayCount" parameterType="map" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM SALES
+        WHERE ADMIN_NO = #{map.adminNo}
+        AND INSERT_DATE BETWEEN #{map.startTime} AND #{map.endTime}
+    </select>
+
+    <select id="getUserList" parameterType="map" resultType="com.makehair.shop.common.constants.CommonUserVo">
+        SELECT
+            USER_ID AS userId,
+            NAME,
+            SEX,
+            PHONE,
+            AGE,
+            INSERT_DATE AS insertDate
+        FROM USER
+        WHERE NAME LIKE CONCAT('%', #{map.searchValue}, '%')
+        ORDER BY NAME DESC, INSERT_DATE DESC
+        LIMIT #{map.startRow}, #{map.pageSize}
+	</select>
+
+<!--    <select id="getUserCount" parameterType="map" resultType="int">-->
+<!--        SELECT-->
+<!--            COUNT(*)-->
+<!--        FROM USER-->
+<!--        WHERE NAME LIKE CONCAT('%', #{map.searchValue}, '%')-->
+<!--    </select>-->
+
+    <select id="getReviewList" parameterType="map" resultType="com.makehair.shop.common.constants.ReviewVo">
+        SELECT
+            r.review_no as reviewNo,
+            r.review_content as reviewContent,
+            r.user_id as userId,
+            r.admin_no as adminNo,
+            s.star_point as star
+        FROM REVIEW AS r, STAR AS s
+        WHERE r.admin_no = s.admin_no
+        AND r.user_id = s.user_id
+        AND r.admin_no = #{map.searchValue}
+        ORDER BY r.userId DESC
+	</select>
+
+    <select id="getUserCount" parameterType="map" resultType="int">
+        SELECT
+            count(*)
+        FROM REVIEW AS r, STAR AS s
+        WHERE r.admin_no = s.admin_no
+        AND r.user_id = s.user_id
+        AND r.admin_no = #{map.searchValue}
+    </select>
+
+</mapper>
