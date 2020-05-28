@@ -1,7 +1,7 @@
 package com.makehair.shop.page;
 
 import com.makehair.shop.admin.AdminDao;
-import com.makehair.shop.admin.read.AdminReadDao;
+import com.makehair.shop.admin_read.AdminReadDao;
 import com.makehair.shop.commom.util.DateFormatUtil;
 import com.makehair.shop.common.constants.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;

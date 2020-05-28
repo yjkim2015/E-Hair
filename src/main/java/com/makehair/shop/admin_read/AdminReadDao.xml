@@ -26,6 +26,7 @@
 
     <select id="getUserList" parameterType="map" resultType="com.makehair.shop.common.constants.CommonUserVo">
         SELECT
+            USER_NO AS userNo,
             USER_ID AS userId,
             NAME,
             SEX,
@@ -38,12 +39,12 @@
         LIMIT #{map.startRow}, #{map.pageSize}
 	</select>
 
-<!--    <select id="getUserCount" parameterType="map" resultType="int">-->
-<!--        SELECT-->
-<!--            COUNT(*)-->
-<!--        FROM USER-->
-<!--        WHERE NAME LIKE CONCAT('%', #{map.searchValue}, '%')-->
-<!--    </select>-->
+    <select id="getUserCount" parameterType="map" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM USER
+        WHERE NAME LIKE CONCAT('%', #{map.searchValue}, '%')
+    </select>
 
     <select id="getReviewList" parameterType="map" resultType="com.makehair.shop.common.constants.ReviewVo">
         SELECT
@@ -56,10 +57,11 @@
         WHERE r.admin_no = s.admin_no
         AND r.user_id = s.user_id
         AND r.admin_no = #{map.searchValue}
-        ORDER BY r.userId DESC
+        ORDER BY r.user_id DESC
+        LIMIT #{map.startRow}, #{map.pageSize}
 	</select>
 
-    <select id="getUserCount" parameterType="map" resultType="int">
+    <select id="getReviewCount" parameterType="map" resultType="int">
         SELECT
             count(*)
         FROM REVIEW AS r, STAR AS s

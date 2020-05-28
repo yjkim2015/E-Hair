@@ -1,6 +1,6 @@
 package com.makehair.shop.admin;
 
-import com.makehair.shop.admin.read.AdminReadService;
+import com.makehair.shop.admin_read.AdminReadService;
 import com.makehair.shop.common.constants.Auth;
 import com.makehair.shop.common.constants.ReadVo;
 import com.makehair.shop.common.constants.SalesVo;

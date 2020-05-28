@@ -5,6 +5,7 @@ import com.makehair.shop.common.constants.ReviewVo;
 import com.makehair.shop.common.constants.SalesVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Map;
 
@@ -17,9 +18,9 @@ public interface AdminReadDao {
 
     List<CommonUserVo> getUserList(@Param("map") Map<String, Object> map);
 
-    int getUserCount(Map<String, Object> map);
+    int getUserCount(@Param("map") Map<String, Object> map);
 
     List<ReviewVo> getReviewList(@Param("map") Map<String, Object> map);
 
-    int getReviewCount(Map<String, Object> map);
+    int getReviewCount(@Param("map") Map<String, Object> map);
 }

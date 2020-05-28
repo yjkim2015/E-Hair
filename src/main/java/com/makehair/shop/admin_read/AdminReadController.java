@@ -1,5 +1,6 @@
 package com.makehair.shop.admin_read;
 
+import com.makehair.shop.admin_read.AdminReadService;
 import com.makehair.shop.common.constants.Auth;
 import com.makehair.shop.common.constants.ReadVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class AdminReadController {
 
     // 데이터 조회
     @Auth(role = Auth.Role.ADMIN)
-    @RequestMapping("")
+    @RequestMapping(value = {"", "/"})
     @ResponseBody
     public ResponseEntity<Map> getDataList(ReadVo readVo) {
         Map<String, Object> map = adminReadService.getDataList(readVo);
