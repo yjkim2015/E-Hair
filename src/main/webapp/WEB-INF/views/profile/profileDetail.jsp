@@ -53,9 +53,12 @@ $(function(){
 <script>
 var service = {};
 function initComponent() {
-	$('#datepicker').datetimepicker();
-
+	 $('#datetimepicker').datetimepicker({
+        inline: true,
+        sideBySide: true
+    }); 
 	$('#starRating').starRating();
+
 	var param = {};
 	param.adminNo = adminNo;
 	goAjaxGet('/checkDayOff', param, function(result){
@@ -96,10 +99,11 @@ function initComponent() {
 function initEvent() {
 	$('#reservation').on('click', reservation);
 	
-	$('#datepicker').unbind('change').change(function (event) {
+	$('#datetimepicker').unbind('change').change(function (event) {
 		
 		
 		var reservationDate = event.target.value;
+		$('#day').val(reservationDate);
 		reservationDate = reservationDate+ ":00";
 		searchparams.reservationDate = reservationDate;
 		searchparams.adminNo = adminNo;
@@ -107,7 +111,7 @@ function initEvent() {
 		$(dayOffList).each(function(key,value){
 			if ( reservationDate.includes(value) ) {
 				alert('해당 요일은 디자이너의 휴무일입니다.');
-				$('#datepicker').val('');
+				$('#day').val('');
 				return false;
 			}
 		});
@@ -115,7 +119,7 @@ function initEvent() {
 			
 			if ( result.data >= 1 ) {
 				alert(result.reason);
-				$('#datepicker').val('');
+				$('#day').val('');
 			}
 			
 		});
@@ -132,7 +136,7 @@ function reservation() {
 	var memo = $('#memo').val();
 	searchparams.memo = memo;
 	
-	var reservationDate = $('#datepicker').val();
+	var reservationDate = $('#datetimepicker').val();
 
 	
 	if ( reservationDate == '' ) {alert('날짜를 선택해주세요'); return false;}
@@ -196,7 +200,12 @@ function replyAdd() {
                              	
                             </h3>
                         </div>
-						 <p>Date: <input type="text" id="datepicker"></p>
+                        <br><br>
+                       			 <input type="text" id="datetimepicker">
+						 <p>
+					 			Date:  <input type="text" id="day"/>
+						 </p>
+						 
 						 <div class="dropdown">
 						    <button class="btn btn-info dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">서비스 종류
 						    <span class="caret"></span></button>
