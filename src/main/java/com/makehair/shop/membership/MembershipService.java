@@ -6,6 +6,9 @@ import com.makehair.shop.user.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class MembershipService {
 
@@ -20,8 +23,12 @@ public class MembershipService {
   }
 
 
-  public Boolean checkId(String id) {
-    return userDao.checkId(id) == 1;
+  public Boolean checkId(String id, String userType) {
+    Map<String, Object> map = new HashMap<>();
+    map.put("id", id);
+    map.put("userType", userType);
+
+    return userDao.checkId(map) == 1;
   }
 
 

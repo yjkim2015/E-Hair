@@ -6,13 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Map;
 
-
 @Repository
 public interface UserDao {
 
     int insertUser(final CommonUserVo userVo);
 
-    int checkId(String id);
+    int checkId(@Param("map") Map<String, Object> map);
 
     CommonUserVo loginUser(CommonUserVo commonUserVo);
 
@@ -24,5 +23,8 @@ public interface UserDao {
 
     CommonUserVo checkAdmin(@Param("map") Map<String, Object> map);
 
-    CommonUserVo updateUser(CommonUserVo commonUserVo);
+    int updateUser(CommonUserVo commonUserVo);
+
+    int deleteUser(CommonUserVo userVo);
+
 }

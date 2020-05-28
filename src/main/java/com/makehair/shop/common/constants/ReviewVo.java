@@ -6,7 +6,7 @@ public class ReviewVo {
   private long reviewNo;
   private String reviewTitle;
   private String reviewContent;
-  private long stars;
+  private long star;
   private String insertDate;
   private long serviceNo;
   private String userId;
@@ -40,12 +40,12 @@ public class ReviewVo {
   }
 
 
-  public long getStars() {
-    return stars;
+  public long getStar() {
+    return star;
   }
 
-  public void setStars(long stars) {
-    this.stars = stars;
+  public void setStar(long star) {
+    this.star = star;
   }
 
 
@@ -83,12 +83,17 @@ public class ReviewVo {
 	this.adminNo = adminNo;
   }
 
-	@Override
-	public String toString() {
-		return "ReviewVo [reviewNo=" + reviewNo + ", reviewTitle=" + reviewTitle + ", reviewContent=" + reviewContent
-				+ ", stars=" + stars + ", insertDate=" + insertDate + ", serviceNo=" + serviceNo + ", userId=" + userId
-				+ ", adminNo=" + adminNo + "]";
-	}
-	  
-  
+  @Override
+  public String toString() {
+    return "ReviewVo{" +
+            "reviewNo=" + reviewNo +
+            ", reviewTitle='" + reviewTitle + '\'' +
+            ", reviewContent='" + reviewContent + '\'' +
+            ", star=" + star +
+            ", insertDate='" + insertDate + '\'' +
+            ", serviceNo=" + serviceNo +
+            ", userId='" + userId + '\'' +
+            ", adminNo=" + adminNo +
+            '}';
+  }
 }

@@ -22,8 +22,12 @@ public class UserService {
     }
 
 
-    public Boolean checkId(String id) {
-        return userDao.checkId(id) == 1;
+    public Boolean checkId(String id, String userType) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        map.put("userType", userType);
+        System.out.println(userDao.checkId(map));
+        return userDao.checkId(map) == 1;
     }
 
 
@@ -53,10 +57,19 @@ public class UserService {
         Map<String, Object> map = new HashMap<>();
         map.put("adminId", userId);
         map.put("adminNo", adminNo);
-        return userDao.checkAdmin(map).getUserId() != null;
+
+        if(userDao.checkAdmin(map) == null) {
+            return false;
+        }
+        return true;
     }
 
     public CommonUserVo updateUser(CommonUserVo commonUserVo) {
-        return userDao.updateUser(commonUserVo);
+        userDao.updateUser(commonUserVo);
+        return userDao.getUserInfo(commonUserVo.getUserNo());
+    }
+
+    public Boolean deleteUser(CommonUserVo userVo) {
+        return userDao.deleteUser(userVo) == 1;
     }
 }

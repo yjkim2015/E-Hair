@@ -43,6 +43,31 @@ public class UserController {
     }
 
 
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String deleteform() {
+        return "login/delete";
+    }
+
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String deleteProcess(@ModelAttribute CommonUserVo commonUserVo,
+                                HttpServletRequest request,
+                                Model model) {
+
+        Boolean result = userService.deleteUser(commonUserVo);
+        if (result == false) {
+            // 탈퇴 실패
+            model.addAttribute("result", "fail");
+            return "login/delete";
+        } else {
+            // 탈퇴 성공
+            HttpSession session = request.getSession();
+            session.invalidate();
+            return "redirect:?deleteResult=" + result;
+        }
+    }
+
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginForm(
             @RequestParam(value = "userType", defaultValue = "user") String userType) {
@@ -72,12 +97,21 @@ public class UserController {
         }
     }
 
+    @RequestMapping(value = "/logout")
+    public String logoutProcess(HttpServletRequest request) {
+        // 세션 invalid 처리 및 메인 페이지 이동
+        HttpSession session = request.getSession();
+        session.invalidate();
+        return "redirect:/";
+    }
+
 
     @RequestMapping(value = "/check-id", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Boolean> checkId(@RequestParam("id") String id) {
-        System.out.println(id);
-        Boolean result = userService.checkId(id);
+    public Map<String, Boolean> checkId(@RequestParam("id") String id,
+                                        @RequestParam(value = "userType", defaultValue = "") String userType) {
+
+        Boolean result = userService.checkId(id, userType);
 
         Map<String, Boolean> map = new HashMap<>();
         map.put("checkId", result);
@@ -89,16 +123,24 @@ public class UserController {
 
     @RequestMapping(value = "/user_detail", method = RequestMethod.GET)
     public String userDetail(@ModelAttribute CommonUserVo commonUserVo,
-                             HttpSession httpSession,
                              Model model) {
 
         return "login/user_detail";
     }
 
-    @RequestMapping(value = "/user_update", method = RequestMethod.POST)
-    public String userUpdate(@ModelAttribute CommonUserVo commonUserVo, Model model) {
-        userService.updateUser(commonUserVo);
 
-        return "login/user_detail";
+    @RequestMapping(value = "/user_update", method = RequestMethod.POST)
+    public String userUpdate(@ModelAttribute CommonUserVo commonUserVo,
+                             @RequestParam(value = "userType", defaultValue = "user") String userType,
+                             HttpSession session) {
+
+        if(userType.equals("admin")) {
+            return "redirect:/user_detail";
+        } else {
+            CommonUserVo userVo = userService.updateUser(commonUserVo);
+            System.out.print(userVo.toString());
+            session.setAttribute("loginUser", userVo);
+            return "redirect:/user_detail";
+        }
     }
 }

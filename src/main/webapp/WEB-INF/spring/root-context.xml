@@ -32,9 +32,9 @@
           <property name="password" value="${db.password}"/>
           <property name="validationQuery" value="${db.validation.query}"/> -->
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/shop"/>
-        <property name="username" value="shop"/>
-        <property name="password" value="shop"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/shop?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;useSSL=false"/>
+        <property name="username" value="root"/>
+<!--        <property name="password" value="develop"/>-->
         <property name="validationQuery" value="select now()"/>
 
     </bean>
