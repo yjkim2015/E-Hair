@@ -88,3 +88,8 @@ function authorizationErrorHandler(a,b,c,d,e) {
 	console.log(e);
 }
 
+
+function errorMsg(message, callback) {
+	alert(message);
+	
+}

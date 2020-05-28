@@ -67,11 +67,23 @@ function initData() {
 		});
 		$('#reserTb').html(html);
 		$('.confirm').on('click',function(event){
-			var reservationNo = this.value;
+			var reservationNo 	= this.value;
+			var isConfirm 		= this.innerText;
+			var param 			= {};
 			param.reservationNo = reservationNo;
-			/* goAjaxPost('/reservationConfirm', param, function(result) {
-				
-			}); */
+			param.isConfirm 	= isConfirm;
+			goAjaxPost('/reservationConfirm', param, function(result) {
+				if ( isConfirm == 'Y' ) {
+					if ( result.status == 'OK') {
+						alert('예약취소되었습니다.');
+					}
+				}
+				else {
+					if ( result.status == 'OK') {
+						alert('예약확인되었습니다.');
+					}
+				}
+			});
 		});
 	});
 }

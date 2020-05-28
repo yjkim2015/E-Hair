@@ -23,4 +23,6 @@ public interface ReservationService {
 	
 	public List<ReservationVo> reservationList(ReservationVo reservationVo);
 	
+	public int updateConfirm(ReservationVo reservationVo);
+	
 }

@@ -50,4 +50,9 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<ReservationVo> reservationList(ReservationVo reservationVo) {
 		return reservationDao.reservationList(reservationVo);
 	}
+
+	@Override
+	public int updateConfirm(ReservationVo reservationVo) {
+		return reservationDao.updateConfirm(reservationVo);
+	}
 }

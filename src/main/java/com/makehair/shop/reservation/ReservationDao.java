@@ -26,4 +26,7 @@ public interface ReservationDao {
 	public int deleteReservation(ReservationVo reservationVo);
 	
 	public List<ReservationVo> reservationList(ReservationVo reservationVo);
+
+	public int updateConfirm(ReservationVo reservationVo);
+	
 }

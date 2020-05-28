@@ -25,6 +25,24 @@ public class ReservationController extends CommonController {
 	@Autowired
 	private ReservationService reservationService;
 	
+	@ResponseBody
+	@RequestMapping(value="/reservationConfirm", method = RequestMethod.POST)
+	public ResponseEntity<ResultVo> reservationConfirm(@RequestBody ReservationVo reservationVo) {
+		
+		ResultVo resultVo = null;
+	
+		try {
+			int result = reservationService.updateConfirm(reservationVo);
+			
+			resultVo = new ResultVo(result, HttpStatus.OK);
+		}
+		catch (Exception ex) {
+			resultVo = new ResultVo(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		return resultVo.build();
+	}
+	
 	@RequestMapping(value="/reservationView", method = RequestMethod.GET)
 	public String reservationList(Model model, CommonUserVo adminVo) {
 		

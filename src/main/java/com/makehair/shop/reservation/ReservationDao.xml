@@ -96,4 +96,15 @@ WHERE
 	</if>
 ORDER BY A.RESERVATION_DATE ASC
 </select>
+
+
+<update id="updateConfirm" parameterType="com.makehair.shop.common.constants.ReservationVo">
+UPDATE 
+	RESERVATION
+	IS_CONFIRM = #{isConfirm}
+SET 
+WHERE
+	RESERVATION_NO = #{reservationNo} 
+</update>
+
 </mapper> 

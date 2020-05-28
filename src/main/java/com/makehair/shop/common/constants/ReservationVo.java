@@ -6,7 +6,7 @@ public class ReservationVo {
 	
 	private int reservationNo;
 	private String reservationDate;
-	private Boolean isConfirm;
+	private String isConfirm;
 	private String memo;
 	private Date insertDate;
 	private int serviceNo;
@@ -30,10 +30,11 @@ public class ReservationVo {
 	public void setReservationDate(String reservationDate) {
 		this.reservationDate = reservationDate;
 	}
-	public Boolean getIsConfirm() {
+
+	public String getIsConfirm() {
 		return isConfirm;
 	}
-	public void setIsConfirm(Boolean isConfirm) {
+	public void setIsConfirm(String isConfirm) {
 		this.isConfirm = isConfirm;
 	}
 	public String getMemo() {
