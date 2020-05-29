@@ -92,7 +92,7 @@ function initComponent() {
 				data.data.starPoint = 0;
 			}
 			$('#mainImg').attr('src','/displayFile?fileName='+data.data.imgUrl);
-			$('#profile').html("<h4>"+"소속 매장 : " + data.data.shopName +"<br>"+"이름 : " + data.data.name + "<br>별점 ★ " + data.data.starPoint+".0<br>성별 : " + data.data.sex + "<br>자기소개 : " + data.data.profile +"</h4>");
+			$('#profile').html("<h4>"+"소속 매장 : " + data.data.shopName +"<br>"+"이름 : " + data.data.name + "<br>별점 ★ " + data.data.starPoint+" <br>성별 : " + data.data.sex + "<br>자기소개 : " + data.data.profile +"</h4>");
 		}
 	});
 }
@@ -133,7 +133,7 @@ function initEvent() {
 function reservation() {
 	
 	
-	searchparams.userId ='test';
+	searchparams.userId ='${loginUser.userId}';
 	var memo = $('#memo').val();
 	searchparams.memo = memo;
 	
@@ -297,7 +297,7 @@ function replyAdd() {
 		    	 </h3>
 			</div>
 			<div class="box-body">
-					<input class='form-control' type='text' placeholder='글쓴이' id='newReplyWriter' value="" >
+					<input class='form-control' type='text' placeholder='글쓴이' id='newReplyWriter' value="${loginUser.userId}" readonly >
 					<div style="margin-top:15px; margin-bottom:15px;">
 						<textarea rows="8"  id="newReplyText" class="form-control" placeholder="내용"></textarea>
 					</div>
@@ -415,14 +415,14 @@ var printData= function(replyArr,target,templateObject){
 	var html=template(replyArr);
 	$(".replyLi").remove();
 	target.after(html);
+	
+	 for(var i=0;i<replyArr.length;i++){
 
-	/* for(var i=0;i<replyArr.length;i++){
-
-		if(replyArr[i].replyer !="${login_id}" && replyArr[i].replyer != "${login_id2}"){
+		if(replyArr[i].replyer !='${loginUser.userId}'){
 			$("a[name=modify_modal]").eq(i).hide();
 		}
 		
-	} */
+	} 
 }
 
 $(".pagination").on("click","li a",function(event){

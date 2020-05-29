@@ -5,7 +5,7 @@
 
   <select id="selectAllProfile" parameterType="com.makehair.shop.common.constants.SearchCriteria"
     resultType="com.makehair.shop.common.constants.CommonUserVo">
-    SELECT
+   SELECT
     A.ADMIN_NO as adminNo,
     A.ADMIN_ID AS userId,
     A.NAME AS name,
@@ -15,7 +15,7 @@
     A.IMG_URL AS imgUrl,
     A.SHOP_NO as shopNo,
     B.SHOP_NAME AS shopName,
-    C.STAR_POINT AS starPoint
+    ROUND(AVG(C.STAR_POINT),1) AS starPoint
     FROM
     ADMIN A
     LEFT JOIN SHOP B
@@ -51,7 +51,7 @@
     A.IMG_URL AS imgUrl,
     A.SHOP_NO as shopNo,
     B.SHOP_NAME AS shopName,
-    C.STAR_POINT AS starPoint
+    ROUND(AVG(C.STAR_POINT),1) AS starPoint
     FROM
     ADMIN A
     LEFT JOIN SHOP B

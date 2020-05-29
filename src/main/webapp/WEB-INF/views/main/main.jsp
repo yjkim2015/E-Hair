@@ -19,9 +19,9 @@
 <body id="page-top">
 <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
         <!-- Masthead-->
-        <header class="masthead">
+        <header class="masthead" style="height:1053px;">
             <div class="container">
-                <div class="masthead-subheading">미용실 통합 예약시스템 <br>
+                <div class="masthead-subheading" style="margin-top: 150px;">미용실 통합 예약시스템 <br>
                 HIRS(Hairshop Integration Reservation System)</div>
                 <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
             </div>

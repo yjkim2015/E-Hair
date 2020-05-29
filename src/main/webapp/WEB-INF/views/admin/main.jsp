@@ -225,8 +225,9 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-                <li><a href="${pageContext.request.contextPath}/profile">Profile</a></li>
-                <li><a href="#">Help</a></li>
+                <li><a href="${pageContext.request.contextPath}/profile?adminNo=${sessionScope.loginUser.adminNo}">Profile 수정</a></li>
+                <li><a href="${pageContext.request.contextPath}/service?adminNo=${sessionScope.loginUser.adminNo}">서비스</a></li>
+                <li><a href="${pageContext.request.contextPath}/reservationView?adminNo=${sessionScope.loginUser.adminNo}">예약 관리</a></li>
             </ul>
         </div>
     </div>
@@ -240,8 +241,8 @@
                 <li class="active"><a href="javascript:callAjax('salesDay', '', 1)">일별 매출관리 <span class="sr-only">(current)</span></a></li>
                 <li class="active"><a href="javascript:callAjax('salesMonth', '', 1)">월별 매출관리 <span class="sr-only">(current)</span></a></li>
                 <li class="active"><a href="javascript:callAjax('user', '', 1)">고객관리 <span class="sr-only">(current)</span></a></li>
-                <li class="active"><a href="javascript:callAjax('review', '', 1)">후기관리 <span class="sr-only">(current)</span></a></li>
-            </ul>
+<!--                 <li class="active"><a href="javascript:callAjax('review', '', 1)">후기관리 <span class="sr-only">(current)</span></a></li>
+ -->            </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="float: left; margin: 50px 0;">
             <div class="input-group date" style="margin-top: 30px; width: 200px;">

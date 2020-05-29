@@ -21,10 +21,11 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ml-auto">
                 <c:if test="${not empty sessionScope.loginUser}">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/user_detail">회원수정</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/delete">탈퇴</a></li>
                     <c:if test="${sessionScope.loginUser.adminNo == 0}">
+	                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/user_detail">회원수정</a></li>
+	                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/delete">탈퇴</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/membership?userNo=${sessionScope.loginUser.userNo}">포인트</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="${pageContext.request.contextPath}/allProfile">디자이너</a></li>
                     </c:if>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="javascript:logoutCheck()">로그아웃</a></li>
                 </c:if>

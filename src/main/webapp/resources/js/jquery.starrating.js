@@ -8,7 +8,12 @@
             	
             	var params = {};
             	//var userId = '${userId}';
-            	var userId = 'TEST';
+            	var userId = '${loginUser.userId}';
+            	console.log('${loginUser}');
+            	if ( userId == null || userId.includes("loginUser")) {
+            		alert("로그인 후 이용가능합니다");
+            		return;
+            	}
             	params.userId = userId;
             	params.adminNo = adminNo;
             	params.starPoint = starRate;

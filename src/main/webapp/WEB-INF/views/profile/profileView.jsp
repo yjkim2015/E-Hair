@@ -10,8 +10,7 @@
 <body>
 <script>
 
-var userId = '${userId}';
-var loginId = '${loginId}';
+var userId = '${loginUser.userId}';
 $(function() {
 	initComponent();
 	initData();
@@ -24,7 +23,12 @@ var imgData;
 
 function initComponent() {
 	$( "#profileTextUpload" ).prop( "disabled", true );
+	 $('#datetimepicker').datetimepicker({
+	        inline: true,
+	        sideBySide: true
+	 }); 
 }
+
 
 function initData() {
 	
@@ -111,11 +115,12 @@ function checkImageType(fileName) {
 
 </script>
 <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
-<section class="page-section bg-light" id="team">
-       <div class="container">
+<section class="page-section bg-light" id="team" style="height:1053px;">
+       <div class="container" style="margin-top:100px;">
            <div class="text-center">
            		<br><br>
                <h2 class="section-heading text-uppercase">현재 프로필</h2>
+           	  <br><br>
            </div>
            <div class="row">
            <div style="width:250px; margin:auto;">
@@ -133,7 +138,14 @@ function checkImageType(fileName) {
                    </div>
                </div>
            </div>
+		 <p style="width:500px;">
+            	<input type="text" id="datetimepicker">
+	 			<input type="text" id="day"/>
+	 			<button type="button" class="btn-warning">휴무지정</button>
+		 </p>
            </div>
+     		
+           
      </div>
 </section>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

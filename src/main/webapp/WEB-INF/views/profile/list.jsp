@@ -20,7 +20,7 @@ $(function(){
 </script>
 <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
 
-<section class="page-section bg-light" id="portfolio">
+<section class="page-section bg-light" id="portfolio" style="margin-bottom:210px;">
             <div class="container">
                 <div class="text-center">
                 	<br>
@@ -58,7 +58,7 @@ $(function(){
                             /></a>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">${oneDesigner.name } 
-                                	★ ${oneDesigner.starPoint}.0
+                                	★ ${oneDesigner.starPoint}
                                 	</div>
                                 <div class="portfolio-caption-subheading text-muted">매장 이름  ${oneDesigner.shopName}<br> ${oneDesigner.profile }</div>
                             </div>

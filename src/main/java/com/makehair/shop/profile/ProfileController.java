@@ -51,7 +51,7 @@ public class ProfileController extends CommonController {
 		
 		for ( CommonUserVo oneUser : list ) {
 			if ( oneUser.getStarPoint() == null ) {
-				oneUser.setStarPoint("0");
+				oneUser.setStarPoint("0.0");
 			}
 		}
 		model.addAttribute("list",list);

@@ -21,8 +21,8 @@
 <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
 
 <!-- Contact-->
-<section class="page-section" id="contact">
-    <div class="container">
+<section class="page-section" id="contact" style="height:1053px;">
+    <div class="container" style="margin-top:200px;">
         <div class="text-center">
             <h2 class="section-heading text-uppercase"><c:out value="${param.userType}"
                                                               default="user"/> Login</h2>
