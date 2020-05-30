@@ -8,8 +8,13 @@ SELECT
 	ADMIN_NO AS adminNo
 FROM
 	DAY_OFF
-WHERE 
-	ADMIN_NO = #{adminNo}
+WHERE
+ 	1 = 1
+ 	<if test="reservationDate != null and reservationDate != ''">
+ 	AND DAY_OFF LIKE CONCAT ('%', #{reservationDate},'%')
+ 	</if> 
+	AND ADMIN_NO = #{adminNo}
+	
 
 </select>
 
@@ -21,6 +26,7 @@ SELECT
 	MEMO		  AS MEMO
 FROM
 	SERVICE
+WHERE SHOP_NO = #{shopNo}
 </select>
 
 <select id="checkDuplicateReservation" parameterType="com.makehair.shop.common.constants.ReservationVo" resultType="int">
@@ -106,5 +112,12 @@ SET
 WHERE
 	RESERVATION_NO = #{reservationNo} 
 </update>
+
+<insert id="insertDayOff" parameterType="com.makehair.shop.common.constants.ReservationVo">
+INSERT
+	INTO
+		DAY_OFF (DAY_OFF, ADMIN_NO)
+			VALUES (#{reservationDate},#{adminNo})
+</insert>
 
 </mapper> 

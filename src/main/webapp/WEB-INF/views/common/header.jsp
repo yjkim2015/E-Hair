@@ -45,5 +45,8 @@
     <script src="../../../resources/assets/mail/contact_me.js"></script>
 </head>
 <body>
+<script>
+var getContextPath ='${getContextPath}';
+</script>
 </body>
 </html>

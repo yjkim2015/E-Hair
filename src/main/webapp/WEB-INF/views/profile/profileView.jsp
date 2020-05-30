@@ -11,6 +11,7 @@
 <script>
 
 var userId = '${loginUser.userId}';
+var adminNo = '${loginUser.adminNo}';
 $(function() {
 	initComponent();
 	initData();
@@ -19,14 +20,11 @@ $(function() {
 </script>
 <script>
 var imgData;
+var searchParams = {};
 
 
 function initComponent() {
 	$( "#profileTextUpload" ).prop( "disabled", true );
-	 $('#datetimepicker').datetimepicker({
-	        inline: true,
-	        sideBySide: true
-	 }); 
 }
 
 
@@ -138,14 +136,7 @@ function checkImageType(fileName) {
                    </div>
                </div>
            </div>
-		 <p style="width:500px;">
-            	<input type="text" id="datetimepicker">
-	 			<input type="text" id="day"/>
-	 			<button type="button" class="btn-warning">휴무지정</button>
-		 </p>
            </div>
-     		
-           
      </div>
 </section>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

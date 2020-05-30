@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.makehair.shop.common.constants.CommonUserVo;
 import com.makehair.shop.common.constants.DayOffVo;
 import com.makehair.shop.common.constants.ReservationVo;
 import com.makehair.shop.common.constants.ServiceVo;
@@ -15,7 +16,7 @@ public interface ReservationDao {
 	
 	public List<DayOffVo> checkDayOff(ReservationVo reservationVo);
 
-	public List<ServiceVo> allService();
+	public List<ServiceVo> allService(CommonUserVo commonUserVo);
 	
 	public int checkReservation(ReservationVo reservationVo);
 
@@ -29,4 +30,5 @@ public interface ReservationDao {
 
 	public int updateConfirm(ReservationVo reservationVo);
 	
+	public int insertDayOff(ReservationVo reservationVo);
 }

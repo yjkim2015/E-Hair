@@ -3,6 +3,7 @@ package com.makehair.shop.reservation;
 
 import java.util.List;
 
+import com.makehair.shop.common.constants.CommonUserVo;
 import com.makehair.shop.common.constants.DayOffVo;
 import com.makehair.shop.common.constants.ReservationVo;
 import com.makehair.shop.common.constants.ServiceVo;
@@ -11,7 +12,7 @@ public interface ReservationService {
 	
 	public List<DayOffVo> checkDayOff(ReservationVo reservationVo);
 	
-	public List<ServiceVo> allService();
+	public List<ServiceVo> allService(CommonUserVo commonUserVo);
 	
 	public int checkReservation(ReservationVo reservationVo);
 	
@@ -25,4 +26,5 @@ public interface ReservationService {
 	
 	public int updateConfirm(ReservationVo reservationVo);
 	
+	public int insertDayOff(ReservationVo reservationVo);
 }

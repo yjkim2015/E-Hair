@@ -61,13 +61,14 @@ public class ReservationController extends CommonController {
 	
 	@ResponseBody
 	@RequestMapping(value="/allService", method = RequestMethod.GET)
-	public List<ServiceVo> allService() {
-		return reservationService.allService();
+	public List<ServiceVo> allService(CommonUserVo commonUserVo) {
+		return reservationService.allService(commonUserVo);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/checkDayOff", method = RequestMethod.GET)
 	public List<DayOffVo> checkDayOff(ReservationVo reservationVo) {
+		System.out.println(reservationVo.toString());
 		return reservationService.checkDayOff(reservationVo);
 	}
 	
@@ -132,6 +133,34 @@ public class ReservationController extends CommonController {
 		catch (Exception e) {
 			resultVo = new ResultVo(HttpStatus.INTERNAL_SERVER_ERROR);
 			resultVo.setReason("예약 취소에 실패 하였습니다.");
+		}
+		return resultVo.build();
+	}
+	
+	@RequestMapping(value="/dayOff", method = RequestMethod.GET)
+	public String dayOffView() {
+		
+		return "/dayOff/dayOff";
+	}
+	
+	@RequestMapping(value="/insertDayOff", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<ResultVo> insertDayOff(@RequestBody ReservationVo reservationVo){
+		
+		ResultVo resultVo = null;
+		
+		try {
+			reservationVo.setReservationDate(reservationVo.getReservationDate().replaceAll("/", "-"));
+		
+			if ( reservationService.checkDayOff(reservationVo).size() > 0 ) {
+				throw new Exception();
+			}
+			final int result = reservationService.insertDayOff(reservationVo);
+			resultVo = new ResultVo(result,HttpStatus.OK);
+		}
+		catch(Exception ex) {
+			resultVo = new ResultVo(HttpStatus.INTERNAL_SERVER_ERROR);
+			resultVo.setReason("이미 휴무로 지정되었습니다");
 		}
 		return resultVo.build();
 	}

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.makehair.shop.common.constants.CommonUserVo;
 import com.makehair.shop.common.constants.DayOffVo;
 import com.makehair.shop.common.constants.ReservationVo;
 import com.makehair.shop.common.constants.ServiceVo;
@@ -32,8 +33,8 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public List<ServiceVo> allService() {
-		return reservationDao.allService();
+	public List<ServiceVo> allService(CommonUserVo commonUserVo) {
+		return reservationDao.allService(commonUserVo);
 	}
 
 	@Override
@@ -55,4 +56,10 @@ public class ReservationServiceImpl implements ReservationService {
 	public int updateConfirm(ReservationVo reservationVo) {
 		return reservationDao.updateConfirm(reservationVo);
 	}
+
+	@Override
+	public int insertDayOff(ReservationVo reservationVo) {
+		return reservationDao.insertDayOff(reservationVo);
+	}
+
 }
