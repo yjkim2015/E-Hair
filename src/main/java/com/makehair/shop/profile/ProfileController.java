@@ -70,6 +70,7 @@ public class ProfileController extends CommonController {
 		
 		//model.addAttribute("userId", adminVo.getUserId());
 		model.addAttribute("adminNo", adminVo.getAdminNo());
+		model.addAttribute("shopNo", adminVo.getShopNo());
 		return "profile/profileDetail";
 	}
 	
