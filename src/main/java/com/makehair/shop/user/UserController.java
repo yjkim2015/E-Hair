@@ -143,4 +143,14 @@ public class UserController {
             return "redirect:/user_detail";
         }
     }
+
+
+    @RequestMapping(value = "/mypage", method = RequestMethod.GET)
+    public String userUpdate(
+//        @ModelAttribute CommonUserVo commonUserVo, @RequestParam(value = "userType", defaultValue = "user") String userType, HttpSession session
+    ) {
+
+
+        return "user/mypage";
+    }
 }
