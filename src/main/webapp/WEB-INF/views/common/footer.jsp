@@ -6,7 +6,7 @@
 </head>
 <body>
 <style>
-    footer {
+  /*   footer {
         position: absolute;
 
         left: 0;
@@ -22,7 +22,7 @@
         color: white;
 
         background: blue;
-    }
+    } */
 </style>
 <!-- Footer-->
 <footer class="footer py-4">
