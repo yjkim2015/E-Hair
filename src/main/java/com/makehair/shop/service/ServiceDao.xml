@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.makehair.shop.service.ServiceDao">
+
+	<insert id="insertService" parameterType="com.makehair.shop.common.constants.ServiceVo">
+		INSERT INTO SERVICE (SERVICE_NAME,SERVICE_PRICE,MEMO, SHOP_NO ) VALUES(#{serviceName}, #{servicePrice}, #{memo}, #{shopNo})
+	</insert>
+
+	
+	<select id="checkService" parameterType="com.makehair.shop.common.constants.ServiceVo" resultType="int">
+		SELECT COUNT(*) FROM SERVICE WHERE SERVICE_NAME = #{serviceName} AND SHOP_NO = #{shopNo}
+	</select>
+</mapper>
+	<!--AES_DECRYPT(passwd, SHA2("enc_key",512)),-->

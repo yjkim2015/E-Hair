@@ -29,12 +29,60 @@ function initData() {
 	param.shopNo = shopNo;
 	param.adminNo = adminNo;
 	goAjaxGet('/allService', param, function(result){
-		console.log(result);
+		var html = "";
+		html = "<tr><th>등록 된 서비스명</th>"+
+			"<th>가격</th>"+
+			"<th>메모</th>"+
+			"</tr>";
+		$(result).each(function(k,v){
+			html += "<tr>"+
+				"<td>"+v.serviceName+"</td>"+
+				"<td>"+v.servicePrice+"</td>"+
+				"<td>"+v.memo+"</td>"+
+			"</tr>"			
+		});	
+		$("#serviceList").html(html);
 	});
 }
 
 function initEvent() {
-	
+	$('#register').on('click', function(){
+		var serviceName = $('#serviceName').val();
+		var servicePrice = $('#servicePrice').val();
+		var memo = $('#memo').val();
+		var shopNo = $('#shopNo').val();
+		
+		var searchParam = {};
+		
+		if ( shopNo == null || shopNo == '' ) {
+			alert("로그인 후 이용해주세요");
+			return;
+		}
+			
+			
+		if ( serviceName == null || serviceName == '' ) {
+			alert("서비스명을 입력해주세요 ");
+			return;
+		}
+		
+		if ( servicePrice == null || servicePrice == '' ) {
+			alert("가격을 입력해주세요");
+		}
+			 
+		searchParam.serviceName 	= serviceName;
+		searchParam.servicePrice 	= servicePrice;
+		searchParam.memo			= memo;
+		searchParam.shopNo		 	= shopNo;
+		
+		goAjaxPost('/insertService', searchParam, function(result){
+			
+			if ( result.status == 'OK' ) {
+				alert('서비스가 등록되었습니다');
+				initData();
+			}
+			
+		});
+	});
 }
 </script>
 <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
@@ -52,19 +100,10 @@ function initEvent() {
 		 	<label for="servicePrice">가격</label><input type="text" name="servicePrice"id="servicePrice"/>
 		 	<label for="memo">메모</label><input type="text" id="memo" name="memo">
 		 	<input type="hidden" id="shopNo" name="shopNo" value="${loginUser.shopNo}">
-		 	<button type="button" class="btn-primary" style="margin-top:10px;">서비스 등록</button>
+		 	<button type="button" class="btn-primary" id="register" style="margin-top:10px;">서비스 등록</button>
            </form>
      		<table id="serviceList" border="1" style="width:500px;">
-				<tr>
-					<th>등록 된 서비스명</th>
-					<th>가격</th>
-					<th>메모</th>
-				</tr>
-				<tr>
-					<td>11</td>
-					<td>22</td>
-					<td>33</td>
-				</tr>				
+					
            </table>
            </div>
            
