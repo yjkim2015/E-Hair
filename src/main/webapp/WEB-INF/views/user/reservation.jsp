@@ -13,6 +13,7 @@
 var userId = '${loginUser.userId}';
 var searchParams = {};
 
+
 $(function () {
   initData();
   initEvent();
