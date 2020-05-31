@@ -47,8 +47,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
         // 6. 세션이 존재하면 유효한 유저인지 확인
         CommonUserVo loginUser = (CommonUserVo) session.getAttribute("loginUser");
-        System.out.println("로긴유저");
-        System.out.println(loginUser);
         if ( loginUser == null ) {
             response.sendRedirect(request.getContextPath() + "/login");
             return false;
@@ -56,8 +54,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
         // 7. admin일 경우
         String role = auth.role().toString();
-        System.out.println("role");
-        System.out.println(role);
         if( "ADMIN".equals(role) ) {
 
             Boolean isAdmin = userService.checkAdmin(loginUser.getAdminNo(), loginUser.getUserId());

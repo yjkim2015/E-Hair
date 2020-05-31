@@ -83,7 +83,6 @@
           alert('서비스가 등록되었습니다');
           initData();
         }
-
       });
     });
   }
@@ -91,7 +90,6 @@
 <body class="fixed-navigation">
 <div id="wrapper">
     <%@ include file="/WEB-INF/views/common/admin_navbar_left.jsp" %>
-
     <div id="page-wrapper" class="gray-bg">
         <%@ include file="/WEB-INF/views/common/admin_navbar_top.jsp" %>
         <div class="text-left">

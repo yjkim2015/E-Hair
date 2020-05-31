@@ -42,7 +42,7 @@ public class AdminController {
         Map<String, Object> map = adminReadService.getSalesDayList(adminNo);
         model.addAttribute("map", map);
 
-        return "admin/main";
+        return "admin/dashboard";
     }
 
     // 매출 폼

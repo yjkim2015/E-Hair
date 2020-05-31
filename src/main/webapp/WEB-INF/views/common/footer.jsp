@@ -5,6 +5,25 @@
 <head>
 </head>
 <body>
+<style>
+    footer {
+        position: absolute;
+
+        left: 0;
+
+        bottom: 0;
+
+        width: 100%;
+
+        padding: 15px 0;
+
+        text-align: center;
+
+        color: white;
+
+        background: blue;
+    }
+</style>
 <!-- Footer-->
 <footer class="footer py-4">
     <div class="container">

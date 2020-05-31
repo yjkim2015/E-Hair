@@ -30,7 +30,7 @@
             USER_ID AS userId,
             NAME,
             SEX,
-            PHONE,
+            AES_DECRYPT(PHONE, SHA2("enc_key",512)) as PHONE,
             AGE,
             INSERT_DATE AS insertDate
         FROM USER
@@ -38,6 +38,20 @@
         ORDER BY NAME DESC, INSERT_DATE DESC
         LIMIT #{map.startRow}, #{map.pageSize}
 	</select>
+
+
+    <select id="getUserListAll" resultType="com.makehair.shop.common.constants.CommonUserVo">
+        SELECT
+            USER_NO AS userNo,
+            USER_ID AS userId,
+            NAME,
+            SEX,
+            AES_DECRYPT(PHONE, SHA2("enc_key",512)) as PHONE,
+            AGE,
+            INSERT_DATE AS insertDate
+        FROM USER
+        ORDER BY NAME DESC, INSERT_DATE DESC
+	  </select>
 
     <select id="getUserCount" parameterType="map" resultType="int">
         SELECT
@@ -69,5 +83,20 @@
         AND r.user_id = s.user_id
         AND r.admin_no = #{map.searchValue}
     </select>
+
+
+    <select id="getMonthlySalesReport" resultType="com.makehair.shop.common.constants.SalesVo" parameterType="long">
+        SELECT
+       SUM(sl.INCOME) as income,
+       DATE_FORMAT(sl.INSERT_DATE, '%Y-%m') as iDate
+        FROM shop s
+                 JOIN admin a
+                      ON s.SHOP_NO = a.SHOP_NO
+                 JOIN sales sl
+                      ON sl.ADMIN_NO = a.ADMIN_NO
+        WHERE a.SHOP_NO = #{shopNo}
+        GROUP BY iDate
+        LIMIT 12;
+	  </select>
 
 </mapper>

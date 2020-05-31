@@ -86,4 +86,18 @@ public class AdminReadService {
 
         return map;
     }
+
+    public List<CommonUserVo> getUserListAll(){
+        return adminReadDao.getUserListAll();
+    }
+
+    public Map<String, Object> getMonthlySalesReport(long shopNo) {
+        List<SalesVo> salesVoList = adminReadDao.getMonthlySalesReport(shopNo);
+        int total = salesVoList.stream().mapToInt(v -> (int) v.getIncome()).sum();
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("total", total);
+        map.put("monthly", salesVoList);
+        return map;
+    }
 }

@@ -38,7 +38,7 @@
         });
     });
 </script>
-<body id="page-top">
+<body>
 <%@ include file="/WEB-INF/views/common/navbar.jsp" %>
 
 <!-- Services-->

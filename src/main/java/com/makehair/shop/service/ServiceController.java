@@ -1,5 +1,7 @@
 package com.makehair.shop.service;
 
+import com.makehair.shop.common.constants.Auth;
+import com.makehair.shop.common.constants.Auth.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ public class ServiceController extends CommonController{
 	private ServiceDao serviceDao;
 	
 	@RequestMapping(value="/serviceView", method = RequestMethod.GET)
+	@Auth(role = Role.ADMIN)
 	public String serviceView(CommonUserVo commonUserVo) {
 		return "/service/serviceView";
 	}

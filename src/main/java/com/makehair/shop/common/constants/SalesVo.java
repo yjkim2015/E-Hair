@@ -9,7 +9,15 @@ public class SalesVo {
   private long income;
   private String memo;
   private Date insertDate;
+  private String iDate;
 
+  public String getiDate() {
+    return iDate;
+  }
+
+  public void setiDate(String iDate) {
+    this.iDate = iDate;
+  }
 
   public long getSalesNo() {
     return salesNo;

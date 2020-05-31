@@ -12,10 +12,19 @@
     <title>회원별 메모 등록</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <!-- include libraries(jQuery, bootstrap) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </head>
 <body>
 
 <script type="text/javascript">
+
     $(function(){
         $('#btnSubmit').on('click', function () {
             var memo = $('#memo').val()
@@ -37,24 +46,36 @@
             })
         })
     })
+    $(document).ready(function() {
+      $('#memo').summernote({
+        height:200
+      });
+    });
 </script>
 
 <form>
-    <div class="input-group">
-        <span class="input-group-addon" id="sizing-addon2">${map.userId} 님에 대한 메모 입력</span>
-        <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon2" name="memo" id="memo">
-        <input type="hidden" value="${map.userNo}" name="userNo" id="userNo">
+    <div class="col-md-6">
+        <h3>
+            ${map.userId} 님에 대한 메모 입력
+        </h3>
     </div>
-    <button type="button" class="btn btn-default" id="btnSubmit">등록</button>
+    <div class="form-group">
+        <textarea type="text" class="form-control" aria-describedby="sizing-addon2" name="memo" id="memo">
+        </textarea>
+    </div>
+    <div class="form-group">
+        <input type="hidden" value="${map.userNo}" name="userNo" id="userNo">
+        <button type="button" class="btn btn-default btn-block" id="btnSubmit">등록</button>
+    </div>
 </form>
-
-<div>
-    <table class="table table-striped" id="valueList">
+<hr/>
+<div class="form-group">
+    <table class="table table-striped table-hover" id="valueList">
         <thead>
         <tr>
-            <th>번호</th>
-            <th>메모</th>
-            <th>발생일자</th>
+            <th width="10%">번호</th>
+            <th width="60%">메모</th>
+            <th width="30%">발생일자</th>
         </tr>
         </thead>
         <tbody>

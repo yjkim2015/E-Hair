@@ -31,8 +31,9 @@ public class MembershipService {
   }
 
   public boolean getRefund(int userNo, long leftPoint) {
+    Membership membership = getMembership(userNo);
     Map<String, Object> map = new HashMap<>();
-    map.put("userNo", userNo);
+    map.put("membershipNo", membership.getMembershipNo());
     map.put("leftPoint", -leftPoint);
     map.put("description", "환불");
     return membershipDao.getRefundByUserNo(map) == 1;
