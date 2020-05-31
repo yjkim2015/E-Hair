@@ -4,6 +4,7 @@
 <html>
 <head>
 </head>
+
 <body class="fixed-navigation">
 <!-- Navigation-->
 <nav class="navbar-default navbar-static-side" role="navigation">
@@ -16,14 +17,23 @@
                         <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/">Logout</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
                     IN+
                 </div>
             </li>
-
+            <li>
+                <a href="#">
+                    <i class="fa fa-th-large"></i>
+                    <span class="nav-label">대시보드</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li><a href="${pageContext.request.contextPath}/admin/${sessionScope.loginUser.adminNo}">매출 대시보드</a></li>
+                </ul>
+            </li>
             <li>
                 <a href="#">
                     <i class="fa fa-th-large"></i>
