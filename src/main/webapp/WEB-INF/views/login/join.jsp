@@ -7,6 +7,11 @@
     <title>Insert title here</title>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
 </head>
+<style>
+    body {
+        color: antiquewhite;
+    }
+</style>
 <script type="application/javascript">
     $(document).ready(function () {
         // 밸리데이션
@@ -99,7 +104,9 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label class="col-form-label" for="user_id">아이디</label>
                         <div class="input-group">
+
                             <input class="form-control" id="user_id" name="userId" type="text"
                                    placeholder="Your ID *" required="required"
                                    data-validation-required-message="Please enter your id."/>
@@ -110,6 +117,7 @@
                     <!-- 어드민인 경우에만 해당 인풋창 생성 -->
                     <c:if test="${param.userType eq 'admin'}">
                         <div class="form-group">
+                            <label class="col-form-label" for="shop_name">매장명</label>
                             <input class="form-control" id="shop_name" name="shopName" type="text"
                                    placeholder="Your Shop Name *" required="required"
                                    data-validation-required-message="Please enter shop name."/>
@@ -117,12 +125,14 @@
                         </div>
                     </c:if>
                     <div class="form-group">
+                        <label class="col-form-label" for="password_1">비밀번호</label>
                         <input class="form-control pw" id="password_1" name="password" type="password"
                                placeholder="Your Password *" required="required"
                                data-validation-required-message="Please enter password."/>
                         <p class="help-block text-danger"></p>
                     </div>
                     <div class="form-group">
+                        <label class="col-form-label" for="password_2">비밀번호 확인</label>
                         <input class="form-control pw" id="password_2" type="password"
                                placeholder="Confirm Password *" required="required"
                                data-validation-required-message="Please enter password again."/>
@@ -134,40 +144,42 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-form-label" for="name">이름</label>
                         <input class="form-control" id="name" type="text" name="name"
                                placeholder="Your Name *" required="required"
                                data-validation-required-message="Please enter your name."/>
                         <p class="help-block text-danger"></p>
                     </div>
+
                     <div class="form-group">
                         <div class="custom-control custom-radio">
                             <input type="radio" name="sex" id="jb-radio-1"
                                    class="custom-control-input" required="required"
                                    data-validation-required-message="Please check your sex."
                                    value="M">
-                            <label class="custom-control-label" for="jb-radio-1"
-                                   style="background-color: white;">Man</label>
+                            <label class="custom-control-label" for="jb-radio-1">Man</label>
                         </div>
                         <div class="custom-control custom-radio">
                             <input type="radio" name="sex" id="jb-radio-2"
                                    class="custom-control-input" required="required"
                                    data-validation-required-message="Please check your sex."
                                    value="F">
-                            <label class="custom-control-label" for="jb-radio-2"
-                                   style="background-color: white;">Woman</label>
+                            <label class="custom-control-label" for="jb-radio-2">Woman</label>
                         </div>
                         <p class="help-block text-danger"></p>
                     </div>
                     <div class="form-group">
+                        <label class="col-form-label" for="phone">핸드폰</label>
                         <input class="form-control" id="phone" name="phone" type="text"
                                placeholder="Your Phone *" required="required"
                                data-validation-required-message="Please enter your phone number."/>
                         <p class="help-block text-danger"></p>
                     </div>
                     <div class="form-group">
+                        <label class="col-form-label" for="age">생년월일</label>
                         <input class="form-control" id="age" name="age" type="text"
-                               placeholder="Your Age *" required="required"
-                               data-validation-required-message="Please enter your age"/>
+                               placeholder="ex) 19990301" required="required"
+                               data-validation-required-message="생년월일"/>
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>

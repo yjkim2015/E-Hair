@@ -157,7 +157,6 @@
                                            value="F" ${fSex}>
                                     <label class="custom-control-label" for="jb-radio-2">Woman</label>
                                 </div>
-
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>

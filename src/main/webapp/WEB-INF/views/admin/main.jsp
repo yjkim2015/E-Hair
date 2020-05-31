@@ -223,13 +223,7 @@
             <a class="navbar-brand" href="#">관리자 페이지</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-                <li><a href="${pageContext.request.contextPath}/profile?adminNo=${sessionScope.loginUser.adminNo}">Profile 수정</a></li>
-                <li><a href="${pageContext.request.contextPath}/serviceView?adminNo=${sessionScope.loginUser.adminNo}">서비스</a></li>
-                <li><a href="${pageContext.request.contextPath}/reservationView?adminNo=${sessionScope.loginUser.adminNo}">예약 관리</a></li>
-                <li><a href="${pageContext.request.contextPath}/dayOff?adminNo=${sessionScope.loginUser.adminNo}">휴무 설정</a></li>
-            </ul>
+
         </div>
     </div>
 </nav>
