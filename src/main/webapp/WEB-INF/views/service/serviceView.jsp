@@ -7,7 +7,6 @@
     <title>Insert title here</title>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
 </head>
-<body>
 <script>
 
   var shopNo = '${loginUser.shopNo}';
@@ -25,23 +24,33 @@
     param.adminNo = adminNo;
     goAjaxGet('/allService', param, function (result) {
       var html = "";
-      html = "<tr><th>등록 된 서비스명</th>" +
-          "<th>가격</th>" +
-          "<th>메모</th>" +
+      html = "<thead class='thead-dark'>"
+      html += "<tr>" +
+          "<th width='40%'>등록된 서비스명</th>" +
+          "<th width='20%'>가격</th>" +
+          "<th width='30%'>메모</th>" +
+          "<th width='10%'></th>" +
           "</tr>";
+      html +="</thead>"
+      html += "<tbody>"
       $(result).each(function (k, v) {
         html += "<tr>" +
             "<td>" + v.serviceName + "</td>" +
             "<td>" + v.servicePrice + "</td>" +
             "<td>" + v.memo + "</td>" +
+            "<td>삭제/수정 </td>" +
             "</tr>"
       });
+      html += "</tbody>"
+
       $("#serviceList").html(html);
     });
   }
 
   function initEvent() {
-    $('#register').on('click', function () {
+    $('#register').on('click', function (e) {
+      e.preventDefault();
+
       var serviceName = $('#serviceName').val();
       var servicePrice = $('#servicePrice').val();
       var memo = $('#memo').val();
@@ -79,44 +88,50 @@
     });
   }
 </script>
-<%@ include file="/WEB-INF/views/common/navbar.jsp" %>
+<body class="fixed-navigation">
+<div id="wrapper">
+    <%@ include file="/WEB-INF/views/common/admin_navbar_left.jsp" %>
 
-<section class="page-section bg-light" id="team" style="height:1053px;">
-    <div class="container" style="margin-top:100px;">
-        <div class="text-center">
-            <br><br>
-            <h2 class="section-heading text-uppercase">서비스 관리</h2>
-            <br><br>
+    <div id="page-wrapper" class="gray-bg">
+        <%@ include file="/WEB-INF/views/common/admin_navbar_top.jsp" %>
+        <div class="text-left">
+            <h2>서비스 관리</h2>
         </div>
-        <div class="row">
-        <div class="col-md-6">
-            <form id="serviceForm" style="width:250px; margin-left:200px;">
+        <hr/>
+        <div class="form-group">
+            <h3>서비스 등록</h3>
+        </div>
+        <div class="col-md-12">
+            <form id="serviceForm">
                 <div class="form-group">
                     <label for="serviceName" class="col-form-label">서비스명</label>
-                    <input type="text" name="serviceName" id="serviceName" class="form-control"/>
+                    <input type="text" name="serviceName" id="serviceName" class="form-control" placeholder="서비스명"/>
                 </div>
                 <div class="form-group">
                     <label for="servicePrice" class="col-form-label">가격</label>
-                    <input type="text" name="servicePrice" id="servicePrice" class="form-control"/>
+                    <input type="text" name="servicePrice" id="servicePrice" class="form-control" placeholder="숫자만 가능"/>
                 </div>
                 <div class="form-group">
-                    <label for="memo" class="col-form-label">메모</label>
-                    <input type="text" id="memo" name="memo" class="form-control">
+                    <label for="memo" class="col-form-label" >메모</label>
+                    <input type="text" id="memo" name="memo" class="form-control"  placeholder="메모">
                 </div>
-                <input type="hidden" id="shopNo" name="shopNo" value="${loginUser.shopNo}">
-                <button type="button" class="btn-primary" id="register" style="margin-top:10px;">서비스
-                    등록
-                </button>
+                <input type="hidden" id="shopNo" name="shopNo" value="${sessionScope.loginUser.shopNo}">
+                <div class="form-group">
+                    <button type="button" class="btn btn-block btn-primary" id="register">
+                        서비스 등록
+                    </button>
+                </div>
             </form>
         </div>
-        <div class="col-md-6">
-            <table id="serviceList" border="1" style="width:500px;">
-
-            </table>
-        </div>
+        <hr/>
+        <div class="form-group">
+            <h3>등록된 서비스 리스트 </h3>
+            <div class="col-md-12">
+                <table id="serviceList" class="table table-bordered table-striped table-hover">
+                </table>
+            </div>
         </div>
     </div>
-</section>
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+</div>
 </body>
 </html>
