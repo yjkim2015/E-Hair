@@ -47,6 +47,7 @@ public class ReservationController extends CommonController {
 	public String reservationList(Model model, CommonUserVo adminVo) {
 		
 		model.addAttribute("adminNo", adminVo.getAdminNo());
+
 		return "/reservation/reservationList";
 	}
 	

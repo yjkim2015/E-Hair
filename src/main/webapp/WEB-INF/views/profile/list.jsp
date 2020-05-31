@@ -50,7 +50,7 @@ $(function(){
                 <c:forEach var="oneDesigner" items="${list}" varStatus="status">
                     <div class="col-lg-4 col-sm-6 mb-4">
                         <div class="portfolio-item">
-                            <a class="portfolio-link" href="/profile/detail?adminNo=${oneDesigner.adminNo}"
+                            <a class="portfolio-link" href="/profile/detail?adminNo=${oneDesigner.adminNo}&shopNo=${oneDesigner.shopNo}"
                                 ><div class="portfolio-hover">
                                     <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
                                 </div>

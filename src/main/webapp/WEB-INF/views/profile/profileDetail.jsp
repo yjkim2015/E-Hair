@@ -43,6 +43,8 @@ ul.hover li.active:not(.hover) { color: #ccc }
 <script type="text/javascript">
 var adminNo = '${adminNo}';
 var getContextPath = '${getContextPath}';
+var userId = '${loginUser.userId}';
+
 var searchparams = {};
 var dayOffList = [];
 $(function(){
@@ -69,7 +71,9 @@ function initComponent() {
 		});
 	});
 	
-	goAjaxGet('/allService',null, function(result){
+	var param = {}
+	param.shopNo = '${shopNo}';
+	goAjaxGet('/allService',param, function(result){
 		$(result).each(function(key, value) { 
 			service[value.serviceName] = value.serviceNo;
 			$('.dropdown-menu').append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#">'+value.serviceName+'</a></li>');
@@ -92,6 +96,12 @@ function initComponent() {
 				data.data.starPoint = 0;
 			}
 			$('#mainImg').attr('src','/displayFile?fileName='+data.data.imgUrl);
+			if ( data.data.sex == 'F' ){
+				data.data.sex = '여';
+			}
+			else {
+				data.data.sex ='남';
+			}
 			$('#profile').html("<h4>"+"소속 매장 : " + data.data.shopName +"<br>"+"이름 : " + data.data.name + "<br>별점 ★ " + data.data.starPoint+" <br>성별 : " + data.data.sex + "<br>자기소개 : " + data.data.profile +"</h4>");
 		}
 	});

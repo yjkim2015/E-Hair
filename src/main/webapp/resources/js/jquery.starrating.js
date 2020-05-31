@@ -8,8 +8,7 @@
             	
             	var params = {};
             	//var userId = '${userId}';
-            	var userId = '${loginUser.userId}';
-            	console.log('${loginUser}');
+            	
             	if ( userId == null || userId.includes("loginUser")) {
             		alert("로그인 후 이용가능합니다");
             		return;
