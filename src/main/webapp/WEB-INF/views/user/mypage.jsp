@@ -35,7 +35,7 @@
                 </div>
                 <hr/>
                 <div class="form-group">
-                    <a href="/user_detail" class="btn btn-block btn-outline-info"> 예약내역 확인하기 </a>
+                    <a href="/mypage/reservation?userId=${loginUser.userId}" class="btn btn-block btn-outline-info"> 예약내역 확인하기 </a>
                 </div>
                 <hr/>
                 <div class="form-group">

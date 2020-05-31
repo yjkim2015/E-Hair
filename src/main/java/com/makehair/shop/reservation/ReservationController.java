@@ -104,11 +104,13 @@ public class ReservationController extends CommonController {
 			System.out.println(reservationVo.toString());
 			String forCheckReservationData = reservationVo.getReservationDate().replaceAll("/", "-").substring(0,10);
 			System.out.println(" forCheckReservationData : " + forCheckReservationData);
+			String tmp = reservationVo.getReservationDate();
 			reservationVo.setReservationDate(forCheckReservationData);
 			if ( reservationService.checkDuplicateReservation(reservationVo) > 0) {
 				resultVo = new ResultVo(3, HttpStatus.OK);
 			}
 			else {
+				reservationVo.setReservationDate(tmp);
 				reservationVo.setReservationDate(reservationVo.getReservationDate().replaceAll("/", "-"));
 
 				final int result = reservationService.insertReservation(reservationVo);

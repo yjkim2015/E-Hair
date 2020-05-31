@@ -16,6 +16,8 @@ public class ReservationVo {
 	private int servicePrice;
 	private int userNo;
 	private String userName;
+	private String designerName;
+	private String shopName;
 	
 	public int getReservationNo() {
 		return reservationNo;
@@ -92,12 +94,26 @@ public class ReservationVo {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	public String getDesignerName() {
+		return designerName;
+	}
+	public void setDesignerName(String designerName) {
+		this.designerName = designerName;
+	}
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
 	@Override
 	public String toString() {
 		return "ReservationVo [reservationNo=" + reservationNo + ", reservationDate=" + reservationDate + ", isConfirm="
 				+ isConfirm + ", memo=" + memo + ", insertDate=" + insertDate + ", serviceNo=" + serviceNo
 				+ ", adminNo=" + adminNo + ", userId=" + userId + ", serviceName=" + serviceName + ", servicePrice="
-				+ servicePrice + ", userNo=" + userNo + ", userName=" + userName + "]";
+				+ servicePrice + ", userNo=" + userNo + ", userName=" + userName + ", designerName=" + designerName
+				+ ", shopName=" + shopName + "]";
 	}
+	
 	
 }

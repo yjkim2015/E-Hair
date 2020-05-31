@@ -1,10 +1,13 @@
 package com.makehair.shop.user;
 
-import com.makehair.shop.common.constants.CommonUserVo;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Map;
+import com.makehair.shop.common.constants.CommonUserVo;
+import com.makehair.shop.common.constants.ReservationVo;
 
 @Repository
 public interface UserDao {
@@ -27,4 +30,7 @@ public interface UserDao {
 
     int deleteUser(CommonUserVo userVo);
 
+    List<ReservationVo> myReservationList(CommonUserVo userVo);
+    
+    int deleteReservation(ReservationVo reservationVo);
 }

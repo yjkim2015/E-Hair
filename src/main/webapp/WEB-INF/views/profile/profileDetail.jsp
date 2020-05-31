@@ -147,7 +147,7 @@ function reservation() {
 	var memo = $('#memo').val();
 	searchparams.memo = memo;
 	
-	var reservationDate = $('#datetimepicker').val();
+	var reservationDate = $('#day').val();
 
 	
 	if ( reservationDate == '' ) {alert('날짜를 선택해주세요'); return false;}

@@ -1,13 +1,16 @@
 package com.makehair.shop.user;
 
-import com.makehair.shop.common.constants.CommonUserVo;
-import com.makehair.shop.membership.MembershipDao;
-import com.makehair.shop.shop.ShopDao;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.makehair.shop.common.constants.CommonUserVo;
+import com.makehair.shop.common.constants.ReservationVo;
+import com.makehair.shop.membership.MembershipDao;
+import com.makehair.shop.shop.ShopDao;
 
 @Service
 public class UserService {
@@ -84,4 +87,13 @@ public class UserService {
     public Boolean deleteUser(CommonUserVo userVo) {
         return userDao.deleteUser(userVo) == 1;
     }
+    
+    public List<ReservationVo> myReservationList(CommonUserVo userVo) {
+    	return userDao.myReservationList(userVo);
+    }
+    
+    public int deleteReservation(ReservationVo reservationVo) {
+    	return userDao.deleteReservation(reservationVo);
+    }
+    
 }
