@@ -4,7 +4,7 @@
 
     <!-- 매출 등록 -->
     <insert id="insertSales" parameterType="com.makehair.shop.common.constants.SalesVo">
-        INSERT INTO SALES (SALES_NO, INCOME, MEMO, ADMIN_NO) VALUES (13, #{income}, #{memo}, #{adminNo})
+        INSERT INTO SALES (SALES_NO, INCOME, MEMO, ADMIN_NO) VALUES (null, #{income}, #{memo}, #{adminNo})
     </insert>
 
     <!-- 메모 등록 -->

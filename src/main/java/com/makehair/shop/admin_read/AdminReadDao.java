@@ -18,9 +18,13 @@ public interface AdminReadDao {
 
     List<CommonUserVo> getUserList(@Param("map") Map<String, Object> map);
 
+    List<CommonUserVo> getUserListAll();
+
     int getUserCount(@Param("map") Map<String, Object> map);
 
     List<ReviewVo> getReviewList(@Param("map") Map<String, Object> map);
 
     int getReviewCount(@Param("map") Map<String, Object> map);
+
+    List<SalesVo> getMonthlySalesReport(long shopNo);
 }

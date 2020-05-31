@@ -39,16 +39,21 @@
     </script>
 </head>
 <body>
-
 <form>
-    <div class="input-group">
-        <span class="input-group-addon" id="sizing-addon2">매출 등록</span>
+    <div class="form-group">
+        <h3> 매출 등록 ${sessionScope.loginUser.name}님 (${sessionScope.loginUser.userId})</h3>
+    </div>
+    <hr/>
+    <div class="form-group">
+        <label for="income" class="col-form-label">매출액</label>
         <input type="text" class="form-control" placeholder="ex) 50000 / 숫자만 입력" aria-describedby="sizing-addon2" name="income" id="income">
         <input type="hidden" value="${sessionScope.loginUser.adminNo}" name="adminNo" id="adminNo">
+    </div>
+    <div class="form-group">
+        <label for="memo" class="col-form-label">매출내용</label>
         <input type="text" class="form-control" placeholder="매출 내용 입력" aria-describedby="sizing-addon2" name="memo" id="memo">
     </div>
-    <button type="button" class="btn btn-default" id="btnSubmit">등록</button>
+    <button type="button" class="btn btn-success btn-block" id="btnSubmit">등록</button>
 </form>
-
 </body>
 </html>

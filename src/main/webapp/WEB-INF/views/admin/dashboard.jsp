@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <script type="text/javascript">
   // from controller
   var adminNo = '${sessionScope.loginUser.adminNo}';
@@ -35,6 +36,7 @@
   function openPopUp(url) {
     window.open(url, "", "width=600, height=600, left=600");
   }
+
 
   // 일별 매출, 월별 매출, 고객 관리, 후기 관리 데이터 호출용 함수
   function callAjax(readType, searchValue, pageNum) {
@@ -210,88 +212,24 @@
 
     <div id="page-wrapper" class="gray-bg sidebar-content">
         <%@ include file="/WEB-INF/views/common/admin_navbar_top.jsp" %>
-        <div class="sidebar-panel">
-
-        </div>
+        <div class="sidebar-panel"></div>
         <div class="wrapper wrapper-content">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-content">
                             <div>
-                                <span class="float-right text-right">
-                                <small>Average value of sales in the past month in: <strong>United states</strong></small>
-                                    <br/>
-                                    All sales: 162,862
-                                </span>
-                                <h1 class="m-b-xs">$ 50,992</h1>
+                                <h1 class="m-b-xs" id="total"></h1>
                                 <h3 class="font-bold no-margins">
-                                    Half-year revenue margin
+                                    최근 1개년 매출액
                                 </h3>
-                                <small>Sales marketing.</small>
+                                <small>매출액 총합</small>
                             </div>
 
                             <div>
                                 <canvas id="lineChart" height="70"></canvas>
                             </div>
 
-                            <div class="m-t-md">
-                                <small class="float-right">
-                                    <i class="fa fa-clock-o"> </i>
-                                    Update on 16.07.2015
-                                </small>
-                                <small>
-                                    <strong>Analysis of sales:</strong> The value has been changed over time, and last month reached a level over $50,000.
-                                </small>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="ibox ">
-                        <div class="ibox-title">
-                            <div class="ibox-tools">
-                                <span class="label label-primary float-right">Today</span>
-                            </div>
-                            <h5>visits</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <h1 class="no-margins">22 285,400</h1>
-                            <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div>
-                            <small>New orders</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="ibox ">
-                        <div class="ibox-title">
-                            <div class="ibox-tools">
-                                <span class="label label-info float-right">Monthly</span>
-                            </div>
-                            <h5>Orders</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <h1 class="no-margins">60 420,600</h1>
-                            <div class="stat-percent font-bold text-info">40% <i class="fa fa-level-up"></i></div>
-                            <small>New orders</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="ibox ">
-                        <div class="ibox-title">
-                            <div class="ibox-tools">
-                                <span class="label label-warning float-right">Annual</span>
-                            </div>
-                            <h5>Income</h5>
-                        </div>
-                        <div class="ibox-content">
-                            <h1 class="no-margins">$ 120 430,800</h1>
-                            <div class="stat-percent font-bold text-warning">16% <i class="fa fa-level-up"></i></div>
-                            <small>New orders</small>
                         </div>
                     </div>
                 </div>
@@ -411,37 +349,61 @@
 <!-- ChartJS-->
 <script src="../../../resources/js/plugins/chartJs/Chart.min.js"></script>
 <script>
+
+  getMonthlySales();
+  function getMonthlySales() {
+    $.ajax({
+      url: '/admin/read/monthly',
+      type: 'get',
+      success: function (data) {
+        console.log(data);
+        $("#total").html(data.total+"원");
+        let labels = [];
+        let data1 = [];
+        data.monthly.forEach((i,v)=>{
+          console.log(v)
+          let dateTime = i.iDate.split("-")
+
+          labels.push(dateTime[0]+"년 "+ dateTime[1]+"월 ");
+          data1.push(i.income);
+        })
+        var lineData = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Example dataset",
+              backgroundColor: "rgba(26,179,148,0.5)",
+              borderColor: "rgba(26,179,148,0.7)",
+              pointBackgroundColor: "rgba(26,179,148,1)",
+              pointBorderColor: "#fff",
+              data: data1
+            },
+            {
+              label: "Example dataset",
+              backgroundColor: "rgba(220,220,220,0.5)",
+              borderColor: "rgba(220,220,220,1)",
+              pointBackgroundColor: "rgba(220,220,220,1)",
+              pointBorderColor: "#fff",
+              data: data1
+            }
+          ]
+        };
+
+        var lineOptions = {
+          responsive: true
+        };
+
+
+        var ctx = document.getElementById("lineChart").getContext("2d");
+        new Chart(ctx, {type: 'line', data: lineData, options:lineOptions});
+      }
+    })
+  }
+
   $(document).ready(function() {
 
-    var lineData = {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
-      datasets: [
-        {
-          label: "Example dataset",
-          backgroundColor: "rgba(26,179,148,0.5)",
-          borderColor: "rgba(26,179,148,0.7)",
-          pointBackgroundColor: "rgba(26,179,148,1)",
-          pointBorderColor: "#fff",
-          data: [28, 48, 40, 19, 86, 27, 90]
-        },
-        {
-          label: "Example dataset",
-          backgroundColor: "rgba(220,220,220,0.5)",
-          borderColor: "rgba(220,220,220,1)",
-          pointBackgroundColor: "rgba(220,220,220,1)",
-          pointBorderColor: "#fff",
-          data: [65, 59, 80, 81, 56, 55, 40]
-        }
-      ]
-    };
-
-    var lineOptions = {
-      responsive: true
-    };
 
 
-    var ctx = document.getElementById("lineChart").getContext("2d");
-    new Chart(ctx, {type: 'line', data: lineData, options:lineOptions});
 
   });
 </script>
