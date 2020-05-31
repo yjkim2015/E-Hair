@@ -211,11 +211,7 @@
     <div id="page-wrapper" class="gray-bg sidebar-content">
         <%@ include file="/WEB-INF/views/common/admin_navbar_top.jsp" %>
         <div class="sidebar-panel">
-            <div>
-                <a class="btn btn-outline-danger btn-block" href="javascript:callAjax('salesDay', '', 1)">일별 매출관리 <span class="sr-only">(current)</span></a>
-                <a class="btn btn-outline-danger btn-block"  href="javascript:callAjax('salesMonth', '', 1)">월별 매출관리 <span class="sr-only">(current)</span></a>
-                <a class="btn btn-outline-success btn-block"  href="javascript:callAjax('user', '', 1)">고객관리 <span class="sr-only">(current)</span></a>
-            </div>
+
         </div>
         <div class="wrapper wrapper-content">
             <div class="row">
@@ -302,6 +298,11 @@
             </div>
         </div>
         <div class="wrapper wrapper-content panel">
+            <div>
+                <a class="btn btn-outline-danger" href="javascript:callAjax('salesDay', '', 1)">일별 매출관리 <span class="sr-only">(current)</span></a>
+                <a class="btn btn-outline-danger"  href="javascript:callAjax('salesMonth', '', 1)">월별 매출관리 <span class="sr-only">(current)</span></a>
+                <a class="btn btn-outline-success"  href="javascript:callAjax('user', '', 1)">고객관리 <span class="sr-only">(current)</span></a>
+            </div>
             <div class="col-md-12">
                 <div class="input-group date" style="margin-top: 30px; width: 200px;">
                     <input type="text" id="dateValue" class="form-control" value="${map.searchValue}"
