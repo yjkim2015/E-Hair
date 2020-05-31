@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.makehair.shop.user.UserDao">
 
-	<insert id="insertUser" parameterType="com.makehair.shop.common.constants.CommonUserVo">
+	<insert id="insertUser" parameterType="com.makehair.shop.common.constants.CommonUserVo" useGeneratedKeys="true" keyProperty="userNo">
 		INSERT INTO user (USER_ID, PASSWORD, NAME, SEX, PHONE, AGE, INSERT_DATE, DELETE_DATE)
 		VALUES (#{userId}, HEX(AES_ENCRYPT(#{password}, SHA2("enc_key",512))), #{name}, #{sex},  AES_ENCRYPT(#{phone}, SHA2("enc_key",512)), #{age}, now(), now());
 	</insert>
 
-	<insert id="insertAdmin" parameterType="com.makehair.shop.common.constants.CommonUserVo">
+	<insert id="insertAdmin" parameterType="com.makehair.shop.common.constants.CommonUserVo" useGeneratedKeys="true" keyProperty="userNo">
 		INSERT INTO admin (ADMIN_ID, SHOP_NO, PASSWORD, NAME, SEX, PHONE, AGE, INSERT_DATE, DELETE_DATE)
 		VALUES (#{userId}, #{shopNo},HEX(AES_ENCRYPT(#{password}, SHA2("enc_key",512))), #{name}, #{sex},  AES_ENCRYPT(#{phone}, SHA2("enc_key",512)), #{age}, now(), now());
 	</insert>

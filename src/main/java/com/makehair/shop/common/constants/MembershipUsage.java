@@ -8,7 +8,7 @@ public class MembershipUsage {
   private long price;
   private String description;
   private Date insertDate;
-  private int userNo;
+  private int membershipNo;
 
 
   public long getUsageNo() {
@@ -37,13 +37,12 @@ public class MembershipUsage {
     this.description = description;
   }
 
-
-  public int getUserNo() {
-    return userNo;
+  public int getMembershipNo() {
+    return membershipNo;
   }
 
-  public void setUserNo(int userNo) {
-    this.userNo = userNo;
+  public void setMembershipNo(int membershipNo) {
+    this.membershipNo = membershipNo;
   }
 
   public Date getInsertDate() {

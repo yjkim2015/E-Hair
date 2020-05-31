@@ -1,21 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.makehair.shop.membership.MembershipDao">
 
-    <select id="getPointListByUserNo" parameterType="int" resultType="com.makehair.shop.common.constants.MembershipUsage">
+  <select id="getPointListByMembershipNo" parameterType="int"
+    resultType="com.makehair.shop.common.constants.MembershipUsage">
 		SELECT
-			USER_NO as userNo,
+			MEMBERSHIP_NO as membershipNo,
 			PRICE,
 			DESCRIPTION,
 			INSERT_DATE as insertDate
 		FROM MEMBERSHIP_USAGE
-		WHERE USER_NO = #{value}
+		WHERE MEMBERSHIP_NO = #{value}
 		ORDER BY INSERT_DATE DESC
 	</select>
 
-	<insert id="getRefundByUserNo" parameterType="map">
-		INSERT INTO MEMBERSHIP_USAGE (PRICE, DESCRIPTION, USER_NO)
-		VALUES (#{map.leftPoint}, #{map.description}, #{map.userNo})
+
+  <insert id="getRefundByUserNo" parameterType="map">
+		INSERT INTO MEMBERSHIP_USAGE (PRICE, DESCRIPTION, MEMBERSHIP_NO)
+		VALUES (#{map.leftPoint}, #{map.description}, #{map.membershipNo})
 	</insert>
 
+
+  <insert id="addMembership" parameterType="map">
+		INSERT INTO MEMBERSHIP (MEMBERSHIP_NO, MEMO, INSERT_DATE, USER_NO)
+		VALUES (null, #{map.memo}, now(), #{map.userNo})
+	</insert>
+
+	<insert id="addMembershipUsage" parameterType="com.makehair.shop.common.constants.MembershipUsage">
+		INSERT INTO MEMBERSHIP_USAGE (USAGE_NO, PRICE, DESCRIPTION, INSERT_DATE, MEMBERSHIP_NO)
+		VALUES (null, #{price}, #{description}, now(), #{membershipNo})
+	</insert>
+
+  <select id="getMembership" parameterType="int"
+    resultType="com.makehair.shop.common.constants.Membership">
+		SELECT
+			MEMBERSHIP_NO as membershipNo,
+			MEMO,
+			INSERT_DATE as insertDate,
+			USER_NO as userNo
+		FROM MEMBERSHIP
+		WHERE USER_NO = #{value}
+	</select>
+
+	<select id="getMembershipPoint" parameterType="long" resultType="long">
+		SELECT SUM(PRICE) as point FROM MEMBERSHIP_USAGE WHERE MEMBERSHIP_NO = #{value}
+	</select>
 </mapper>

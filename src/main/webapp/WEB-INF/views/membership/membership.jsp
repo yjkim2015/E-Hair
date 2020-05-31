@@ -74,7 +74,8 @@
                 </c:forEach>
                 </tbody>
             </table>
-            <button type="button" class="btn btn-primary" id="btnRefund">잔여 포인트 환불</button>
+            <a href="${pageContext.request.contextPath}/membership/charge?userNo=${sessionScope.loginUser.userNo}" type="button" class="btn btn-block btn-info">멤버쉽 충전</a>
+            <a href="#" type="button" class="btn btn-block btn-primary" id="btnRefund">잔여 포인트 환불</a>
         </div>
         <div>
             <nav>

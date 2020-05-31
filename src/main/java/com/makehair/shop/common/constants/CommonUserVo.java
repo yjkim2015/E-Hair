@@ -153,6 +153,14 @@ public class CommonUserVo {
 		this.starPoint = starPoint;
 	}
 
+	public String getReservationDate() {
+		return reservationDate;
+	}
+
+	public void setReservationDate(String reservationDate) {
+		this.reservationDate = reservationDate;
+	}
+
 	@Override
 	public String toString() {
 		return "CommonUserVo [userNo=" + userNo + ", adminNo=" + adminNo + ", userId=" + userId + ", password="

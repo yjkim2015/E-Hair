@@ -1,6 +1,7 @@
 package com.makehair.shop.user;
 
 import com.makehair.shop.common.constants.CommonUserVo;
+import com.makehair.shop.membership.MembershipDao;
 import com.makehair.shop.shop.ShopDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,20 @@ public class UserService {
     @Autowired
     private ShopDao shopDao;
 
+    @Autowired
+    private MembershipDao membershipDao;
+
+
     public int inserUser(CommonUserVo userVo) {
-        return userDao.insertUser(userVo);
+        userDao.insertUser(userVo);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("memo", "신규 가입");
+        map.put("userNo", userVo.getUserNo());
+
+        membershipDao.addMembership(map);
+
+        return userVo.getUserNo();
     }
 
 
@@ -45,9 +58,8 @@ public class UserService {
 
 
     public int inserAdmin(CommonUserVo userVo) {
-        int result = shopDao.insertShop(userVo.getShopName());
-        int shopNo = shopDao.getLastId();
-        System.out.println(userVo);
+        shopDao.insertShop(userVo);
+        int shopNo = userVo.getShopNo();
         userVo.setShopNo(shopNo);
 
         return userDao.insertAdmin(userVo);

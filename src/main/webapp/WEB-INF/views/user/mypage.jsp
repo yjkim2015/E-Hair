@@ -39,10 +39,6 @@
                 </div>
                 <hr/>
                 <div class="form-group">
-                    <a href="/user_detail" class="btn btn-block btn-outline-info"> 리뷰 확인하기 </a>
-                </div>
-                <hr/>
-                <div class="form-group">
                     <a href="${pageContext.request.contextPath}/membership?userNo=${sessionScope.loginUser.userNo}" class="btn btn-block btn-outline-info"> 멤버쉽 잔액 확인하기 </a>
                 </div>
                 <hr/>
