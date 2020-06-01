@@ -73,9 +73,15 @@
             var isConfirm = this.innerText;
             var param = {};
             param.reservationNo = reservationNo;
+            if ( isConfirm == 'N' ) {
+            	isConfirm = 'Y';
+            }
+            else {
+            	isConfirm = 'N';
+            }
             param.isConfirm = isConfirm;
             goAjaxPost('/reservationConfirm', param, function (result) {
-              if (isConfirm == 'Y') {
+              if (isConfirm == 'N') {
                 if (result.status == 'OK') {
                   alert('예약취소되었습니다.');
                 }
@@ -84,6 +90,7 @@
                   alert('예약확인되었습니다.');
                 }
               }
+              initData();
             });
           });
         });

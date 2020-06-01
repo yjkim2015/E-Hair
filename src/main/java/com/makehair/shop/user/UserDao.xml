@@ -84,4 +84,31 @@
 		FROM user
 		WHERE USER_NO = #{value}
 	</select>
+	
+	<select id="myReservationList" parameterType="com.makehair.shop.common.constants.CommonUserVo" resultType="com.makehair.shop.common.constants.ReservationVo">
+		SELECT 
+		A.RESERVATION_NO AS reservationNo,
+		A.RESERVATION_DATE AS reservationDate,
+		A.MEMO AS memo,
+		A.IS_CONFIRM as isConfirm,
+		B.SERVICE_NAME as serviceName,
+		B.SERVICE_PRICE as servicePrice,
+		C.SHOP_NAME as shopName,
+		D.NAME as designerName
+	FROM
+		RESERVATION A
+	LEFT JOIN SERVICE B
+	ON A.SERVICE_NO = B.SERVICE_NO
+	LEFT JOIN SHOP C
+	ON B.SHOP_NO = C.SHOP_NO
+	LEFT JOIN ADMIN D
+	ON A.ADMIN_NO = D.ADMIN_NO
+	WHERE A.USER_ID = #{userId}
+	
+	
+	</select>
+	
+	<delete id="deleteReservation" parameterType="com.makehair.shop.common.constants.ReservationVo">
+		DELETE FROM RESERVATION WHERE RESERVATION_NO = #{reservationNo}
+	</delete>
 </mapper>

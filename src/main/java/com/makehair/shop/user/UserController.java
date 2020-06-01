@@ -1,15 +1,26 @@
 package com.makehair.shop.user;
 
-import com.makehair.shop.common.constants.CommonUserVo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.makehair.shop.common.constants.CommonUserVo;
+import com.makehair.shop.common.constants.ReservationVo;
+import com.makehair.shop.common.constants.ResultVo;
 
 @Controller
 public class UserController {
@@ -152,5 +163,47 @@ public class UserController {
 
 
         return "user/mypage";
+    }
+    
+    @RequestMapping(value="/mypage/reservation", method = RequestMethod.GET)
+    public String mypageReservation(CommonUserVo commonUserVo) {
+    	
+    	return "/user/reservation";
+    }
+    
+    @RequestMapping(value="/mypage/myReservation", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<ResultVo> myReservation(CommonUserVo commonUserVo) {
+    	
+    	ResultVo resultVo = null;
+    	
+    	try {
+    		resultVo = new ResultVo(HttpStatus.OK);
+    		resultVo.setData(userService.myReservationList(commonUserVo));
+    		
+    	}
+    	catch(Exception ex) {
+    		resultVo = new ResultVo(HttpStatus.INTERNAL_SERVER_ERROR);
+    	}
+    	
+    	return resultVo.build();
+    }
+    
+    @RequestMapping(value="/mypage/deleteReservation", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<ResultVo> deleteReservation(@RequestBody ReservationVo reservationVo) {
+    	
+    	ResultVo resultVo = null;
+    	
+    	try {
+    		int result = userService.deleteReservation(reservationVo);
+    		resultVo = new ResultVo(result, HttpStatus.OK);
+    		
+    	}
+    	catch(Exception ex) {
+    		resultVo = new ResultVo(HttpStatus.INTERNAL_SERVER_ERROR);
+    	}
+    	
+    	return resultVo.build();
     }
 }

@@ -107,8 +107,8 @@ ORDER BY A.RESERVATION_DATE ASC
 <update id="updateConfirm" parameterType="com.makehair.shop.common.constants.ReservationVo">
 UPDATE 
 	RESERVATION
-	IS_CONFIRM = #{isConfirm}
 SET 
+	IS_CONFIRM = #{isConfirm}
 WHERE
 	RESERVATION_NO = #{reservationNo} 
 </update>
