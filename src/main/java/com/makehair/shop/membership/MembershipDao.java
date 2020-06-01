@@ -20,7 +20,7 @@ public interface MembershipDao {
 
     Membership getMembership(int userNo);
 
-    long getMembershipPoint(long membershipNo);
+    Integer getMembershipPoint(long membershipNo);
 
     int addMembershipUsage(MembershipUsage membershipUsage);
 }

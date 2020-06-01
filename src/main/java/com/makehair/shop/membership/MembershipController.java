@@ -78,7 +78,7 @@ public class MembershipController {
     }
 
     Membership membership = membershipService.getMembership(userNo);
-    long point = membershipService.getMembershipPoint(membership.getMembershipNo());
+    Integer point = membershipService.getMembershipPoint(membership.getMembershipNo());
 
     model.addAttribute("point", point);
 

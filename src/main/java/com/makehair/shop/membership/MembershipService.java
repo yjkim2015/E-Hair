@@ -43,7 +43,7 @@ public class MembershipService {
     return membershipDao.getMembership(userNo);
   }
 
-  public long getMembershipPoint(long membershipNo) {
+  public Integer getMembershipPoint(long membershipNo) {
     return membershipDao.getMembershipPoint(membershipNo);
   }
 

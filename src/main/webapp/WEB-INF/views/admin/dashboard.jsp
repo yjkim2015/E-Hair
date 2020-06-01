@@ -209,7 +209,6 @@
 <body class="fixed-navigation">
 <div id="wrapper">
     <%@ include file="/WEB-INF/views/common/admin_navbar_left.jsp" %>
-
     <div id="page-wrapper" class="gray-bg sidebar-content">
         <%@ include file="/WEB-INF/views/common/admin_navbar_top.jsp" %>
         <div class="sidebar-panel"></div>
@@ -358,34 +357,25 @@
       success: function (data) {
         console.log(data);
         $("#total").html(data.total+"원");
-        let labels = [];
-        let data1 = [];
+        let labels = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+        let data1 = [0,0,0,0,0,0,0,0,0,0,0,0];
         data.monthly.forEach((i,v)=>{
-          console.log(v)
           let dateTime = i.iDate.split("-")
-
-          labels.push(dateTime[0]+"년 "+ dateTime[1]+"월 ");
-          data1.push(i.income);
+          let month =parseInt(dateTime[1]);
+          labels[month-1] = dateTime[0]+"년 "+ dateTime[1]+"월 ";
+          data1[month-1] = i.income;
         })
         var lineData = {
           labels: labels,
           datasets: [
             {
-              label: "Example dataset",
+              label: "월별 매출액",
               backgroundColor: "rgba(26,179,148,0.5)",
               borderColor: "rgba(26,179,148,0.7)",
               pointBackgroundColor: "rgba(26,179,148,1)",
               pointBorderColor: "#fff",
               data: data1
             },
-            {
-              label: "Example dataset",
-              backgroundColor: "rgba(220,220,220,0.5)",
-              borderColor: "rgba(220,220,220,1)",
-              pointBackgroundColor: "rgba(220,220,220,1)",
-              pointBorderColor: "#fff",
-              data: data1
-            }
           ]
         };
 
@@ -399,13 +389,6 @@
       }
     })
   }
-
-  $(document).ready(function() {
-
-
-
-
-  });
 </script>
 </body>
 </html>

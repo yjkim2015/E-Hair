@@ -43,7 +43,7 @@
 		WHERE USER_NO = #{value}
 	</select>
 
-	<select id="getMembershipPoint" parameterType="long" resultType="long">
+	<select id="getMembershipPoint" parameterType="long" resultType="integer">
 		SELECT SUM(PRICE) as point FROM MEMBERSHIP_USAGE WHERE MEMBERSHIP_NO = #{value}
 	</select>
 </mapper>

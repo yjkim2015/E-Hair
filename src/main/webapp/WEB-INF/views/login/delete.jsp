@@ -42,7 +42,7 @@
                 <form class="form-signin" method="POST" action="${pageContext.request.contextPath}/delete">
                     <label for="inputId" class="sr-only">Email address</label>
                     <input type="text" class="form-control" id="inputId" placeholder="아이디" name="userId" required="" autofocus=""
-                           value="${sessionScope.loginUser.userId}" disabled>
+                           value="${sessionScope.loginUser.userId}" readonly>
                     <label for="inputPassword" class="sr-only">Password</label>
                     <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호" name="password" required="">
                     <button class="btn btn-lg btn-primary btn-block" type="submit" id="btnSubmit">회원 탈퇴</button>

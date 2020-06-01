@@ -25,7 +25,7 @@
                 </div>
             </li>
             <li>
-                <a href="#">
+                <a href="/admin/">
                     <i class="fa fa-th-large"></i>
                     <span class="nav-label">대시보드</span>
                     <span class="fa arrow"></span>
@@ -35,7 +35,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#">
+                <a href="/profile">
                     <i class="fa fa-th-large"></i>
                     <span class="nav-label">개인 정보 관리</span>
                     <span class="fa arrow"></span>
@@ -46,14 +46,13 @@
                 </ul>
             </li>
             <li>
-                <a href="#">
+                <a href="/serviceView">
                     <i class="fa fa-th-large"></i>
                     <span class="nav-label">서비스 관리</span>
                     <span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level">
                     <li><a href="${pageContext.request.contextPath}/serviceView?adminNo=${sessionScope.loginUser.adminNo}">서비스</a></li>
-
                 </ul>
             </li>
             <li>
