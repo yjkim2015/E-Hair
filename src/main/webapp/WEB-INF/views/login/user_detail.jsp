@@ -78,7 +78,7 @@
             <h3 class="section-subheading text-muted">회원님의 정보를 수정하세요.</h3>
         </div>
         <form action="${pageContext.request.contextPath}/user_update?userType=<c:out value="${param.userType}" default="user"/>"
-              method="post">
+              method="post" enctype="multipart/form-data">
             <div class="row align-items-stretch mb-5 ">
                 <div class="col-md-6">
                     <!-- 파일등록 -->
@@ -90,13 +90,13 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="myFileUp">파일등록하기</label>
-                                <input type="file" id="myFileUp">
+                                <input type="file" id="myFileUp" name="myFileUp">
                             </div>
                         </div>
                     </div>
                     <!-- 커버이미지 들어오는 부분 (임시로 이미지를 넣어줬다)-->
                     <div class="selectCover" style="padding-left: 0;">
-                        <img id="cover" src="../../../resources/assets/img/user/human_image.png"
+                        <img id="cover" src="<c:out value='displayFile?fileName=${sessionScope.loginUser.imgUrl}' default='../../../resources/assets/img/user/human_image.png'/>"
                              style="width: 80%; height: 80%;"/>
                     </div>
                 </div>

@@ -33,7 +33,8 @@
 			NAME,
 			SEX,
 			AES_DECRYPT(PHONE, SHA2("enc_key",512)) as PHONE,
-			AGE
+			AGE,
+			IMG_URL as imgUrl
 		FROM user
 		WHERE USER_ID = #{userId}  AND PASSWORD = HEX(AES_ENCRYPT(#{password}, SHA2("enc_key",512)))
 	</select>
@@ -69,7 +70,7 @@
 
 	<update id="updateUser" parameterType="com.makehair.shop.common.constants.CommonUserVo">
 		UPDATE user
-		SET NAME = #{name}, SEX = #{sex}, PHONE = AES_ENCRYPT(#{phone}, SHA2("enc_key",512)), AGE = #{age}
+		SET NAME = #{name}, SEX = #{sex}, PHONE = AES_ENCRYPT(#{phone}, SHA2("enc_key",512)), AGE = #{age}, IMG_URL = #{imgUrl}
 		WHERE USER_NO = #{userNo}
 	</update>
 

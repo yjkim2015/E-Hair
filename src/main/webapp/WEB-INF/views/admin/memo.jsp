@@ -84,11 +84,37 @@
                 <td>${UserDetail.userDetailNo}</td>
                 <td>${UserDetail.memo}</td>
                 <td>${UserDetail.insertDate}</td>
+                <td> <button class='btn btn-danger' data-detail=${UserDetail.userDetailNo} onclick='deleteDetail(this)'>삭제</button> </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
+<script>
+  function deleteDetail(obj) {
+      alert("씨발")
+    let detailNo = $(obj).data('detail');
 
+    $.post({
+      url : "/admin/memo/delete/"+detailNo,
+      type:'delete',
+      headers:{
+        "Content-Type":"application/json",
+        "X-HTTP-Method-Override":"DELETE"},
+      dataType:'text',
+      processData:false,
+      success:function(result){
+        if(result){
+          alert("삭제 되었습니다")
+          window.close()
+        } else {
+          alert("다시 시도하여 주시기 바랍니다.")
+        }
+
+      }
+    })
+
+  }
+</script>
 </body>
 </html>

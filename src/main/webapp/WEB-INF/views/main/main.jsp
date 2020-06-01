@@ -28,6 +28,5 @@
     </div>
 </header>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
-
 </body>
 </html>

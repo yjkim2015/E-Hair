@@ -6,9 +6,10 @@ import com.makehair.shop.common.constants.ServiceVo;
 
 @Repository
 public interface ServiceDao {
-	
-	public int checkService(ServiceVo serviceVo);
-	
-	public int insertService(ServiceVo serviceVo);
-	
+
+    public int checkService(ServiceVo serviceVo);
+
+    public int insertService(ServiceVo serviceVo);
+
+    int delete(Integer serviceNo);
 }

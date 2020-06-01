@@ -18,4 +18,6 @@ public interface AdminDao {
     int getMemoCount(@Param("map") Map<String, Object> map);
 
     List<UserDetail> getMemoList(@Param("map") Map<String, Object> map);
+
+    int deleteMemo(Integer detailNo);
 }

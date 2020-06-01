@@ -1,8 +1,11 @@
 package com.makehair.shop.user;
 
+import com.makehair.shop.commom.util.UploadFileUtils;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -21,9 +24,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.makehair.shop.common.constants.CommonUserVo;
 import com.makehair.shop.common.constants.ReservationVo;
 import com.makehair.shop.common.constants.ResultVo;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class UserController {
+
+    @Resource(name="uploadPath")
+    private String uploadPath;
 
     private UserService userService;
 
@@ -143,12 +150,16 @@ public class UserController {
     @RequestMapping(value = "/user_update", method = RequestMethod.POST)
     public String userUpdate(@ModelAttribute CommonUserVo commonUserVo,
                              @RequestParam(value = "userType", defaultValue = "user") String userType,
-                             HttpSession session) {
+                             @RequestParam(value = "myFileUp") MultipartFile multipartFile,
+                             HttpSession session) throws Exception {
 
         if(userType.equals("admin")) {
             return "redirect:/user_detail";
         } else {
+            String path = UploadFileUtils.uploadFile(uploadPath, multipartFile.getOriginalFilename(), multipartFile.getBytes());
+            commonUserVo.setImgUrl(path);
             CommonUserVo userVo = userService.updateUser(commonUserVo);
+
             System.out.print(userVo.toString());
             session.setAttribute("loginUser", userVo);
             return "redirect:/user_detail";

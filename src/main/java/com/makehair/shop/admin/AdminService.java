@@ -47,7 +47,7 @@ public class AdminService {
         map.put("pageSize", pageVo.getPageSize());
         map.put("searchValue", readVo.getUserNo());
 
-        if(readVo.getReadType().equals("memo")) {
+        if (readVo.getReadType().equals("memo")) {
             List<UserDetail> dataList = adminDao.getMemoList(map);
             System.out.println(dataList.size());
             map.put("dataList", dataList);
@@ -60,5 +60,9 @@ public class AdminService {
         map.put("pageNum", readVo.getPageNum());
 
         return map;
+    }
+
+    public int deleteMemo(Integer detailNo) {
+        return adminDao.deleteMemo(detailNo);
     }
 }

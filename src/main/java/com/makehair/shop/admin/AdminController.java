@@ -5,6 +5,7 @@ import com.makehair.shop.common.constants.Auth;
 import com.makehair.shop.common.constants.ReadVo;
 import com.makehair.shop.common.constants.SalesVo;
 import com.makehair.shop.common.constants.UserDetail;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.web.bind.annotation.ResponseBody;
 
 // admin basic
 @RequestMapping("/admin")
@@ -59,10 +62,10 @@ public class AdminController {
     public ResponseEntity<Map> addSales(SalesVo salesVo) {
 
         boolean result = adminService.insertSales(salesVo);
-        
+
         Map<String, Object> map = new HashMap<>();
         map.put("result", result);
-        
+
         return ResponseEntity.status(HttpStatus.OK).body(map);
     }
 
@@ -80,7 +83,17 @@ public class AdminController {
 
         return "admin/memo";
     }
-    
+
+
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping(value = "/memo/delete/{detailNo}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity<Boolean> deleteMemo(@PathVariable Integer detailNo) {
+
+        return ResponseEntity.ok().body(adminService.deleteMemo(detailNo) == 1);
+    }
+
+
     // 회원별 메모 등록
     @Auth(role = Auth.Role.ADMIN)
     @RequestMapping(value = "/add/memo", method = RequestMethod.POST)

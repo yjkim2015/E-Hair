@@ -6,23 +6,14 @@
 </head>
 <body>
 <style>
-  /*   footer {
-        position: absolute;
 
-        left: 0;
-
-        bottom: 0;
-
-        width: 100%;
-
-        padding: 15px 0;
-
-        text-align: center;
-
-        color: white;
-
-        background: blue;
-    } */
+    footer{ position:fixed;
+        left:0px;
+        bottom:0px;
+        height:60px;
+        width:100%;
+        background:grey;
+        color: white; }
 </style>
 <!-- Footer-->
 <footer class="footer py-4">

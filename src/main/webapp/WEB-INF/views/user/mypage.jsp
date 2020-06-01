@@ -23,7 +23,8 @@
         <div class="row align-items-stretch mb-5 ">
             <div class="col-md-6">
                 <div class="selectCover" style="padding-left: 0;">
-                    <img id="cover" src="../../../resources/assets/img/user/human_image.png" style="width: 80%; height: 80%;"/>
+                    <img id="cover" src="<c:out value='displayFile?fileName=${sessionScope.loginUser.imgUrl}' default='../../../resources/assets/img/user/human_image.png'/>"
+                         style="width: 80%; height: 80%;"/>
                 </div>
             </div>
 
