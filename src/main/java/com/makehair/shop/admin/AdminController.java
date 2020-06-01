@@ -93,6 +93,14 @@ public class AdminController {
         return ResponseEntity.ok().body(adminService.deleteMemo(detailNo) == 1);
     }
 
+    @Auth(role = Auth.Role.ADMIN)
+    @RequestMapping(value = "/sales/delete/{salesNo}", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity<Boolean> deleteSales(@PathVariable Integer salesNo) {
+
+        return ResponseEntity.ok().body(adminService.deleteSales(salesNo) == 1);
+    }
+
 
     // 회원별 메모 등록
     @Auth(role = Auth.Role.ADMIN)

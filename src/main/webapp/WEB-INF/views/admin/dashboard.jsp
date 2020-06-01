@@ -37,6 +37,29 @@
     window.open(url, "", "width=600, height=600, left=600");
   }
 
+  function deleteSales(obj) {
+      let salesNo = $(obj).data('sales');
+      $.post({
+          url: "/admin/sales/delete/" + salesNo,
+          type: 'delete',
+          headers: {
+              "Content-Type": "application/json",
+              "X-HTTP-Method-Override": "DELETE"
+          },
+          dataType: 'text',
+          processData: false,
+          success: function (result) {
+
+              if (result) {
+                  alert("삭제 되었습니다")
+                  location.reload();
+              } else {
+                  alert("다시 시도하여 주시기 바랍니다.")
+              }
+
+          }
+      })
+  }
 
   // 일별 매출, 월별 매출, 고객 관리, 후기 관리 데이터 호출용 함수
   function callAjax(readType, searchValue, pageNum) {
@@ -263,6 +286,7 @@
                                 <td>${SalesVo.income}</td>
                                 <td>${SalesVo.memo}</td>
                                 <td>${SalesVo.insertDate}</td>
+                                <td> <button class='btn btn-danger' data-sales='${SalesVo.salesNo}' onclick='deleteSales(this)'>삭제</button> </td>
                             </tr>
                         </c:forEach>
                         </tbody>

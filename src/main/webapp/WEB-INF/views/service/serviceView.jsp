@@ -90,28 +90,28 @@
   };
 
   function deleteService(obj) {
-    let serviceNo = $(obj).data('service');
+      let serviceNo = $(obj).data('service');
 
-    $.post({
-      url : "/service/delete/"+serviceNo,
-      type:'delete',
-      headers:{
-        "Content-Type":"application/json",
-        "X-HTTP-Method-Override":"DELETE"},
-      dataType:'text',
-      processData:false,
-      success:function(result){
+      $.post({
+          url: "/service/delete/" + serviceNo,
+          type: 'delete',
+          headers: {
+              "Content-Type": "application/json",
+              "X-HTTP-Method-Override": "DELETE"
+          },
+          dataType: 'text',
+          processData: false,
+          success: function (result) {
 
-        if(result){
-          alert("삭제 되었습니다")
-          location.reload();
-        } else {
-          alert("다시 시도하여 주시기 바랍니다.")
-        }
+              if (result) {
+                  alert("삭제 되었습니다")
+                  location.reload();
+              } else {
+                  alert("다시 시도하여 주시기 바랍니다.")
+              }
 
-      }
-    })
-
+          }
+      })
   }
 
 

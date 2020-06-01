@@ -65,4 +65,10 @@ public class AdminService {
     public int deleteMemo(Integer detailNo) {
         return adminDao.deleteMemo(detailNo);
     }
+
+    public int deleteSales(Integer salesNo) {
+        return adminDao.deleteSales(salesNo);
+    }
+
+
 }
